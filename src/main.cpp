@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain("scarpetta.eu");
     app.setOrganizationName("Marco Scarpetta");
     app.setApplicationVersion("1.0");
+    app.setDesktopFileName("pdfmixtool");
 
     //set up translations
     QTranslator qtTranslator;
@@ -38,8 +39,9 @@ int main(int argc, char *argv[])
     app.installTranslator(&qtTranslator);
 
     QTranslator appTranslator;
-    appTranslator.load("pdfmixtool_" + QLocale::system().name());
-    app.installTranslator(&appTranslator);
+    if (appTranslator.load(QString("%1/../share/pdfmixtool/translations/pdfmixtool_%2.qm").arg(
+                               qApp->applicationDirPath(),  QLocale::system().name())))
+        app.installTranslator(&appTranslator);
 
     MainWindow *main_window = new MainWindow();
     main_window->show();

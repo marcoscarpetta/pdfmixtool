@@ -26,30 +26,34 @@
 AboutDialog::AboutDialog(QWidget *parent) :
     QMainWindow(parent)
 {
-    QGridLayout *grid_layout = new QGridLayout(this);
+    this->setWindowIcon(QIcon(QString("%1/../share/icons/hicolor/48x48/apps/pdfmixtool.png").arg(qApp->applicationDirPath())));
+    this->setWindowTitle(tr("About PDF Mix Tool"));
 
     QWidget *central_widget = new QWidget(this);
+    QGridLayout *grid_layout = new QGridLayout(central_widget);
+
     central_widget->setContentsMargins(20, 20, 20, 20);
     central_widget->setLayout(grid_layout);
     this->setCentralWidget(central_widget);
 
-    QPushButton *close_button = new QPushButton(QIcon::fromTheme("close"), tr("Close"), this);
+    QPushButton *close_button = new QPushButton(QIcon::fromTheme("window-close"), tr("Close"), this);
     connect(close_button, SIGNAL(pressed()), this, SLOT(close()));
+
+    QLabel *application_icon = new QLabel(this);
+    application_icon->setPixmap(QPixmap(QString("%1/../share/icons/hicolor/128x128/apps/pdfmixtool.png").arg(qApp->applicationDirPath())));
+    application_icon->setAlignment(Qt::AlignCenter);
 
     QLabel *application_name = new QLabel(qApp->applicationDisplayName(), this);
     application_name->setFont(QFont("Sans", 16));
     application_name->setTextInteractionFlags(Qt::TextSelectableByMouse);
-    application_name->setAlignment(Qt::AlignCenter);
 
     QLabel *application_version = new QLabel(tr("Version %1\n\n").arg(qApp->applicationVersion()), this);
     application_version->setFont(QFont("Sans", 10));
     application_version->setTextInteractionFlags(Qt::TextSelectableByMouse);
-    application_version->setAlignment(Qt::AlignCenter);
 
     QLabel *application_description = new QLabel(this);
     application_description->setWordWrap(true);
-    application_description->setText(tr("An application to split and merge PDF files, "
-                                        "rotate and rearrange their pages\n\n"));
+    application_description->setText(tr("\nAn application to split, merge, rotate and mix PDF files\n\n"));
     application_description->setTextInteractionFlags(Qt::TextSelectableByMouse);
     application_description->setAlignment(Qt::AlignCenter);
 
@@ -77,13 +81,14 @@ AboutDialog::AboutDialog(QWidget *parent) :
     copyright->setTextInteractionFlags(Qt::TextSelectableByMouse);
     copyright->setAlignment(Qt::AlignCenter);
 
-    grid_layout->addWidget(application_name, 1, 1, 1, 2);
-    grid_layout->addWidget(application_version, 2, 1, 1, 2);
-    grid_layout->addWidget(application_description, 3, 1, 1, 2);
-    grid_layout->addWidget(license, 4, 1, 1, 2);
-    grid_layout->addWidget(website, 5, 1, 1, 2);
-    grid_layout->addWidget(copyright, 6, 1, 1, 2);
+    grid_layout->addWidget(application_icon, 1, 1, 2, 1, Qt::AlignLeft);
+    grid_layout->addWidget(application_name, 1, 2, 1, 2);
+    grid_layout->addWidget(application_version, 2, 2, 1, 2);
+    grid_layout->addWidget(application_description, 3, 1, 1, 3);
+    grid_layout->addWidget(license, 4, 1, 1, 3);
+    grid_layout->addWidget(website, 5, 1, 1, 3);
+    grid_layout->addWidget(copyright, 6, 1, 1, 3);
 
-    grid_layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum), 7, 1);
-    grid_layout->addWidget(close_button, 7, 2);
+    grid_layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum), 7, 1, 1, 2);
+    grid_layout->addWidget(close_button, 7, 3);
 }

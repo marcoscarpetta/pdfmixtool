@@ -24,6 +24,7 @@
 
 class ComboBoxDelegate : public QStyledItemDelegate
 {
+    Q_OBJECT
 public:
     ComboBoxDelegate(QWidget *parent);
 

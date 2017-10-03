@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=PDF Mix Tool
+Comment=Application to split, merge, rotate and mix PDF files
+Exec=/usr/bin/pdfmixtool
+Icon=pdfmixtool
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Office
+Keywords=pdf;

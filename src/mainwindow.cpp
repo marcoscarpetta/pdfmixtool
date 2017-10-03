@@ -18,6 +18,7 @@
 
 #include "mainwindow.h"
 
+#include <QApplication>
 #include <QTimer>
 #include "pdffile.h"
 
@@ -29,7 +30,7 @@ Q_DECLARE_METATYPE(PdfFile *)
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    m_layout(new QGridLayout(this)),
+    m_layout(new QGridLayout()),
     m_add_file_button(new QPushButton(QIcon::fromTheme("list-add"), tr("Add PDF file"), this)),
     m_move_up_button(new QPushButton(QIcon::fromTheme("go-up"), tr("Move up"), this)),
     m_move_down_button(new QPushButton(QIcon::fromTheme("go-down"), tr("Move Down"), this)),
@@ -45,6 +46,9 @@ MainWindow::MainWindow(QWidget *parent) :
     m_files_list_model(new QStandardItemModel(0, 4, this)),
     m_about_dialog(new AboutDialog(this))
 {
+    this->setWindowIcon(QIcon(QString("%1/../share/icons/hicolor/48x48/apps/pdfmixtool.png").arg(qApp->applicationDirPath())));
+    this->setWindowTitle(tr("PDF Mix Tool"));
+
     m_progress_bar->hide();
 
     m_open_file_dialog->setNameFilter("*.pdf");
@@ -69,6 +73,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QWidget *central_widget = new QWidget(this);
     central_widget->setLayout(m_layout);
+    this->setCentralWidget(central_widget);
 
     m_layout->addWidget(m_add_file_button, 1, 1);
     m_layout->addWidget(m_move_up_button, 1, 2);
@@ -82,8 +87,6 @@ MainWindow::MainWindow(QWidget *parent) :
     m_layout->addWidget(m_progress_bar, 3, 1, 1, 2);
     m_layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum), 3, 3, 1, 3);
     m_layout->addWidget(m_dest_file_button, 3, 6);
-
-    this->setCentralWidget(central_widget);
 
     connect(m_add_file_button, SIGNAL(pressed()), m_open_file_dialog, SLOT(exec()));
     connect(m_move_up_button, SIGNAL(pressed()), this, SLOT(move_up()));

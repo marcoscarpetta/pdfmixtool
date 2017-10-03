@@ -23,6 +23,7 @@
 
 class AboutDialog : public QMainWindow
 {
+    Q_OBJECT
 public:
     AboutDialog(QWidget *parent);
 };
