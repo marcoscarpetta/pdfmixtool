@@ -31,6 +31,7 @@ Q_DECLARE_METATYPE(PdfFile *)
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
+    m_settings(new QSettings(this)),
     m_layout(new QGridLayout()),
     m_add_file_button(new QPushButton(QIcon::fromTheme("list-add"), tr("Add PDF file"), this)),
     m_move_up_button(new QPushButton(QIcon::fromTheme("go-up"), tr("Move up"), this)),
@@ -55,10 +56,12 @@ MainWindow::MainWindow(QWidget *parent) :
     m_open_file_dialog->setNameFilter("*.pdf");
     m_open_file_dialog->setFilter(QDir::Files);
     m_open_file_dialog->setFileMode(QFileDialog::ExistingFiles);
+    m_open_file_dialog->setDirectory(m_settings->value("open_directory", "").toString());
 
     m_dest_file_dialog->setNameFilter("*.pdf");
     m_dest_file_dialog->setFilter(QDir::Files);
     m_dest_file_dialog->setAcceptMode(QFileDialog::AcceptSave);
+    m_dest_file_dialog->setDirectory(m_settings->value("save_directory", "").toString());
 
     m_files_list_view->setWordWrap(false);
     m_files_list_view->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -227,12 +230,15 @@ void MainWindow::pdf_file_added(const QStringList &selected)
     m_opened_count = selected.count();
     m_open_file_dialog->setDirectory(m_open_file_dialog->directory());
     m_dest_file_dialog->setDirectory(m_open_file_dialog->directory());
+    m_settings->setValue("open_directory", m_open_file_dialog->directory().absolutePath());
 
     m_files_list_view->resizeColumnsToContents();
 }
 
 void MainWindow::generate_pdf(const QString &file_selected)
 {
+    m_settings->setValue("save_directory", m_dest_file_dialog->directory().absolutePath());
+
     m_progress_bar->setValue(0);
     m_progress_bar->show();
 
