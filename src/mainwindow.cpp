@@ -20,6 +20,7 @@
 
 #include <QApplication>
 #include <QTimer>
+#include <QHeaderView>
 #include "pdffile.h"
 
 #define NAME_COLUMN 0
@@ -70,6 +71,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_files_list_model->setHorizontalHeaderItem(2, new QStandardItem(tr("Pages filter")));
     m_files_list_model->setHorizontalHeaderItem(3, new QStandardItem(tr("Rotation")));
     m_files_list_view->setItemDelegateForColumn(3, m_combobox_delegate);
+    m_files_list_view->horizontalHeader()->setStretchLastSection(true);
+    m_files_list_view->resizeColumnsToContents();
 
     m_add_file_button->setDefault(true);
     m_move_up_button->setDefault(true);
@@ -214,7 +217,7 @@ void MainWindow::pdf_file_added(const QStringList &selected)
 
         row_data << new QStandardItem();
 
-        column = new QStandardItem("No rotation");
+        column = new QStandardItem(tr("No rotation"));
         column->setData(0, Qt::UserRole);
         row_data << column;
 

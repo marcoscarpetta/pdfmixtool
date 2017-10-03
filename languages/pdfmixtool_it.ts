@@ -80,59 +80,64 @@ GNU General Public License for more details.
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/mainwindow.cpp" line="34"/>
+        <location filename="../src/mainwindow.cpp" line="35"/>
         <source>Add PDF file</source>
         <translation>Aggiungi file PDF</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="35"/>
+        <location filename="../src/mainwindow.cpp" line="36"/>
         <source>Move up</source>
         <translation>Sposta su</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="36"/>
+        <location filename="../src/mainwindow.cpp" line="37"/>
         <source>Move Down</source>
         <translation>Sposta giù</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="37"/>
+        <location filename="../src/mainwindow.cpp" line="38"/>
         <source>Remove file</source>
         <translation>Rimuovi file</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="38"/>
+        <location filename="../src/mainwindow.cpp" line="39"/>
         <source>About</source>
         <translation>Informazioni</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="39"/>
+        <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Generate PDF</source>
         <translation>Genera PDF</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="50"/>
+        <location filename="../src/mainwindow.cpp" line="51"/>
         <source>PDF Mix Tool</source>
         <translation>PDF Mix Tool</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="68"/>
+        <location filename="../src/mainwindow.cpp" line="69"/>
         <source>Filename</source>
         <translation>Nome del file</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="69"/>
+        <location filename="../src/mainwindow.cpp" line="70"/>
         <source>Page count</source>
         <translation>Numero di pagine</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="70"/>
+        <location filename="../src/mainwindow.cpp" line="71"/>
         <source>Pages filter</source>
         <translation>Filtri sulle pagine</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="71"/>
+        <location filename="../src/mainwindow.cpp" line="72"/>
         <source>Rotation</source>
         <translation>Rotazione</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="220"/>
+        <source>No rotation</source>
+        <translation type="unfinished">Non ruotare</translation>
     </message>
 </context>
 </TS>
