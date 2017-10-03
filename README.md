@@ -1,2 +1,2 @@
 # PDF Mix Tool
-An application to split and merge PDF files, rotate and rearrange their pages
+An application to split, merge, rotate and mix PDF files

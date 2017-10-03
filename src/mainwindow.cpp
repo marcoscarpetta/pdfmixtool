@@ -71,6 +71,13 @@ MainWindow::MainWindow(QWidget *parent) :
     m_files_list_model->setHorizontalHeaderItem(3, new QStandardItem(tr("Rotation")));
     m_files_list_view->setItemDelegateForColumn(3, m_combobox_delegate);
 
+    m_add_file_button->setDefault(true);
+    m_move_up_button->setDefault(true);
+    m_move_down_button->setDefault(true);
+    m_remove_file_button->setDefault(true);
+    m_about_button->setDefault(true);
+    m_dest_file_button->setAutoDefault(true);
+
     QWidget *central_widget = new QWidget(this);
     central_widget->setLayout(m_layout);
     this->setCentralWidget(central_widget);

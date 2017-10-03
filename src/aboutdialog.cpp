@@ -37,6 +37,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     this->setCentralWidget(central_widget);
 
     QPushButton *close_button = new QPushButton(QIcon::fromTheme("window-close"), tr("Close"), this);
+    close_button->setAutoDefault(true);
     connect(close_button, SIGNAL(pressed()), this, SLOT(close()));
 
     QLabel *application_icon = new QLabel(this);

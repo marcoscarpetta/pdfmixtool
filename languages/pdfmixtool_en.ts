@@ -14,14 +14,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/aboutdialog.cpp" line="50"/>
+        <location filename="../src/aboutdialog.cpp" line="51"/>
         <source>Version %1
 
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/aboutdialog.cpp" line="56"/>
+        <location filename="../src/aboutdialog.cpp" line="57"/>
         <source>
 An application to split, merge, rotate and mix PDF files
 
@@ -29,7 +29,7 @@ An application to split, merge, rotate and mix PDF files
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/aboutdialog.cpp" line="61"/>
+        <location filename="../src/aboutdialog.cpp" line="62"/>
         <source>PDF Mix Tool is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -44,7 +44,7 @@ GNU General Public License for more details.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/aboutdialog.cpp" line="73"/>
+        <location filename="../src/aboutdialog.cpp" line="74"/>
         <source>Website</source>
         <translation type="unfinished"></translation>
     </message>
