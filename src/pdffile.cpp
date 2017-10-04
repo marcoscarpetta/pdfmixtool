@@ -231,7 +231,8 @@ void PdfFile::run(PoDoFo::PdfMemDocument *output_file)
         for (int i=0; i < added_pages; i++)
         {
             PoDoFo::PdfPage *page = output_file->GetPage(page_index + i);
-            page->SetRotation(m_rotation);
+            int rotation = (page->GetRotation() + m_rotation)%360;
+            page->SetRotation(rotation);
         }
     }
 }

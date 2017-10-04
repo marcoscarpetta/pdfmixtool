@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -27,7 +27,7 @@
         <source>Version %1
 
 </source>
-        <translation>Versione %1
+        <translation type="vanished">Versione %1
 
 </translation>
     </message>
@@ -36,7 +36,7 @@
 An application to split, merge, rotate and mix PDF files
 
 </source>
-        <translation>
+        <translation type="vanished">
 Un&apos;applicazione per dividere, unire, ruotare e mescolare file PDF
 
 </translation>
