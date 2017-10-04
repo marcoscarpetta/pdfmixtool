@@ -53,6 +53,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     this->setWindowIcon(QIcon(QString("%1/../share/icons/hicolor/48x48/apps/pdfmixtool.png").arg(qApp->applicationDirPath())));
     this->setWindowTitle(tr("PDF Mix Tool"));
+    this->setWindowState(Qt::WindowMaximized);
 
     m_error_dialog->setIcon(QMessageBox::Critical);
     m_error_dialog->setTextFormat(Qt::RichText);
