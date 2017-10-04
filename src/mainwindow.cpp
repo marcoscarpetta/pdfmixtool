@@ -23,6 +23,8 @@
 #include <QHeaderView>
 #include "pdffile.h"
 
+#include <QDebug>
+
 #define NAME_COLUMN 0
 #define PAGES_FILTER_COLUMN 2
 #define ROTATION_COLUMN 3
@@ -38,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_move_down_button(new QPushButton(QIcon::fromTheme("go-down"), tr("Move Down"), this)),
     m_remove_file_button(new QPushButton(QIcon::fromTheme("list-remove"), tr("Remove file"), this)),
     m_about_button(new QPushButton(QIcon::fromTheme("help-about"), tr("About"), this)),
-    m_dest_file_button(new QPushButton(QIcon::fromTheme("document-save-as"), tr("Generate PDF"), this)),
+    m_generate_pdf_button(new QPushButton(QIcon::fromTheme("document-save-as"), tr("Generate PDF"), this)),
     m_progress_bar(new QProgressBar(this)),
     m_open_file_dialog(new QFileDialog(this)),
     m_opened_count(0),
@@ -46,10 +48,14 @@ MainWindow::MainWindow(QWidget *parent) :
     m_files_list_view(new QTableView(this)),
     m_combobox_delegate(new ComboBoxDelegate(this)),
     m_files_list_model(new QStandardItemModel(0, 4, this)),
+    m_error_dialog(new QMessageBox(this)),
     m_about_dialog(new AboutDialog(this))
 {
     this->setWindowIcon(QIcon(QString("%1/../share/icons/hicolor/48x48/apps/pdfmixtool.png").arg(qApp->applicationDirPath())));
     this->setWindowTitle(tr("PDF Mix Tool"));
+
+    m_error_dialog->setIcon(QMessageBox::Critical);
+    m_error_dialog->setTextFormat(Qt::RichText);
 
     m_progress_bar->hide();
 
@@ -57,11 +63,13 @@ MainWindow::MainWindow(QWidget *parent) :
     m_open_file_dialog->setFilter(QDir::Files);
     m_open_file_dialog->setFileMode(QFileDialog::ExistingFiles);
     m_open_file_dialog->setDirectory(m_settings->value("open_directory", "").toString());
+    m_open_file_dialog->setModal(true);
 
     m_dest_file_dialog->setNameFilter("*.pdf");
     m_dest_file_dialog->setFilter(QDir::Files);
     m_dest_file_dialog->setAcceptMode(QFileDialog::AcceptSave);
     m_dest_file_dialog->setDirectory(m_settings->value("save_directory", "").toString());
+    m_dest_file_dialog->setModal(true);
 
     m_files_list_view->setWordWrap(false);
     m_files_list_view->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -82,7 +90,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_move_down_button->setDefault(true);
     m_remove_file_button->setDefault(true);
     m_about_button->setDefault(true);
-    m_dest_file_button->setAutoDefault(true);
+    m_generate_pdf_button->setAutoDefault(true);
 
     QWidget *central_widget = new QWidget(this);
     central_widget->setLayout(m_layout);
@@ -99,18 +107,68 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_layout->addWidget(m_progress_bar, 3, 1, 1, 2);
     m_layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum), 3, 3, 1, 3);
-    m_layout->addWidget(m_dest_file_button, 3, 6);
+    m_layout->addWidget(m_generate_pdf_button, 3, 6);
 
     connect(m_add_file_button, SIGNAL(pressed()), m_open_file_dialog, SLOT(exec()));
+    connect(m_open_file_dialog, SIGNAL(filesSelected(QStringList)), this, SLOT(pdf_file_added(QStringList)));
+
     connect(m_move_up_button, SIGNAL(pressed()), this, SLOT(move_up()));
     connect(m_move_down_button, SIGNAL(pressed()), this, SLOT(move_down()));
     connect(m_remove_file_button, SIGNAL(pressed()), this, SLOT(remove_pdf_file()));
-    connect(m_about_button, SIGNAL(pressed()), m_about_dialog, SLOT(show()));
-    connect(m_dest_file_button, SIGNAL(pressed()), m_dest_file_dialog, SLOT(exec()));
 
-    connect(m_open_file_dialog, SIGNAL(filesSelected(QStringList)), this, SLOT(pdf_file_added(QStringList)));
+    connect(m_about_button, SIGNAL(pressed()), m_about_dialog, SLOT(show()));
+
+    connect(m_generate_pdf_button, SIGNAL(pressed()), this, SLOT(generate_pdf_button_pressed()));
 
     connect(m_dest_file_dialog, SIGNAL(fileSelected(QString)), this, SLOT(generate_pdf(QString)));
+}
+
+void MainWindow::pdf_file_added(const QStringList &selected)
+{
+    for (int i=m_opened_count; i<selected.count(); i++)
+    {
+        //check if filename is already in the model
+        PdfFile * pdf_file = NULL;
+
+        for (int j=0; j<m_files_list_model->rowCount(); j++)
+        {
+            QStandardItem *item = m_files_list_model->item(j, NAME_COLUMN);
+            if (item->data().value<PdfFile *>()->filename() == selected.at(i).toStdString())
+                pdf_file = item->data().value<PdfFile *>();
+        }
+
+        if (pdf_file != NULL)
+            pdf_file = new PdfFile(*pdf_file);
+        else
+            pdf_file = new PdfFile(selected.at(i).toStdString());
+
+        //create the row
+        QList<QStandardItem *> row_data;
+
+        QStandardItem *column = new QStandardItem(selected.at(i));
+        column->setEditable(false);
+        column->setData(QVariant::fromValue<PdfFile *>(pdf_file));
+        row_data << column;
+
+        column = new QStandardItem(QString::number(pdf_file->page_count()));
+        column->setEditable(false);
+        row_data << column;
+
+        row_data << new QStandardItem();
+
+        column = new QStandardItem(tr("No rotation"));
+        column->setData(0, Qt::UserRole);
+        row_data << column;
+
+        m_files_list_model->appendRow(row_data);
+    }
+
+    m_opened_count = selected.count();
+    m_open_file_dialog->setDirectory(m_open_file_dialog->directory());
+    m_dest_file_dialog->setDirectory(m_open_file_dialog->directory());
+    m_settings->setValue("open_directory", m_open_file_dialog->directory().absolutePath());
+
+    m_files_list_view->resizeColumnsToContents();
 }
 
 void MainWindow::move_up()
@@ -187,52 +245,61 @@ void MainWindow::remove_pdf_file()
     }
 }
 
-void MainWindow::pdf_file_added(const QStringList &selected)
+void MainWindow::generate_pdf_button_pressed()
 {
-    for (int i=m_opened_count; i<selected.count(); i++)
+    //check if there is at least one input file
+    if (m_files_list_model->rowCount() == 0)
     {
-        //check if filename is already in the model
-        PdfFile * pdf_file = NULL;
-
-        for (int j=0; j<m_files_list_model->rowCount(); j++)
-        {
-            QStandardItem *item = m_files_list_model->item(j, NAME_COLUMN);
-            if (item->data().value<PdfFile *>()->filename() == selected.at(i).toStdString())
-                pdf_file = item->data().value<PdfFile *>();
-        }
-
-        if (pdf_file != NULL)
-            pdf_file = new PdfFile(*pdf_file);
-        else
-            pdf_file = new PdfFile(selected.at(i).toStdString());
-
-        //create the row
-        QList<QStandardItem *> row_data;
-
-        QStandardItem *column = new QStandardItem(selected.at(i));
-        column->setEditable(false);
-        column->setData(QVariant::fromValue<PdfFile *>(pdf_file));
-        row_data << column;
-
-        column = new QStandardItem(QString::number(pdf_file->page_count()));
-        column->setEditable(false);
-        row_data << column;
-
-        row_data << new QStandardItem();
-
-        column = new QStandardItem(tr("No rotation"));
-        column->setData(0, Qt::UserRole);
-        row_data << column;
-
-        m_files_list_model->appendRow(row_data);
+        m_error_dialog->setWindowTitle(tr("PDF generation error"));
+        m_error_dialog->setText(tr("You must add at least one pdf file!"));
+        m_error_dialog->show();
+        return;
     }
 
-    m_opened_count = selected.count();
-    m_open_file_dialog->setDirectory(m_open_file_dialog->directory());
-    m_dest_file_dialog->setDirectory(m_open_file_dialog->directory());
-    m_settings->setValue("open_directory", m_open_file_dialog->directory().absolutePath());
+    //set pages rotation and filters
+    for (int i=0; i<m_files_list_model->rowCount(); i++)
+    {
+        PdfFile *pdf_file = m_files_list_model->item(i, NAME_COLUMN)->data().value<PdfFile *>();
 
-    m_files_list_view->resizeColumnsToContents();
+        pdf_file->set_rotation(m_files_list_model->item(i, ROTATION_COLUMN)->data(Qt::UserRole).toInt());
+
+        std::list<Error *> *errors = pdf_file->set_pages_filter_from_string(
+                    m_files_list_model->item(i, PAGES_FILTER_COLUMN)->data(Qt::EditRole).toString().toStdString());
+
+        if (errors != NULL)
+        {
+            m_error_dialog->setWindowTitle(tr("PDF generation error"));
+            QString error_message(tr("<p>The PDF generation failed due to the following errors:</p>"));
+            error_message += QString("<ul>");
+
+            for (Error *error : *errors)
+            {
+                if (error->type == ErrorType::invalid_char)
+                    error_message +=
+                            tr("<li>Invalid character \"<b>%1</b>\" in pages filter of file \"<b>%2</b>\"</li>")
+                            .arg(
+                                QString::fromStdString(error->data),
+                                m_files_list_model->item(i, NAME_COLUMN)->text());
+                else if (error->type == ErrorType::invalid_interval)
+                    error_message +=
+                            tr("<li>Invalid interval \"<b>%1</b>\" in pages filter of file \"<b>%2</b>\"</li>")
+                            .arg(
+                                QString::fromStdString(error->data),
+                                m_files_list_model->item(i, NAME_COLUMN)->text());
+                delete error;
+            }
+            delete errors;
+
+            error_message += QString("</ul>");
+            m_error_dialog->setText(error_message);
+            m_error_dialog->show();
+
+            return;
+        }
+    }
+
+    //show destination file dialog if there wasn't any error before
+    m_dest_file_dialog->show();
 }
 
 void MainWindow::generate_pdf(const QString &file_selected)
@@ -244,22 +311,20 @@ void MainWindow::generate_pdf(const QString &file_selected)
 
     PoDoFo::PdfMemDocument *output_file = new PoDoFo::PdfMemDocument();
 
+    //write each file to the output file
     for (int i=0; i<m_files_list_model->rowCount(); i++)
     {
         PdfFile *pdf_file = m_files_list_model->item(i, NAME_COLUMN)->data().value<PdfFile *>();
-
-        pdf_file->set_pages_filter_from_string(
-                    m_files_list_model->item(i, PAGES_FILTER_COLUMN)->data(Qt::EditRole).toString().toStdString());
-        pdf_file->set_rotation(m_files_list_model->item(i, ROTATION_COLUMN)->data(Qt::UserRole).toInt());
 
         pdf_file->run(output_file);
 
         m_progress_bar->setValue((i+1)*100/(m_files_list_model->rowCount()+1));
     }
 
+    //save output file on disk
     output_file->Write(file_selected.toStdString().c_str());
+    delete output_file;
 
     m_progress_bar->setValue(100);
-
     QTimer::singleShot(2000, m_progress_bar, SLOT(hide()));
 }

@@ -27,6 +27,7 @@
 #include <QTableView>
 #include <QStandardItemModel>
 #include <QSettings>
+#include <QMessageBox>
 #include "comboboxdelegate.h"
 #include "aboutdialog.h"
 
@@ -39,13 +40,15 @@ public:
 signals:
 
 public slots:
+    void pdf_file_added(const QStringList &selected);
+
     void move_up();
 
     void move_down();
 
     void remove_pdf_file();
 
-    void pdf_file_added(const QStringList &selected);
+    void generate_pdf_button_pressed();
 
     void generate_pdf(const QString &file_selected);
 
@@ -59,7 +62,7 @@ private:
     QPushButton *m_move_up_button;
     QPushButton *m_move_down_button;
     QPushButton *m_about_button;
-    QPushButton *m_dest_file_button;
+    QPushButton *m_generate_pdf_button;
 
     QProgressBar *m_progress_bar;
 
@@ -71,6 +74,7 @@ private:
     ComboBoxDelegate *m_combobox_delegate;
     QStandardItemModel *m_files_list_model;
 
+    QMessageBox *m_error_dialog;
     AboutDialog *m_about_dialog;
 };
 

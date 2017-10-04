@@ -23,20 +23,32 @@
 #include <string>
 #include <list>
 
+enum class ErrorType {
+    invalid_interval,
+    invalid_char,
+};
+
+struct Error {
+    Error(ErrorType type, const std::string &data) : type(type), data(data) {}
+    ErrorType type;
+    std::string data;
+};
+
 class PdfFile
 {
 public:
     PdfFile();
     PdfFile(const std::string &filename);
     PdfFile(PdfFile &pdf_file);
+    ~PdfFile();
 
     const std::string &filename();
 
     int page_count();
 
-    void set_pages_filter_from_string(const std::string &str);
+    std::list<Error *> *set_pages_filter_from_string(const std::string &str);
 
-    void add_pages_filter(int from, int to);
+    Error *add_pages_filter(int from, int to);
 
     void set_rotation(int rotation);
 
