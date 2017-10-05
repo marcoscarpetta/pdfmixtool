@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     app.setApplicationDisplayName("PDF Mix Tool");
     app.setOrganizationDomain("scarpetta.eu");
     app.setOrganizationName("Marco Scarpetta");
-    app.setApplicationVersion("1.0");
+    app.setApplicationVersion("0.1");
     app.setDesktopFileName("pdfmixtool");
 
     //set up translations

@@ -34,6 +34,11 @@ struct Error {
     std::string data;
 };
 
+struct PoDoFoFile {
+    PoDoFo::PdfMemDocument *file;
+    int ref_count;
+};
+
 class PdfFile
 {
 public:
@@ -56,7 +61,7 @@ public:
 
 private:
     std::string m_filename;
-    PoDoFo::PdfMemDocument *m_pdf_file;
+    PoDoFoFile *m_podofo_file;
 
     std::list<std::pair<int, int>> m_filters;
     int m_rotation;

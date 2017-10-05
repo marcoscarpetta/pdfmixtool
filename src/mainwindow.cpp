@@ -238,11 +238,17 @@ void MainWindow::move_down()
 
 void MainWindow::remove_pdf_file()
 {
-    QModelIndexList selected = m_files_list_view->selectionModel()->selectedRows();
-    for (int i=selected.size() - 1; i >= 0; i--)
+    QList<int> rows;
+    for(const QModelIndex & index : m_files_list_view->selectionModel()->selectedRows()) {
+       rows.append(index.row());
+    }
+
+    qSort(rows);
+
+    for (int i=rows.count() - 1; i >= 0; i--)
     {
-        delete m_files_list_model->item(selected.at(i).row(), NAME_COLUMN)->data().value<PdfFile *>();
-        m_files_list_model->removeRow(selected.at(i).row());
+        delete m_files_list_model->item(rows[i], NAME_COLUMN)->data().value<PdfFile *>();
+        m_files_list_model->removeRow(rows[i]);
     }
 }
 

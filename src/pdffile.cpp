@@ -19,7 +19,7 @@
 #include "pdffile.h"
 
 PdfFile::PdfFile() :
-    m_pdf_file(NULL),
+    m_podofo_file(NULL),
     m_rotation(0)
 {
 
@@ -30,20 +30,31 @@ PdfFile::PdfFile(const std::string &filename) :
 {
     m_filename = filename;
 
-    m_pdf_file = new PoDoFo::PdfMemDocument(filename.c_str());
+    m_podofo_file = new PoDoFoFile;
+    m_podofo_file->file = new PoDoFo::PdfMemDocument(filename.c_str());
+    m_podofo_file->ref_count = 1;
 }
 
 PdfFile::PdfFile(PdfFile &pdf_file) :
     PdfFile()
 {
-    m_pdf_file = pdf_file.m_pdf_file;
+    m_podofo_file = pdf_file.m_podofo_file;
+    m_podofo_file->ref_count++;
     m_filename = pdf_file.m_filename;
 }
 
 PdfFile::~PdfFile()
 {
-    if (m_pdf_file != NULL)
-        delete m_pdf_file;
+    if (m_podofo_file != NULL)
+    {
+        if (m_podofo_file->ref_count == 1)
+        {
+            delete m_podofo_file->file;
+            delete m_podofo_file;
+        }
+        else
+            m_podofo_file->ref_count--;
+    }
 }
 
 const std::string &PdfFile::filename()
@@ -53,7 +64,7 @@ const std::string &PdfFile::filename()
 
 int PdfFile::page_count()
 {
-    return m_pdf_file->GetPageCount();
+    return m_podofo_file->file->GetPageCount();
 }
 
 std::list<Error *> *PdfFile::set_pages_filter_from_string(const std::string &str)
@@ -142,8 +153,8 @@ Error *PdfFile::add_pages_filter(int from, int to)
     if (from < 1)
         from = 1;
 
-    if (to > m_pdf_file->GetPageCount())
-        to = m_pdf_file->GetPageCount();
+    if (to > m_podofo_file->file->GetPageCount())
+        to = m_podofo_file->file->GetPageCount();
 
     if (from > to)
         return new Error(
@@ -211,8 +222,8 @@ void PdfFile::run(PoDoFo::PdfMemDocument *output_file)
     //add pages to output document from this document
     if (m_filters.size() == 0)
     {
-        output_file->InsertPages(*(m_pdf_file), 0, m_pdf_file->GetPageCount());
-        added_pages += m_pdf_file->GetPageCount();
+        output_file->InsertPages(*(m_podofo_file->file), 0, m_podofo_file->file->GetPageCount());
+        added_pages += m_podofo_file->file->GetPageCount();
     }
     else
     {
@@ -220,7 +231,7 @@ void PdfFile::run(PoDoFo::PdfMemDocument *output_file)
         for (it=m_filters.begin(); it != m_filters.end(); ++it)
         {
             int page_count = it->second - it->first + 1;
-            output_file->InsertPages(*(m_pdf_file), it->first - 1, page_count);
+            output_file->InsertPages(*(m_podofo_file->file), it->first - 1, page_count);
             added_pages += page_count;
         }
     }
