@@ -293,6 +293,12 @@ void MainWindow::generate_pdf_button_pressed()
                             .arg(
                                 QString::fromStdString(error->data),
                                 m_files_list_model->item(i, NAME_COLUMN)->text());
+                else if (error->type == ErrorType::page_out_of_range)
+                    error_message +=
+                            tr("<li>Boundaries of interval \"<b>%1</b>\" in pages filter of file \"<b>%2</b>\" are out of allowed interval</li>")
+                            .arg(
+                                QString::fromStdString(error->data),
+                                m_files_list_model->item(i, NAME_COLUMN)->text());
                 delete error;
             }
             delete errors;

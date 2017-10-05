@@ -150,11 +150,12 @@ std::list<Error *> *PdfFile::set_pages_filter_from_string(const std::string &str
 Error *PdfFile::add_pages_filter(int from, int to)
 {
     //check interval boundaries
-    if (from < 1)
-        from = 1;
-
-    if (to > m_podofo_file->file->GetPageCount())
-        to = m_podofo_file->file->GetPageCount();
+    if (from < 1 || from > m_podofo_file->file->GetPageCount() ||
+            to < 1 || to > m_podofo_file->file->GetPageCount())
+        return new Error(
+                    ErrorType::page_out_of_range,
+                    std::to_string(from) + "-" + std::to_string(to)
+                    );
 
     if (from > to)
         return new Error(

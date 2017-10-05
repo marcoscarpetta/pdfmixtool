@@ -26,6 +26,7 @@
 enum class ErrorType {
     invalid_interval,
     invalid_char,
+    page_out_of_range
 };
 
 struct Error {

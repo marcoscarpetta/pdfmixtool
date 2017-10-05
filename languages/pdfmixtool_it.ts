@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -27,7 +27,7 @@
         <source>Version %1
 
 </source>
-        <translation type="vanished">Versione %1
+        <translation>Versione %1
 
 </translation>
     </message>
@@ -36,7 +36,7 @@
 An application to split, merge, rotate and mix PDF files
 
 </source>
-        <translation type="vanished">
+        <translation>
 Un&apos;applicazione per dividere, unire, ruotare e mescolare file PDF
 
 </translation>
@@ -157,6 +157,15 @@ Un&apos;applicazione per dividere, unire, ruotare e mescolare file PDF
         <location filename="../src/mainwindow.cpp" line="292"/>
         <source>&lt;li&gt;Invalid interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</source>
         <translation>&lt;li&gt;Intervallo non valido &quot;&lt;b&gt;%1&lt;/b&gt;&quot; nel filtro delle pagine del file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="298"/>
+        <source>&lt;li&gt;Boundaries of interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; are out of allowed interval&lt;/li&gt;</source>
+        <translation>&lt;li&gt;I limiti dell&apos;intervallo &quot;&lt;b&gt;%1&lt;/b&gt;&quot; nel filtro delle pagine del file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; sono oltre i valori consentiti&lt;/li&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;li&gt;Boundaries of interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; are out of valid interval&lt;/li&gt;</source>
+        <translation></translation>
     </message>
 </context>
 </TS>
