@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain("scarpetta.eu");
     app.setOrganizationName("Marco Scarpetta");
     app.setApplicationVersion("0.1");
-    app.setDesktopFileName("pdfmixtool");
+    //app.setDesktopFileName("pdfmixtool"); Disabled for compatibility with Qt < 5.7
 
     //set up translations
     QTranslator qtTranslator;
