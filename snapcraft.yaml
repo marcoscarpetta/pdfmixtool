@@ -24,9 +24,10 @@ parts:
       - build-essential
       - qtbase5-dev
       - libpodofo-dev
+      - qttools5-dev-tools
     stage-packages:
       - libqt5gui5
-      - libpodofo0.9.3
+      - libpodofo0.9.5
     after: [desktop-qt5]
 
 #icon: usr/share/icons/hicolor/scalable/apps/pdfmixtool.svg
