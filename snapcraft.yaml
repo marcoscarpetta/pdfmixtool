@@ -1,0 +1,32 @@
+name: pdfmixtool
+version: '0.1'
+summary: An application to split, merge, rotate and mix PDF files
+description: |
+  PDF Mix Tool is a simple and lightweight application that allows you to split, merge, rotate and mix PDF files.
+  It is written in C++ and depends only on Qt 5 and PoDoFo.
+
+grade: stable
+confinement: strict
+
+apps:
+  pdfmixtool:
+    command: desktop-launch $SNAP/usr/bin/pdfmixtool
+    desktop: usr/share/applications/pdfmixtool.desktop
+    plugs:
+      - home
+
+parts:
+  pdfmixtool:
+    plugin: cmake
+    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/usr]
+    source: .
+    build-packages:
+      - build-essential
+      - qtbase5-dev
+      - libpodofo-dev
+    stage-packages:
+      - libqt5gui5
+      - libpodofo0.9.3
+    after: [desktop-qt5]
+
+#icon: usr/share/icons/hicolor/scalable/apps/pdfmixtool.svg
