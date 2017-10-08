@@ -11,8 +11,20 @@ confinement: strict
 apps:
   pdfmixtool:
     command: desktop-launch $SNAP/usr/bin/pdfmixtool
-    desktop: usr/share/applications/pdfmixtool.desktop
-    plugs: [home, x11, wayland, opengl]
+    desktop: $SNAP/usr/share/applications/pdfmixtool.desktop
+    plugs:
+      - home
+      - x11
+      - wayland
+      - opengl
+      - platform
+
+plugs:
+  platform:
+    content: ubuntu-app-platform1
+    default-provider: ubuntu-app-platform
+    interface: content
+    target: ubuntu-app-platform
 
 parts:
   pdfmixtool:
@@ -25,8 +37,7 @@ parts:
       - libpodofo-dev
       - qttools5-dev-tools
     stage-packages:
-      - libqt5gui5
       - libpodofo0.9.3
-    after: [desktop-qt5]
+    after: [desktop-ubuntu-app-platform]
 
-icon: resources/icon.svg
+icon: resources/icon_128.png
