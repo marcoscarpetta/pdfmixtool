@@ -17,14 +17,6 @@ apps:
       - x11
       - wayland
       - opengl
-      - platform
-
-plugs:
-  platform:
-    content: ubuntu-app-platform1
-    default-provider: ubuntu-app-platform
-    interface: content
-    target: ubuntu-app-platform
 
 parts:
   pdfmixtool:
@@ -38,6 +30,6 @@ parts:
       - qttools5-dev-tools
     stage-packages:
       - libpodofo0.9.3
-    after: [desktop-ubuntu-app-platform]
+    after: [desktop-qt5]
 
 icon: resources/icon_128.png
