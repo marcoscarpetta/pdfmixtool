@@ -11,7 +11,7 @@ confinement: strict
 apps:
   pdfmixtool:
     command: desktop-launch $SNAP/usr/bin/pdfmixtool
-    desktop: $SNAP/usr/share/applications/pdfmixtool.desktop
+    desktop: usr/share/applications/pdfmixtool.desktop
     plugs:
       - home
       - x11
