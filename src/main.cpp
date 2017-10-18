@@ -28,9 +28,12 @@ int main(int argc, char *argv[])
     app.setApplicationName("pdfmixtool");
     app.setApplicationDisplayName("PDF Mix Tool");
     app.setOrganizationDomain("scarpetta.eu");
-    app.setOrganizationName("Marco Scarpetta");
-    app.setApplicationVersion("0.1");
-    //app.setDesktopFileName("pdfmixtool"); Disabled for compatibility with Qt < 5.7
+    app.setOrganizationName("PDF Mix Tool");
+    app.setApplicationVersion("0.2");
+
+#if QT_VERSION >= 0x050700
+    app.setDesktopFileName("pdfmixtool");
+#endif
 
     //set up translations
     QTranslator qtTranslator;
