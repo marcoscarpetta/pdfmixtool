@@ -18,56 +18,35 @@
 
 #include "pdffile.h"
 
-PdfFile::PdfFile() :
-    m_podofo_file(NULL),
+OutputPdfFile::OutputPdfFile()
+{
+
+}
+
+InputPdfFile::InputPdfFile() :
     m_rotation(0)
 {
 
 }
 
-PdfFile::PdfFile(const std::string &filename) :
-    PdfFile()
+InputPdfFile::InputPdfFile(const std::string &filename) :
+    InputPdfFile()
 {
     m_filename = filename;
-
-    m_podofo_file = new PoDoFoFile;
-    m_podofo_file->file = new PoDoFo::PdfMemDocument(filename.c_str());
-    m_podofo_file->ref_count = 1;
 }
 
-PdfFile::PdfFile(PdfFile &pdf_file) :
-    PdfFile()
+InputPdfFile::InputPdfFile(InputPdfFile *pdf_file) :
+    InputPdfFile()
 {
-    m_podofo_file = pdf_file.m_podofo_file;
-    m_podofo_file->ref_count++;
-    m_filename = pdf_file.m_filename;
+    m_filename = pdf_file->m_filename;
 }
 
-PdfFile::~PdfFile()
-{
-    if (m_podofo_file != NULL)
-    {
-        if (m_podofo_file->ref_count == 1)
-        {
-            delete m_podofo_file->file;
-            delete m_podofo_file;
-        }
-        else
-            m_podofo_file->ref_count--;
-    }
-}
-
-const std::string &PdfFile::filename()
+const std::string &InputPdfFile::filename()
 {
     return m_filename;
 }
 
-int PdfFile::page_count()
-{
-    return m_podofo_file->file->GetPageCount();
-}
-
-std::list<Error *> *PdfFile::set_pages_filter_from_string(const std::string &str)
+std::list<Error *> *InputPdfFile::set_pages_filter_from_string(const std::string &str)
 {
     m_filters.clear();
 
@@ -147,11 +126,11 @@ std::list<Error *> *PdfFile::set_pages_filter_from_string(const std::string &str
         return errors;
 }
 
-Error *PdfFile::add_pages_filter(int from, int to)
+Error *InputPdfFile::add_pages_filter(int from, int to)
 {
     //check interval boundaries
-    if (from < 1 || from > m_podofo_file->file->GetPageCount() ||
-            to < 1 || to > m_podofo_file->file->GetPageCount())
+    if (from < 1 || from > this->page_count() ||
+            to < 1 || to > this->page_count())
         return new Error(
                     ErrorType::page_out_of_range,
                     std::to_string(from) + "-" + std::to_string(to)
@@ -210,41 +189,7 @@ Error *PdfFile::add_pages_filter(int from, int to)
     return NULL;
 }
 
-void PdfFile::set_rotation(int rotation)
+void InputPdfFile::set_rotation(int rotation)
 {
     m_rotation = rotation;
-}
-
-void PdfFile::run(PoDoFo::PdfMemDocument *output_file)
-{
-    int page_index = output_file->GetPageCount();
-    int added_pages = 0;
-
-    //add pages to output document from this document
-    if (m_filters.size() == 0)
-    {
-        output_file->InsertPages(*(m_podofo_file->file), 0, m_podofo_file->file->GetPageCount());
-        added_pages += m_podofo_file->file->GetPageCount();
-    }
-    else
-    {
-        std::list<std::pair<int, int>>::iterator it;
-        for (it=m_filters.begin(); it != m_filters.end(); ++it)
-        {
-            int page_count = it->second - it->first + 1;
-            output_file->InsertPages(*(m_podofo_file->file), it->first - 1, page_count);
-            added_pages += page_count;
-        }
-    }
-
-    //set pages rotation
-    if (m_rotation != 0)
-    {
-        for (int i=0; i < added_pages; i++)
-        {
-            PoDoFo::PdfPage *page = output_file->GetPage(page_index + i);
-            int rotation = (page->GetRotation() + m_rotation)%360;
-            page->SetRotation(rotation);
-        }
-    }
 }

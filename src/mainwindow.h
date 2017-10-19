@@ -30,6 +30,7 @@
 #include <QMessageBox>
 #include "comboboxdelegate.h"
 #include "aboutdialog.h"
+#include "pdf_edit_lib/pdfeditor.h"
 
 class MainWindow : public QMainWindow
 {
@@ -53,6 +54,8 @@ public slots:
     void generate_pdf(const QString &file_selected);
 
 private:
+    PdfEditor *m_pdf_editor;
+
     QSettings *m_settings;
 
     QGridLayout *m_layout;

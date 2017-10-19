@@ -19,50 +19,39 @@
 #ifndef PDFFILE_H
 #define PDFFILE_H
 
-#include <podofo/podofo.h>
 #include <string>
 #include <list>
+#include "definitions.h"
 
-enum class ErrorType {
-    invalid_interval,
-    invalid_char,
-    page_out_of_range
-};
-
-struct Error {
-    Error(ErrorType type, const std::string &data) : type(type), data(data) {}
-    ErrorType type;
-    std::string data;
-};
-
-struct PoDoFoFile {
-    PoDoFo::PdfMemDocument *file;
-    int ref_count;
-};
-
-class PdfFile
+class OutputPdfFile
 {
 public:
-    PdfFile();
-    PdfFile(const std::string &filename);
-    PdfFile(PdfFile &pdf_file);
-    ~PdfFile();
+    OutputPdfFile();
 
-    const std::string &filename();
+    virtual void write(const std::string &filename) = 0;
+};
 
-    int page_count();
+class InputPdfFile
+{
+public:
+    InputPdfFile();
+    InputPdfFile(const std::string &filename);
+    InputPdfFile(InputPdfFile *pdf_file);
 
-    std::list<Error *> *set_pages_filter_from_string(const std::string &str);
+    virtual const std::string &filename();
 
-    Error *add_pages_filter(int from, int to);
+    virtual int page_count() = 0;
 
-    void set_rotation(int rotation);
+    virtual std::list<Error *> *set_pages_filter_from_string(const std::string &str);
 
-    void run(PoDoFo::PdfMemDocument *output_file);
+    virtual Error *add_pages_filter(int from, int to);
 
-private:
+    virtual void set_rotation(int rotation);
+
+    virtual void run(OutputPdfFile *output_file) = 0;
+
+protected:
     std::string m_filename;
-    PoDoFoFile *m_podofo_file;
 
     std::list<std::pair<int, int>> m_filters;
     int m_rotation;

@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     app.setApplicationName("pdfmixtool");
     app.setApplicationDisplayName("PDF Mix Tool");
     app.setOrganizationDomain("scarpetta.eu");
-    app.setOrganizationName("PDF Mix Tool");
+    app.setOrganizationName("PDFMixTool");
     app.setApplicationVersion("0.2");
 
 #if QT_VERSION >= 0x050700

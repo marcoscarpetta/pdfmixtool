@@ -18,8 +18,13 @@ SET (
     src/comboboxdelegate.h
     src/mainwindow.cpp
     src/mainwindow.h
-    src/pdffile.cpp
-    src/pdffile.h
+    src/pdf_edit_lib/definitions.h
+    src/pdf_edit_lib/pdfeditor.cpp
+    src/pdf_edit_lib/pdfeditor.h
+    src/pdf_edit_lib/pdffile.cpp
+    src/pdf_edit_lib/pdffile.h
+    src/pdf_edit_lib/pdffile_podofo.cpp
+    src/pdf_edit_lib/pdffile_podofo.h
 )
 
 SET (

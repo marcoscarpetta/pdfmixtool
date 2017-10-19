@@ -21,18 +21,16 @@
 #include <QApplication>
 #include <QTimer>
 #include <QHeaderView>
-#include "pdffile.h"
-
-#include <QDebug>
 
 #define NAME_COLUMN 0
 #define PAGES_FILTER_COLUMN 2
 #define ROTATION_COLUMN 3
 
-Q_DECLARE_METATYPE(PdfFile *)
+Q_DECLARE_METATYPE(InputPdfFile *)
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
+    m_pdf_editor(new PdfEditor()),
     m_settings(new QSettings(this)),
     m_layout(new QGridLayout()),
     m_add_file_button(new QPushButton(QIcon::fromTheme("list-add"), tr("Add PDF file"), this)),
@@ -129,26 +127,26 @@ void MainWindow::pdf_file_added(const QStringList &selected)
     for (int i=m_opened_count; i<selected.count(); i++)
     {
         //check if filename is already in the model
-        PdfFile * pdf_file = NULL;
+        InputPdfFile * pdf_file = NULL;
 
         for (int j=0; j<m_files_list_model->rowCount(); j++)
         {
             QStandardItem *item = m_files_list_model->item(j, NAME_COLUMN);
-            if (item->data().value<PdfFile *>()->filename() == selected.at(i).toStdString())
-                pdf_file = item->data().value<PdfFile *>();
+            if (item->data().value<InputPdfFile *>()->filename() == selected.at(i).toStdString())
+                pdf_file = item->data().value<InputPdfFile *>();
         }
 
         if (pdf_file != NULL)
-            pdf_file = new PdfFile(*pdf_file);
+            pdf_file = m_pdf_editor->new_input_file(pdf_file);
         else
-            pdf_file = new PdfFile(selected.at(i).toStdString());
+            pdf_file = m_pdf_editor->new_input_file(selected.at(i).toStdString());
 
         //create the row
         QList<QStandardItem *> row_data;
 
         QStandardItem *column = new QStandardItem(selected.at(i));
         column->setEditable(false);
-        column->setData(QVariant::fromValue<PdfFile *>(pdf_file));
+        column->setData(QVariant::fromValue<InputPdfFile *>(pdf_file));
         row_data << column;
 
         column = new QStandardItem(QString::number(pdf_file->page_count()));
@@ -247,7 +245,7 @@ void MainWindow::remove_pdf_file()
 
     for (int i=rows.count() - 1; i >= 0; i--)
     {
-        delete m_files_list_model->item(rows[i], NAME_COLUMN)->data().value<PdfFile *>();
+        delete m_files_list_model->item(rows[i], NAME_COLUMN)->data().value<InputPdfFile *>();
         m_files_list_model->removeRow(rows[i]);
     }
 }
@@ -266,7 +264,7 @@ void MainWindow::generate_pdf_button_pressed()
     //set pages rotation and filters
     for (int i=0; i<m_files_list_model->rowCount(); i++)
     {
-        PdfFile *pdf_file = m_files_list_model->item(i, NAME_COLUMN)->data().value<PdfFile *>();
+        InputPdfFile *pdf_file = m_files_list_model->item(i, NAME_COLUMN)->data().value<InputPdfFile *>();
 
         pdf_file->set_rotation(m_files_list_model->item(i, ROTATION_COLUMN)->data(Qt::UserRole).toInt());
 
@@ -322,12 +320,12 @@ void MainWindow::generate_pdf(const QString &file_selected)
     m_progress_bar->setValue(0);
     m_progress_bar->show();
 
-    PoDoFo::PdfMemDocument *output_file = new PoDoFo::PdfMemDocument();
+    OutputPdfFile *output_file = m_pdf_editor->new_output_file();
 
     //write each file to the output file
     for (int i=0; i<m_files_list_model->rowCount(); i++)
     {
-        PdfFile *pdf_file = m_files_list_model->item(i, NAME_COLUMN)->data().value<PdfFile *>();
+        InputPdfFile *pdf_file = m_files_list_model->item(i, NAME_COLUMN)->data().value<InputPdfFile *>();
 
         pdf_file->run(output_file);
 
@@ -335,7 +333,7 @@ void MainWindow::generate_pdf(const QString &file_selected)
     }
 
     //save output file on disk
-    output_file->Write(file_selected.toStdString().c_str());
+    output_file->write(file_selected.toStdString());
     delete output_file;
 
     m_progress_bar->setValue(100);
