@@ -46,25 +46,24 @@ const std::string &InputPdfFile::filename()
     return m_filename;
 }
 
-std::list<Error *> *InputPdfFile::set_pages_filter_from_string(const std::string &str)
+Problems InputPdfFile::set_pages_filter_from_string(const std::string &str)
 {
     m_filters.clear();
 
-    std::list<Error *> *errors = new std::list<Error *>();
+    Problems problems;
 
     if (str.find_first_not_of("0123456789- ,") != std::string::npos)
     {
-        errors->push_back(new Error(
-                              ErrorType::invalid_char,
+        problems.add(new Problem(
+                              ProblemType::error_invalid_char,
                               str.substr(str.find_first_not_of("0123456789- ,"), 1))
                           );
-        return errors;
+        return problems;
     }
 
     if (str.find_first_not_of("- ,") == std::string::npos)
     {
-        delete errors;
-        return NULL; //void str
+        return problems; //void str
     }
 
     //parse str
@@ -78,10 +77,10 @@ std::list<Error *> *InputPdfFile::set_pages_filter_from_string(const std::string
         {
             std::string page_number = str.substr(cursor, interval_end - cursor);
             int num = std::stoi(page_number);
-            Error *error = this->add_pages_filter(num, num);
+            Problem *problem = this->add_pages_filter(num, num);
 
-            if (error != NULL)
-                errors->push_back(error);
+            if (problem != NULL)
+                problems.add(problem);
 
             cursor = str.find_first_not_of(" ,-", interval_end);
             interval_end = str.find_first_of(" ,", cursor);
@@ -94,8 +93,8 @@ std::list<Error *> *InputPdfFile::set_pages_filter_from_string(const std::string
             if (second_number_start >= interval_end || //syntax error: no second number
                     str.find_first_of('-', second_number_start) < interval_end) //syntax error: more '-' in one interval
             {
-                errors->push_back(new Error(
-                                      ErrorType::invalid_interval,
+                problems.add(new Problem(
+                                      ProblemType::error_invalid_interval,
                                       str.substr(cursor, interval_end - cursor))
                                   );
 
@@ -106,10 +105,10 @@ std::list<Error *> *InputPdfFile::set_pages_filter_from_string(const std::string
             {
                 int from = std::stoi(str.substr(cursor, first_number_end - cursor));
                 int to = std::stoi(str.substr(second_number_start, interval_end));
-                Error *error = this->add_pages_filter(from, to);
+                Problem *problem = this->add_pages_filter(from, to);
 
-                if (error != NULL)
-                    errors->push_back(error);
+                if (problem != NULL)
+                    problems.add(problem);
 
                 cursor = str.find_first_not_of(" ,-", interval_end);
                 interval_end = str.find_first_of(" ,", cursor);
@@ -117,76 +116,42 @@ std::list<Error *> *InputPdfFile::set_pages_filter_from_string(const std::string
         }
     }
 
-    if (errors->size() == 0)
-    {
-        delete errors;
-        return NULL;
-    }
-    else
-        return errors;
+    return problems;
 }
 
-Error *InputPdfFile::add_pages_filter(int from, int to)
+Problem *InputPdfFile::add_pages_filter(int from, int to)
 {
     //check interval boundaries
     if (from < 1 || from > this->page_count() ||
             to < 1 || to > this->page_count())
-        return new Error(
-                    ErrorType::page_out_of_range,
+        return new Problem(
+                    ProblemType::error_page_out_of_range,
                     std::to_string(from) + "-" + std::to_string(to)
                     );
 
     if (from > to)
-        return new Error(
-                    ErrorType::invalid_interval,
+        return new Problem(
+                    ProblemType::error_invalid_interval,
                     std::to_string(from) + "-" + std::to_string(to)
                     );
 
-    //check if this interval can be pushed back
-    if (m_filters.size() == 0 || from > m_filters.back().second)
-    {
-        m_filters.push_back(std::pair<int, int>(from, to));
-        return NULL;
-    }
+    Problem *problem = NULL;
 
-    //check if the new interval doesn't intersect old ones
+    //check if the new interval intersects old ones
     std::list<std::pair<int, int>>::iterator it;
     for (it=m_filters.begin(); it != m_filters.end(); ++it)
     {
-        //non-intersection found
-        if (to < it->first)
-        {
-            m_filters.insert(it, std::pair<int, int>(from, to));
-            return NULL;
-        }
         //intersection found
-        else if (from >= it->first && from <= it->second || to >= it->first && to <= it->second)
-            break;
+        if (!(from > it->second || to < it->first))
+            problem = new Problem(
+                        ProblemType::warning_overlapping_interval,
+                        std::to_string(from) + "-" + std::to_string(to)
+                        );
     }
 
-    //check if the new interval intersect the iterator interval
-    if (to >= it->first && to <= it->second)
-        it->first = from;
-    else if (from >= it->first && from <= it->second)
-    {
-        std::list<std::pair<int, int>>::iterator it_end;
-        for (it_end=it; it_end != m_filters.end(); ++it_end)
-        {
-            if (to < it_end->first)
-                break;
+    m_filters.push_back(std::pair<int, int>(from, to));
 
-            if (to >= it_end->first && to <= it_end->second)
-                to = it_end->second;
-        }
-
-        //delete overlying intervals
-        for (--it_end; it_end != it; --it_end)
-            m_filters.erase(it_end);
-
-        it->second = to;
-    }
-
-    return NULL;
+    return problem;
 }
 
 void InputPdfFile::set_rotation(int rotation)

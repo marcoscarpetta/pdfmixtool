@@ -78,6 +78,7 @@ private:
     QStandardItemModel *m_files_list_model;
 
     QMessageBox *m_error_dialog;
+    QMessageBox *m_warning_dialog;
     AboutDialog *m_about_dialog;
 };
 

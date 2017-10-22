@@ -42,9 +42,9 @@ public:
 
     virtual int page_count() = 0;
 
-    virtual std::list<Error *> *set_pages_filter_from_string(const std::string &str);
+    virtual Problems set_pages_filter_from_string(const std::string &str);
 
-    virtual Error *add_pages_filter(int from, int to);
+    virtual Problem *add_pages_filter(int from, int to);
 
     virtual void set_rotation(int rotation);
 

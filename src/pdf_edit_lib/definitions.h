@@ -19,20 +19,51 @@
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
+#include <string>
+#include <list>
+
 enum class Backend {
     PoDoFo
 };
 
-enum class ErrorType {
-    invalid_interval,
-    invalid_char,
-    page_out_of_range
+enum class ProblemType {
+    error_invalid_interval,
+    error_invalid_char,
+    error_page_out_of_range,
+    warning_overlapping_interval
 };
 
-struct Error {
-    Error(ErrorType type, const std::string &data) : type(type), data(data) {}
-    ErrorType type;
+struct Problem {
+    Problem(ProblemType type, const std::string &data) : type(type), data(data), next(NULL) {}
+    ProblemType type;
     std::string data;
+    Problem *next;
+};
+
+
+struct Problems {
+    Problems() : errors(false), count(0), first(NULL) {}
+    void add(Problem *problem) {
+        if (first == NULL)
+        {
+            first = problem;
+            last = problem;
+        }
+        else
+        {
+            last->next = problem;
+            last = problem;
+        }
+
+        if (problem->type != ProblemType::warning_overlapping_interval)
+            errors = true;
+
+        count++;
+    }
+    bool errors;
+    int count;
+    Problem *first;
+    Problem *last;
 };
 
 #endif // DEFINITIONS_H

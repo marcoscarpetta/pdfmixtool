@@ -47,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_combobox_delegate(new ComboBoxDelegate(this)),
     m_files_list_model(new QStandardItemModel(0, 4, this)),
     m_error_dialog(new QMessageBox(this)),
+    m_warning_dialog(new QMessageBox(this)),
     m_about_dialog(new AboutDialog(this))
 {
     this->setWindowIcon(QIcon(QString("%1/../share/icons/hicolor/48x48/apps/pdfmixtool.png").arg(qApp->applicationDirPath())));
@@ -55,6 +56,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_error_dialog->setIcon(QMessageBox::Critical);
     m_error_dialog->setTextFormat(Qt::RichText);
+
+    m_warning_dialog->setIcon(QMessageBox::Warning);
+    m_warning_dialog->setTextFormat(Qt::RichText);
+    m_warning_dialog->addButton(QMessageBox::Cancel);
+    QPushButton *ignore_warning = m_warning_dialog->addButton(QMessageBox::Ignore);
+    m_warning_dialog->setDefaultButton(QMessageBox::Ignore);
 
     m_progress_bar->hide();
 
@@ -118,6 +125,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_about_button, SIGNAL(pressed()), m_about_dialog, SLOT(show()));
 
     connect(m_generate_pdf_button, SIGNAL(pressed()), this, SLOT(generate_pdf_button_pressed()));
+
+    connect(ignore_warning, SIGNAL(released()), m_dest_file_dialog, SLOT(show()));
 
     connect(m_dest_file_dialog, SIGNAL(fileSelected(QString)), this, SLOT(generate_pdf(QString)));
 }
@@ -268,42 +277,81 @@ void MainWindow::generate_pdf_button_pressed()
 
         pdf_file->set_rotation(m_files_list_model->item(i, ROTATION_COLUMN)->data(Qt::UserRole).toInt());
 
-        std::list<Error *> *errors = pdf_file->set_pages_filter_from_string(
+        Problems problems = pdf_file->set_pages_filter_from_string(
                     m_files_list_model->item(i, PAGES_FILTER_COLUMN)->data(Qt::EditRole).toString().toStdString());
 
-        if (errors != NULL)
+        if (problems.count != 0)
         {
-            m_error_dialog->setWindowTitle(tr("PDF generation error"));
-            QString error_message(tr("<p>The PDF generation failed due to the following errors:</p>"));
-            error_message += QString("<ul>");
-
-            for (Error *error : *errors)
+            if (problems.errors)
             {
-                if (error->type == ErrorType::invalid_char)
-                    error_message +=
-                            tr("<li>Invalid character \"<b>%1</b>\" in pages filter of file \"<b>%2</b>\"</li>")
-                            .arg(
-                                QString::fromStdString(error->data),
-                                m_files_list_model->item(i, NAME_COLUMN)->text());
-                else if (error->type == ErrorType::invalid_interval)
-                    error_message +=
-                            tr("<li>Invalid interval \"<b>%1</b>\" in pages filter of file \"<b>%2</b>\"</li>")
-                            .arg(
-                                QString::fromStdString(error->data),
-                                m_files_list_model->item(i, NAME_COLUMN)->text());
-                else if (error->type == ErrorType::page_out_of_range)
-                    error_message +=
-                            tr("<li>Boundaries of interval \"<b>%1</b>\" in pages filter of file \"<b>%2</b>\" are out of allowed interval</li>")
-                            .arg(
-                                QString::fromStdString(error->data),
-                                m_files_list_model->item(i, NAME_COLUMN)->text());
-                delete error;
-            }
-            delete errors;
+                m_error_dialog->setWindowTitle(tr("PDF generation error"));
+                QString error_message(tr("<p>The PDF generation failed due to the following errors:</p>"));
+                error_message += QString("<ul>");
 
-            error_message += QString("</ul>");
-            m_error_dialog->setText(error_message);
-            m_error_dialog->show();
+                Problem *error = problems.first;
+                Problem *next;
+
+                while (error != NULL)
+                {
+                    next = error->next;
+
+                    if (error->type == ProblemType::error_invalid_char)
+                        error_message +=
+                                tr("<li>Invalid character \"<b>%1</b>\" in pages filter of file \"<b>%2</b>\"</li>")
+                                .arg(
+                                    QString::fromStdString(error->data),
+                                    m_files_list_model->item(i, NAME_COLUMN)->text());
+                    else if (error->type == ProblemType::error_invalid_interval)
+                        error_message +=
+                                tr("<li>Invalid interval \"<b>%1</b>\" in pages filter of file \"<b>%2</b>\"</li>")
+                                .arg(
+                                    QString::fromStdString(error->data),
+                                    m_files_list_model->item(i, NAME_COLUMN)->text());
+                    else if (error->type == ProblemType::error_page_out_of_range)
+                        error_message +=
+                                tr("<li>Boundaries of interval \"<b>%1</b>\" in pages filter of file \"<b>%2</b>\" are out of allowed interval</li>")
+                                .arg(
+                                    QString::fromStdString(error->data),
+                                    m_files_list_model->item(i, NAME_COLUMN)->text());
+
+                    delete error;
+
+                    error = next;
+                }
+
+                error_message += QString("</ul>");
+                m_error_dialog->setText(error_message);
+                m_error_dialog->show();
+            }
+            else
+            {
+                m_warning_dialog->setWindowTitle(tr("PDF generation warning"));
+                QString warning_message(tr("<p>The following problems were encountered while generating the PDF file:</p>"));
+                warning_message += QString("<ul>");
+
+                Problem *warning = problems.first;
+                Problem *next;
+
+                while (warning != NULL)
+                {
+                    next = warning->next;
+
+                    if (warning->type == ProblemType::warning_overlapping_interval)
+                        warning_message +=
+                                tr("<li>Interval \"<b>%1</b>\" in pages filter of file \"<b>%2</b>\" is overlapping with another interval</li>")
+                                .arg(
+                                    QString::fromStdString(warning->data),
+                                    m_files_list_model->item(i, NAME_COLUMN)->text());
+
+                    delete warning;
+
+                    warning = next;
+                }
+
+                warning_message += QString("</ul>");
+                m_warning_dialog->setText(warning_message);
+                m_warning_dialog->show();
+            }
 
             return;
         }
