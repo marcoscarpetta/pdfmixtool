@@ -1,6 +1,9 @@
 # PDF Mix Tool Changelog/Roadmap
 
-## [0.2] - unreleased
+## Version 0.2
+
+**Unreleased**
+
 ### Added
 - [ ] Show output file page count on bottom
 - [ ] Remember main window size and status on exit
@@ -13,7 +16,10 @@
 ### Fixed
 - [x] Fix widgets Tab ordering
 
-## [0.1] - 2017-10-05
+## Version 0.1
+
+**Release date:** 2017-10-05
+
 ### Added
 - Initial release
 - Ability to split, merge, rotate and mix PDF files
