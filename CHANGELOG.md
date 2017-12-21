@@ -2,7 +2,7 @@
 
 ## Version 0.2
 
-**Unreleased**
+**Release date:** unreleased
 
 ### Added
 - [ ] Show output file page count on bottom
