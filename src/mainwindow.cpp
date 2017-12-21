@@ -52,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     this->setWindowIcon(QIcon(QString("%1/../share/icons/hicolor/48x48/apps/pdfmixtool.png").arg(qApp->applicationDirPath())));
     this->setWindowTitle(tr("PDF Mix Tool"));
-    this->setWindowState(Qt::WindowMaximized);
+    this->restoreGeometry(m_settings->value("main_window_geometry").toByteArray());
 
     m_error_dialog->setIcon(QMessageBox::Critical);
     m_error_dialog->setTextFormat(Qt::RichText);
@@ -393,4 +393,10 @@ void MainWindow::generate_pdf(const QString &file_selected)
 
     m_progress_bar->setValue(100);
     QTimer::singleShot(2000, m_progress_bar, SLOT(hide()));
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    m_settings->setValue("main_window_geometry", this->saveGeometry());
+    QMainWindow::closeEvent(event);
 }

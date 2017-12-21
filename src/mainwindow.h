@@ -53,6 +53,8 @@ public slots:
 
     void generate_pdf(const QString &file_selected);
 
+    void closeEvent(QCloseEvent *event);
+
 private:
     PdfEditor *m_pdf_editor;
 

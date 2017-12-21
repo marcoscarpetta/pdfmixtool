@@ -6,7 +6,7 @@
 
 ### Added
 - [ ] Show output file page count on bottom
-- [ ] Remember main window size and status on exit
+- [x] Remember main window size and status on exit
 
 ### Changed
 - [x] Output PDF contains now page intervals in the same order as they were inserted
