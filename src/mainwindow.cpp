@@ -90,6 +90,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_files_list_view->setItemDelegateForColumn(3, m_combobox_delegate);
     m_files_list_view->horizontalHeader()->setStretchLastSection(true);
     m_files_list_view->resizeColumnsToContents();
+    m_files_list_view->setFocusPolicy(Qt::ClickFocus);
 
     m_add_file_button->setDefault(true);
     m_move_up_button->setDefault(true);
@@ -97,6 +98,12 @@ MainWindow::MainWindow(QWidget *parent) :
     m_remove_file_button->setDefault(true);
     m_about_button->setDefault(true);
     m_generate_pdf_button->setAutoDefault(true);
+
+    QWidget::setTabOrder(m_add_file_button, m_move_up_button);
+    QWidget::setTabOrder(m_move_up_button, m_move_down_button);
+    QWidget::setTabOrder(m_move_down_button, m_remove_file_button);
+    QWidget::setTabOrder(m_remove_file_button, m_about_button);
+    QWidget::setTabOrder(m_about_button, m_generate_pdf_button);
 
     QWidget *central_widget = new QWidget(this);
     central_widget->setLayout(m_layout);
