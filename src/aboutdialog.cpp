@@ -20,12 +20,16 @@
 
 #include <QApplication>
 #include <QGridLayout>
+#include <QTabWidget>
 #include <QPushButton>
 #include <QLabel>
+#include <QFile>
+#include <QScrollArea>
 
 AboutDialog::AboutDialog(QWidget *parent) :
     QMainWindow(parent)
 {
+    // Dialog header
     this->setWindowIcon(QIcon(QString("%1/../share/icons/hicolor/48x48/apps/pdfmixtool.png").arg(qApp->applicationDirPath())));
     this->setWindowTitle(tr("About PDF Mix Tool"));
 
@@ -33,7 +37,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     QGridLayout *grid_layout = new QGridLayout(central_widget);
     grid_layout->setVerticalSpacing(20);
 
-    central_widget->setContentsMargins(20, 20, 20, 20);
+    central_widget->setContentsMargins(5, 5, 5, 5);
     central_widget->setLayout(grid_layout);
     this->setCentralWidget(central_widget);
 
@@ -52,42 +56,59 @@ AboutDialog::AboutDialog(QWidget *parent) :
     application_name->setTextInteractionFlags(Qt::TextSelectableByMouse);
     application_name->setAlignment(Qt::AlignTop);
 
-    QLabel *application_description = new QLabel(this);
-    application_description->setWordWrap(true);
-    application_description->setText(tr("An application to split, merge, rotate and mix PDF files."));
-    application_description->setTextInteractionFlags(Qt::TextSelectableByMouse);
-    application_description->setAlignment(Qt::AlignCenter);
+    QTabWidget *tab_widget = new QTabWidget(this);
+    QString style("background-color: white; padding: 10px");
 
-    QLabel *license = new QLabel(this);
-    license->setText("PDF Mix Tool is free software: you can redistribute it and/or modify\n"
-                     "it under the terms of the GNU General Public License as published by\n"
-                     "the Free Software Foundation, either version 3 of the License, or\n"
-                     "(at your option) any later version.\n\n"
-                     "PDF Mix Tool is distributed in the hope that it will be useful,\n"
-                     "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-                     "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the\n"
-                     "GNU General Public License for more details.");
+    // Dialog informations tab
+    QLabel *info_label = new QLabel();
+    info_label->setWordWrap(true);
+    info_label->setText(
+                QString("<p>%1</p>").arg(tr("An application to split, merge, rotate and mix PDF files.")) +
+                QString("<p><a href=\"http://www.scarpetta.eu/page/pdf-mix-tool\">%1</a></p>").arg(tr("Website")) +
+                "<p><small>Copyright © 2017 Marco Scarpetta</small></p>");
+    info_label->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    info_label->setStyleSheet(style);
+    info_label->setAlignment(Qt::AlignCenter);
+
+    tab_widget->addTab(info_label, tr("Informations"));
+
+    // Dialog license tab
+    QLabel *license = new QLabel();
+    license->setText("<p>PDF Mix Tool is free software: you can redistribute it and/or modify<br>"
+                     "it under the terms of the GNU General Public License as published by<br>"
+                     "the Free Software Foundation, either version 3 of the License, or<br>"
+                     "(at your option) any later version.</p>"
+                     "<p>PDF Mix Tool is distributed in the hope that it will be useful,<br<"
+                     "but WITHOUT ANY WARRANTY; without even the implied warranty of<br>"
+                     "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the<br>"
+                     "GNU General Public License for more details.</p>");
     license->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    license->setStyleSheet(style);
     license->setAlignment(Qt::AlignCenter);
 
-    QLabel *website = new QLabel(this);
-    website->setText(QString("<a href=\"http://www.scarpetta.eu/page/pdf-mix-tool\">%1</a>").arg(tr("Website")));
-    website->setTextFormat(Qt::RichText);
-    website->setTextInteractionFlags(Qt::TextBrowserInteraction);
-    website->setOpenExternalLinks(true);
-    website->setAlignment(Qt::AlignCenter);
+    tab_widget->addTab(license, tr("License"));
 
-    QLabel *copyright = new QLabel("<small>Copyright © 2017 Marco Scarpetta</small>", this);
-    copyright->setTextInteractionFlags(Qt::TextSelectableByMouse);
-    copyright->setAlignment(Qt::AlignCenter);
+    // Dialog changelog tab
+    QScrollArea *scroll_area = new QScrollArea();
+    scroll_area->setBackgroundRole(QPalette::Light);
+
+    QFile file(QString("%1/../share/pdfmixtool/changelog.html").arg(qApp->applicationDirPath()));
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+
+    QLabel *changelog = new QLabel(this);
+    changelog->setText(QString::fromStdString(file.readAll().toStdString()));
+    changelog->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    changelog->setStyleSheet(style);
+
+    scroll_area->setWidget(changelog);
+
+    tab_widget->addTab(scroll_area, tr("Changelog"));
 
     grid_layout->addWidget(application_icon, 1, 1);
-    grid_layout->addWidget(application_name, 1, 2, 1, 2);
-    grid_layout->addWidget(application_description, 2, 1, 1, 3);
-    grid_layout->addWidget(license, 3, 1, 1, 3);
-    grid_layout->addWidget(website, 4, 1, 1, 3);
-    grid_layout->addWidget(copyright, 5, 1, 1, 3);
+    grid_layout->addWidget(application_name, 1, 2);
 
-    grid_layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum), 6, 1, 1, 2);
-    grid_layout->addWidget(close_button, 6, 3);
+    grid_layout->addWidget(tab_widget, 2, 1, 1, 4);
+
+    grid_layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum), 3, 3);
+    grid_layout->addWidget(close_button, 3, 4);
 }

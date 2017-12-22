@@ -1,4 +1,4 @@
-# PDF Mix Tool Changelog/Roadmap
+# Changelog
 
 ## Version 0.2
 
@@ -6,7 +6,8 @@
 
 ### Added
 - [ ] Show output file page count on bottom
-- [x] Remember main window size and status on exit
+- [x] Remember main window geometry on exit
+- [x] Add a changelog tab to the about dialog
 
 ### Changed
 - [x] Output PDF contains now page intervals in the same order as they were inserted
