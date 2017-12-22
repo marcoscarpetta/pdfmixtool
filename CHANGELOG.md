@@ -6,10 +6,10 @@
 
 ### Added
 - [ ] Show output file page count on bottom
-- [x] Remember main window geometry on exit
 - [x] Add a changelog tab to the about dialog
 
 ### Changed
+- [x] Remember main window geometry on exit
 - [x] Output PDF contains now page intervals in the same order as they were inserted
 - [x] Page intervals can now overlap (with a warning)
 - [ ] Also check for page intervals while editing

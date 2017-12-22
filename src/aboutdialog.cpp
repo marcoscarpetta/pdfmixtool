@@ -71,7 +71,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     info_label->setOpenExternalLinks(true);
     info_label->setAlignment(Qt::AlignCenter);
 
-    tab_widget->addTab(info_label, tr("Informations"));
+    tab_widget->addTab(info_label, tr("About"));
 
     // Dialog license tab
     QLabel *license = new QLabel();
