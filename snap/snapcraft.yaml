@@ -27,6 +27,7 @@ parts:
       - qtbase5-dev
       - libpodofo-dev
       - qttools5-dev-tools
+      - discount
     stage-packages:
       - libpodofo0.9.3
     after: [desktop-qt5]
