@@ -114,7 +114,7 @@ MainWindow::MainWindow(QWidget *parent) :
     central_widget->setLayout(v_layout);
     this->setCentralWidget(central_widget);
 
-    QHBoxLayout *layout = new QHBoxLayout(this);
+    QHBoxLayout *layout = new QHBoxLayout();
     layout->addWidget(m_add_file_button);
     layout->addWidget(m_move_up_button);
     layout->addWidget(m_move_down_button);
@@ -125,7 +125,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     v_layout->addWidget(m_files_list_view);
 
-    layout = new QHBoxLayout(this);
+    layout = new QHBoxLayout();
     layout->addWidget(m_output_page_count);
     layout->addWidget(m_progress_bar, 1);
     layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
