@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Marco Scarpetta
+/* Copyright (C) 2017-2018 Marco Scarpetta
  *
  * This file is part of PDF Mix Tool.
  *
