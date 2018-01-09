@@ -42,6 +42,8 @@ public:
 
     virtual int page_count() = 0;
 
+    virtual int output_page_count();
+
     virtual Problems set_pages_filter_from_string(const std::string &str);
 
     virtual Problem *add_pages_filter(int from, int to);
@@ -55,6 +57,7 @@ protected:
 
     std::list<std::pair<int, int>> m_filters;
     int m_rotation;
+    int m_output_page_count;
 };
 
 #endif // PDFFILE_H

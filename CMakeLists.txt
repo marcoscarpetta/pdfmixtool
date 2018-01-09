@@ -16,6 +16,8 @@ SET (
     src/aboutdialog.h
     src/comboboxdelegate.cpp
     src/comboboxdelegate.h
+    src/lineeditdelegate.cpp
+    src/lineeditdelegate.h
     src/mainwindow.cpp
     src/mainwindow.h
     src/pdf_edit_lib/definitions.h

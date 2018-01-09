@@ -25,6 +25,8 @@
 #define NAME_COLUMN 0
 #define PAGES_FILTER_COLUMN 2
 #define ROTATION_COLUMN 3
+#define PDF_FILE_ROLE Qt::UserRole
+#define ROTATATION_ROLE Qt::UserRole + 1
 
 Q_DECLARE_METATYPE(InputPdfFile *)
 
@@ -39,12 +41,14 @@ MainWindow::MainWindow(QWidget *parent) :
     m_remove_file_button(new QPushButton(QIcon::fromTheme("list-remove"), tr("Remove file"), this)),
     m_about_button(new QPushButton(QIcon::fromTheme("help-about"), tr("About"), this)),
     m_generate_pdf_button(new QPushButton(QIcon::fromTheme("document-save-as"), tr("Generate PDF"), this)),
+    m_output_page_count(new QLabel(this)),
     m_progress_bar(new QProgressBar(this)),
     m_open_file_dialog(new QFileDialog(this)),
     m_opened_count(0),
     m_dest_file_dialog(new QFileDialog(this)),
     m_files_list_view(new QTableView(this)),
     m_combobox_delegate(new ComboBoxDelegate(this)),
+    m_lineedit_delegate(new LineEditDelegate(this)),
     m_files_list_model(new QStandardItemModel(0, 4, this)),
     m_error_dialog(new QMessageBox(this)),
     m_warning_dialog(new QMessageBox(this)),
@@ -87,6 +91,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_files_list_model->setHorizontalHeaderItem(1, new QStandardItem(tr("Page count")));
     m_files_list_model->setHorizontalHeaderItem(2, new QStandardItem(tr("Pages filter")));
     m_files_list_model->setHorizontalHeaderItem(3, new QStandardItem(tr("Rotation")));
+    m_files_list_view->setItemDelegateForColumn(2, m_lineedit_delegate);
     m_files_list_view->setItemDelegateForColumn(3, m_combobox_delegate);
     m_files_list_view->horizontalHeader()->setStretchLastSection(true);
     m_files_list_view->resizeColumnsToContents();
@@ -118,8 +123,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_layout->addWidget(m_files_list_view, 2, 1, 1, 6);
 
-    m_layout->addWidget(m_progress_bar, 3, 1, 1, 2);
-    m_layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum), 3, 3, 1, 3);
+    m_layout->addWidget(m_output_page_count, 3, 1);
+    m_layout->addWidget(m_progress_bar, 3, 2, 1, 4);
     m_layout->addWidget(m_generate_pdf_button, 3, 6);
 
     connect(m_add_file_button, SIGNAL(pressed()), m_open_file_dialog, SLOT(exec()));
@@ -130,6 +135,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_remove_file_button, SIGNAL(pressed()), this, SLOT(remove_pdf_file()));
 
     connect(m_about_button, SIGNAL(pressed()), m_about_dialog, SLOT(show()));
+
+    connect(m_lineedit_delegate, SIGNAL(data_edit()), this, SLOT(update_output_page_count()));
 
     connect(m_generate_pdf_button, SIGNAL(pressed()), this, SLOT(generate_pdf_button_pressed()));
 
@@ -148,8 +155,8 @@ void MainWindow::pdf_file_added(const QStringList &selected)
         for (int j=0; j<m_files_list_model->rowCount(); j++)
         {
             QStandardItem *item = m_files_list_model->item(j, NAME_COLUMN);
-            if (item->data().value<InputPdfFile *>()->filename() == selected.at(i).toStdString())
-                pdf_file = item->data().value<InputPdfFile *>();
+            if (item->data(PDF_FILE_ROLE).value<InputPdfFile *>()->filename() == selected.at(i).toStdString())
+                pdf_file = item->data(PDF_FILE_ROLE).value<InputPdfFile *>();
         }
 
         if (pdf_file != NULL)
@@ -159,20 +166,25 @@ void MainWindow::pdf_file_added(const QStringList &selected)
 
         //create the row
         QList<QStandardItem *> row_data;
+        QVariant input_pdf_file_address = QVariant::fromValue<InputPdfFile *>(pdf_file);
 
         QStandardItem *column = new QStandardItem(selected.at(i));
         column->setEditable(false);
-        column->setData(QVariant::fromValue<InputPdfFile *>(pdf_file));
+        column->setData(input_pdf_file_address, PDF_FILE_ROLE);
         row_data << column;
 
         column = new QStandardItem(QString::number(pdf_file->page_count()));
         column->setEditable(false);
+        column->setData(input_pdf_file_address, PDF_FILE_ROLE);
         row_data << column;
 
-        row_data << new QStandardItem();
+        column = new QStandardItem();
+        column->setData(input_pdf_file_address, PDF_FILE_ROLE);
+        row_data << column;
 
         column = new QStandardItem(tr("No rotation"));
-        column->setData(0, Qt::UserRole);
+        column->setData(input_pdf_file_address, PDF_FILE_ROLE);
+        column->setData(0, ROTATATION_ROLE);
         row_data << column;
 
         m_files_list_model->appendRow(row_data);
@@ -182,6 +194,8 @@ void MainWindow::pdf_file_added(const QStringList &selected)
     m_open_file_dialog->setDirectory(m_open_file_dialog->directory());
     m_dest_file_dialog->setDirectory(m_open_file_dialog->directory());
     m_settings->setValue("open_directory", m_open_file_dialog->directory().absolutePath());
+
+    this->update_output_page_count();
 
     m_files_list_view->resizeColumnsToContents();
 }
@@ -261,9 +275,23 @@ void MainWindow::remove_pdf_file()
 
     for (int i=rows.count() - 1; i >= 0; i--)
     {
-        delete m_files_list_model->item(rows[i], NAME_COLUMN)->data().value<InputPdfFile *>();
+        delete m_files_list_model->item(rows[i], NAME_COLUMN)->data(PDF_FILE_ROLE).value<InputPdfFile *>();
         m_files_list_model->removeRow(rows[i]);
     }
+
+    this->update_output_page_count();
+}
+
+void MainWindow::update_output_page_count()
+{
+    int output_page_count = 0;
+    for (int i=0; i<m_files_list_model->rowCount(); i++)
+    {
+        InputPdfFile *pdf_file = m_files_list_model->item(i, NAME_COLUMN)->data(PDF_FILE_ROLE).value<InputPdfFile *>();
+        output_page_count += pdf_file->output_page_count();
+    }
+
+    m_output_page_count->setText(tr("Output pages: %1").arg(output_page_count));
 }
 
 void MainWindow::generate_pdf_button_pressed()
@@ -280,9 +308,9 @@ void MainWindow::generate_pdf_button_pressed()
     //set pages rotation and filters
     for (int i=0; i<m_files_list_model->rowCount(); i++)
     {
-        InputPdfFile *pdf_file = m_files_list_model->item(i, NAME_COLUMN)->data().value<InputPdfFile *>();
+        InputPdfFile *pdf_file = m_files_list_model->item(i, NAME_COLUMN)->data(PDF_FILE_ROLE).value<InputPdfFile *>();
 
-        pdf_file->set_rotation(m_files_list_model->item(i, ROTATION_COLUMN)->data(Qt::UserRole).toInt());
+        pdf_file->set_rotation(m_files_list_model->item(i, ROTATION_COLUMN)->data(ROTATATION_ROLE).toInt());
 
         Problems problems = pdf_file->set_pages_filter_from_string(
                     m_files_list_model->item(i, PAGES_FILTER_COLUMN)->data(Qt::EditRole).toString().toStdString());
@@ -380,7 +408,7 @@ void MainWindow::generate_pdf(const QString &file_selected)
     //write each file to the output file
     for (int i=0; i<m_files_list_model->rowCount(); i++)
     {
-        InputPdfFile *pdf_file = m_files_list_model->item(i, NAME_COLUMN)->data().value<InputPdfFile *>();
+        InputPdfFile *pdf_file = m_files_list_model->item(i, NAME_COLUMN)->data(PDF_FILE_ROLE).value<InputPdfFile *>();
 
         pdf_file->run(output_file);
 

@@ -24,7 +24,8 @@ OutputPdfFile::OutputPdfFile()
 }
 
 InputPdfFile::InputPdfFile() :
-    m_rotation(0)
+    m_rotation(0),
+    m_output_page_count(-1)
 {
 
 }
@@ -46,9 +47,18 @@ const std::string &InputPdfFile::filename()
     return m_filename;
 }
 
+int InputPdfFile::output_page_count()
+{
+    if (m_output_page_count < 0)
+        return this->page_count();
+
+    return m_output_page_count;
+}
+
 Problems InputPdfFile::set_pages_filter_from_string(const std::string &str)
 {
     m_filters.clear();
+    m_output_page_count = 0;
 
     Problems problems;
 
@@ -63,6 +73,7 @@ Problems InputPdfFile::set_pages_filter_from_string(const std::string &str)
 
     if (str.find_first_not_of("- ,") == std::string::npos)
     {
+        m_output_page_count = this->page_count();
         return problems; //void str
     }
 
@@ -150,6 +161,8 @@ Problem *InputPdfFile::add_pages_filter(int from, int to)
     }
 
     m_filters.push_back(std::pair<int, int>(from, to));
+
+    m_output_page_count += to - from + 1;
 
     return problem;
 }

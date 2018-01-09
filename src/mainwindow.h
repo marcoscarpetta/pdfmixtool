@@ -22,6 +22,7 @@
 #include <QMainWindow>
 #include <QGridLayout>
 #include <QPushButton>
+#include <QLabel>
 #include <QProgressBar>
 #include <QFileDialog>
 #include <QTableView>
@@ -29,6 +30,7 @@
 #include <QSettings>
 #include <QMessageBox>
 #include "comboboxdelegate.h"
+#include "lineeditdelegate.h"
 #include "aboutdialog.h"
 #include "pdf_edit_lib/pdfeditor.h"
 
@@ -48,6 +50,8 @@ public slots:
     void move_down();
 
     void remove_pdf_file();
+
+    void update_output_page_count();
 
     void generate_pdf_button_pressed();
 
@@ -69,6 +73,7 @@ private:
     QPushButton *m_about_button;
     QPushButton *m_generate_pdf_button;
 
+    QLabel *m_output_page_count;
     QProgressBar *m_progress_bar;
 
     QFileDialog *m_open_file_dialog;
@@ -77,6 +82,7 @@ private:
 
     QTableView *m_files_list_view;
     ComboBoxDelegate *m_combobox_delegate;
+    LineEditDelegate *m_lineedit_delegate;
     QStandardItemModel *m_files_list_model;
 
     QMessageBox *m_error_dialog;

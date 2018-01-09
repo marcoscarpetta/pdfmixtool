@@ -18,6 +18,9 @@
 
 #include "comboboxdelegate.h"
 
+#define PDF_FILE_ROLE Qt::UserRole
+#define ROTATATION_ROLE Qt::UserRole + 1
+
 ComboBoxDelegate::ComboBoxDelegate(QWidget *parent) :
     QStyledItemDelegate(parent)
 {
@@ -37,7 +40,7 @@ void ComboBoxDelegate::setEditorData(QWidget *editor, const QModelIndex &index) 
     combobox->addItem(tr("180°"), 180);
     combobox->addItem(tr("270°"), 270);
 
-    int rotation = index.data(Qt::UserRole).toInt();
+    int rotation = index.data(ROTATATION_ROLE).toInt();
     combobox->setCurrentIndex(combobox->findData(rotation));
 }
 
@@ -47,7 +50,7 @@ void ComboBoxDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, 
 
     QMap<int, QVariant> map;
     map[Qt::DisplayRole] = QVariant(combobox->currentText());
-    map[Qt::UserRole] = QVariant(combobox->currentData());
+    map[ROTATATION_ROLE] = QVariant(combobox->currentData());
 
     model->setItemData(index, map);
 }
