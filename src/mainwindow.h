@@ -20,7 +20,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QGridLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QPushButton>
 #include <QLabel>
 #include <QProgressBar>
@@ -63,8 +64,6 @@ private:
     PdfEditor *m_pdf_editor;
 
     QSettings *m_settings;
-
-    QGridLayout *m_layout;
 
     QPushButton *m_add_file_button;
     QPushButton *m_remove_file_button;

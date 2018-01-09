@@ -34,7 +34,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     m_pdf_editor(new PdfEditor()),
     m_settings(new QSettings(this)),
-    m_layout(new QGridLayout()),
     m_add_file_button(new QPushButton(QIcon::fromTheme("list-add"), tr("Add PDF file"), this)),
     m_move_up_button(new QPushButton(QIcon::fromTheme("go-up"), tr("Move up"), this)),
     m_move_down_button(new QPushButton(QIcon::fromTheme("go-down"), tr("Move Down"), this)),
@@ -110,22 +109,28 @@ MainWindow::MainWindow(QWidget *parent) :
     QWidget::setTabOrder(m_remove_file_button, m_about_button);
     QWidget::setTabOrder(m_about_button, m_generate_pdf_button);
 
+    QVBoxLayout *v_layout = new QVBoxLayout();
     QWidget *central_widget = new QWidget(this);
-    central_widget->setLayout(m_layout);
+    central_widget->setLayout(v_layout);
     this->setCentralWidget(central_widget);
 
-    m_layout->addWidget(m_add_file_button, 1, 1);
-    m_layout->addWidget(m_move_up_button, 1, 2);
-    m_layout->addWidget(m_move_down_button, 1, 3);
-    m_layout->addWidget(m_remove_file_button, 1, 4);
-    m_layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum), 1, 5);
-    m_layout->addWidget(m_about_button, 1, 6);
+    QHBoxLayout *layout = new QHBoxLayout(this);
+    layout->addWidget(m_add_file_button);
+    layout->addWidget(m_move_up_button);
+    layout->addWidget(m_move_down_button);
+    layout->addWidget(m_remove_file_button);
+    layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
+    layout->addWidget(m_about_button);
+    v_layout->addLayout(layout);
 
-    m_layout->addWidget(m_files_list_view, 2, 1, 1, 6);
+    v_layout->addWidget(m_files_list_view);
 
-    m_layout->addWidget(m_output_page_count, 3, 1);
-    m_layout->addWidget(m_progress_bar, 3, 2, 1, 4);
-    m_layout->addWidget(m_generate_pdf_button, 3, 6);
+    layout = new QHBoxLayout(this);
+    layout->addWidget(m_output_page_count);
+    layout->addWidget(m_progress_bar, 1);
+    layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
+    layout->addWidget(m_generate_pdf_button);
+    v_layout->addLayout(layout);
 
     connect(m_add_file_button, SIGNAL(pressed()), m_open_file_dialog, SLOT(exec()));
     connect(m_open_file_dialog, SIGNAL(filesSelected(QStringList)), this, SLOT(pdf_file_added(QStringList)));
