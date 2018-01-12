@@ -79,7 +79,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
                      "it under the terms of the GNU General Public License as published by<br>"
                      "the Free Software Foundation, either version 3 of the License, or<br>"
                      "(at your option) any later version.</p>"
-                     "<p>PDF Mix Tool is distributed in the hope that it will be useful,<br<"
+                     "<p>PDF Mix Tool is distributed in the hope that it will be useful,<br>"
                      "but WITHOUT ANY WARRANTY; without even the implied warranty of<br>"
                      "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the<br>"
                      "GNU General Public License for more details.</p>");

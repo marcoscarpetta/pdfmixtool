@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.3
+
+**Release date:** unreleased
+
 ## Version 0.2
 
 **Release date:** 2018-01-09
