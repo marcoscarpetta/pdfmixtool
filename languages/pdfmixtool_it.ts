@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -42,7 +42,7 @@
         <source>Version %1
 
 </source>
-        <translation>Versione %1
+        <translation type="vanished">Versione %1
 
 </translation>
     </message>
@@ -51,7 +51,7 @@
 An application to split, merge, rotate and mix PDF files
 
 </source>
-        <translation>
+        <translation type="vanished">
 Un&apos;applicazione per dividere, unire, ruotare e mescolare file PDF
 
 </translation>
@@ -88,113 +88,119 @@ Un&apos;applicazione per dividere, unire, ruotare e mescolare file PDF
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/mainwindow.cpp" line="38"/>
+        <location filename="../src/mainwindow.cpp" line="37"/>
         <source>Add PDF file</source>
         <translation>Aggiungi file PDF</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="39"/>
+        <location filename="../src/mainwindow.cpp" line="38"/>
         <source>Move up</source>
         <translation>Sposta su</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="40"/>
+        <location filename="../src/mainwindow.cpp" line="39"/>
         <source>Move Down</source>
         <translation>Sposta giù</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="41"/>
+        <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Remove file</source>
         <translation>Rimuovi file</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="42"/>
+        <location filename="../src/mainwindow.cpp" line="41"/>
         <source>About</source>
         <translation>Informazioni</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="43"/>
+        <location filename="../src/mainwindow.cpp" line="42"/>
         <source>Generate PDF</source>
         <translation>Genera PDF</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="58"/>
+        <location filename="../src/mainwindow.cpp" line="57"/>
         <source>PDF Mix Tool</source>
         <translation>PDF Mix Tool</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="90"/>
+        <location filename="../src/mainwindow.cpp" line="71"/>
+        <location filename="../src/mainwindow.cpp" line="77"/>
+        <source>PDF files (*.pdf)</source>
+        <translation>File PDF (*.pdf)</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="89"/>
         <source>Filename</source>
         <translation>Nome del file</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="91"/>
+        <location filename="../src/mainwindow.cpp" line="90"/>
         <source>Page count</source>
         <translation>Numero di pagine</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="92"/>
+        <location filename="../src/mainwindow.cpp" line="91"/>
         <source>Pages filter</source>
         <translation>Filtri sulle pagine</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="93"/>
+        <location filename="../src/mainwindow.cpp" line="92"/>
         <source>Rotation</source>
         <translation>Rotazione</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="185"/>
+        <location filename="../src/mainwindow.cpp" line="190"/>
         <source>No rotation</source>
         <translation>Non ruotare</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="294"/>
+        <location filename="../src/mainwindow.cpp" line="299"/>
         <source>Output pages: %1</source>
         <translation>Pagine in uscita: %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="302"/>
-        <location filename="../src/mainwindow.cpp" line="322"/>
+        <location filename="../src/mainwindow.cpp" line="307"/>
+        <location filename="../src/mainwindow.cpp" line="327"/>
         <source>PDF generation error</source>
         <translation>Errore nella generazione del file PDF</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="303"/>
+        <location filename="../src/mainwindow.cpp" line="308"/>
         <source>You must add at least one pdf file!</source>
         <translation>Devi aggiungere almeno un file PDF!</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="323"/>
+        <location filename="../src/mainwindow.cpp" line="328"/>
         <source>&lt;p&gt;The PDF generation failed due to the following errors:&lt;/p&gt;</source>
         <translation>&lt;p&gt;La generazione del PDF è fallita a causa dei seguenti errori:&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="335"/>
+        <location filename="../src/mainwindow.cpp" line="340"/>
         <source>&lt;li&gt;Invalid character &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</source>
         <translation>&lt;li&gt;Carattere non valido &quot;&lt;b&gt;%1&lt;/b&gt;&quot; nel filtro delle pagine del file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="341"/>
+        <location filename="../src/mainwindow.cpp" line="346"/>
         <source>&lt;li&gt;Invalid interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</source>
         <translation>&lt;li&gt;Intervallo non valido &quot;&lt;b&gt;%1&lt;/b&gt;&quot; nel filtro delle pagine del file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="347"/>
+        <location filename="../src/mainwindow.cpp" line="352"/>
         <source>&lt;li&gt;Boundaries of interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; are out of allowed interval&lt;/li&gt;</source>
         <translation>&lt;li&gt;I limiti dell&apos;intervallo &quot;&lt;b&gt;%1&lt;/b&gt;&quot; nel filtro delle pagine del file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; sono oltre i valori consentiti&lt;/li&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="363"/>
+        <location filename="../src/mainwindow.cpp" line="368"/>
         <source>PDF generation warning</source>
         <translation>Warning nella generazione del PDF</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="364"/>
+        <location filename="../src/mainwindow.cpp" line="369"/>
         <source>&lt;p&gt;The following problems were encountered while generating the PDF file:&lt;/p&gt;</source>
         <translation>&lt;p&gt;Sono stati riscontrati i seguenti problemi durante la generazione del file PDF:&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="376"/>
+        <location filename="../src/mainwindow.cpp" line="381"/>
         <source>&lt;li&gt;Interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; is overlapping with another interval&lt;/li&gt;</source>
         <translation>&lt;li&gt;L&apos;intervallo &quot;&lt;b&gt;%1&lt;/b&gt;&quot; nel filtro delle pagine del file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; è sovrapposto ad un altro intervallo&lt;/li&gt;</translation>
     </message>
