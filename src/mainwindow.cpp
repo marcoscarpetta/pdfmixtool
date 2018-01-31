@@ -68,13 +68,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_progress_bar->hide();
 
-    m_open_file_dialog->setNameFilter("*.pdf");
+    m_open_file_dialog->setNameFilter(tr("PDF files (*.pdf)"));
     m_open_file_dialog->setFilter(QDir::Files);
     m_open_file_dialog->setFileMode(QFileDialog::ExistingFiles);
     m_open_file_dialog->setDirectory(m_settings->value("open_directory", "").toString());
     m_open_file_dialog->setModal(true);
 
-    m_dest_file_dialog->setNameFilter("*.pdf");
+    m_dest_file_dialog->setNameFilter(tr("PDF files (*.pdf)"));
     m_dest_file_dialog->setFilter(QDir::Files);
     m_dest_file_dialog->setAcceptMode(QFileDialog::AcceptSave);
     m_dest_file_dialog->setDirectory(m_settings->value("save_directory", "").toString());
