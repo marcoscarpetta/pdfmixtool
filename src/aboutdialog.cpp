@@ -82,9 +82,11 @@ AboutDialog::AboutDialog(QWidget *parent) :
                      "<p>PDF Mix Tool is distributed in the hope that it will be useful,<br>"
                      "but WITHOUT ANY WARRANTY; without even the implied warranty of<br>"
                      "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the<br>"
-                     "GNU General Public License for more details.</p>");
-    license->setTextInteractionFlags(Qt::TextSelectableByMouse);
+                     "<a href=\"https://www.gnu.org/licenses/gpl-3.0.en.html\">"
+                     "GNU General Public License</a> for more details.</p>");
+    license->setTextInteractionFlags(Qt::TextBrowserInteraction);
     license->setStyleSheet(style);
+    license->setOpenExternalLinks(true);
     license->setAlignment(Qt::AlignCenter);
 
     tab_widget->addTab(license, tr("License"));
