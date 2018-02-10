@@ -6,12 +6,12 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="34"/>
         <source>About PDF Mix Tool</source>
-        <translation></translation>
+        <translation>Om PDF Mix-verktøyet</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="44"/>
         <source>Close</source>
-        <translation></translation>
+        <translation>Lukk</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="54"/>
@@ -21,7 +21,7 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="66"/>
         <source>An application to split, merge, rotate and mix PDF files.</source>
-        <translation></translation>
+        <translation type="unfinished">Et program for å splitte, flette, rotere og mikse PDF-filer.</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="67"/>
@@ -31,17 +31,17 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="74"/>
         <source>About</source>
-        <translation></translation>
+        <translation>Om</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="90"/>
         <source>License</source>
-        <translation></translation>
+        <translation>Lisens</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="106"/>
         <source>Changelog</source>
-        <translation></translation>
+        <translation>Endringslogg</translation>
     </message>
 </context>
 <context>
@@ -49,7 +49,7 @@
     <message>
         <location filename="../src/comboboxdelegate.cpp" line="38"/>
         <source>No rotation</source>
-        <translation></translation>
+        <translation>Ingen rotasjon</translation>
     </message>
     <message>
         <location filename="../src/comboboxdelegate.cpp" line="39"/>
@@ -72,37 +72,37 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="37"/>
         <source>Add PDF file</source>
-        <translation></translation>
+        <translation>Legg til PDF-fil</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="38"/>
         <source>Move up</source>
-        <translation></translation>
+        <translation>Flytt oppover</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="39"/>
         <source>Move Down</source>
-        <translation></translation>
+        <translation>Flytt nedover</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Remove file</source>
-        <translation></translation>
+        <translation>Fjern fil</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="41"/>
         <source>About</source>
-        <translation></translation>
+        <translation>Om</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="42"/>
         <source>Generate PDF</source>
-        <translation></translation>
+        <translation>Generer PDF</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="57"/>
         <source>PDF Mix Tool</source>
-        <translation></translation>
+        <translation>PDF Mix-verktøyet</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="71"/>
@@ -113,12 +113,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="89"/>
         <source>Filename</source>
-        <translation></translation>
+        <translation>Filnavn</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="90"/>
         <source>Page count</source>
-        <translation></translation>
+        <translation>Sideantall</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="91"/>
@@ -128,12 +128,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="92"/>
         <source>Rotation</source>
-        <translation></translation>
+        <translation>Rotasjon</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="190"/>
         <source>No rotation</source>
-        <translation></translation>
+        <translation>Ingen rotasjon</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="299"/>
@@ -144,47 +144,47 @@
         <location filename="../src/mainwindow.cpp" line="307"/>
         <location filename="../src/mainwindow.cpp" line="327"/>
         <source>PDF generation error</source>
-        <translation></translation>
+        <translation>PDF-genereringsfeil</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="308"/>
         <source>You must add at least one pdf file!</source>
-        <translation></translation>
+        <translation type="unfinished">Du må legge til minst én PDF-fil!</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="328"/>
         <source>&lt;p&gt;The PDF generation failed due to the following errors:&lt;/p&gt;</source>
-        <translation></translation>
+        <translation>&lt;p&gt;PDF-genereringen mislyktes på grunn av disse feilene:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="340"/>
         <source>&lt;li&gt;Invalid character &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</source>
-        <translation></translation>
+        <translation>&lt;li&gt;Ugyldig tegn &quot;&lt;b&gt;%1&lt;/b&gt;&quot; i sidefilteret til filen &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="346"/>
         <source>&lt;li&gt;Invalid interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</source>
-        <translation></translation>
+        <translation>&lt;li&gt;Ugyldig intervall &quot;&lt;b&gt;%1&lt;/b&gt;&quot; i sidefilteret til filen &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="352"/>
         <source>&lt;li&gt;Boundaries of interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; are out of allowed interval&lt;/li&gt;</source>
-        <translation></translation>
+        <translation>&lt;li&gt;Yttergrensene for intervallet &quot;&lt;b&gt;%1&lt;/b&gt;&quot; i sidefilteret til filen &quot;&lt;b&gt;%2&lt;/b&gt;&quot; er utenfor tillatt intervall&lt;/li&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="368"/>
         <source>PDF generation warning</source>
-        <translation></translation>
+        <translation>PDF-genereringsadvarsel</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="369"/>
         <source>&lt;p&gt;The following problems were encountered while generating the PDF file:&lt;/p&gt;</source>
-        <translation></translation>
+        <translation>&lt;p&gt;Støtte på disse feilene under generering av PDF-fil:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="381"/>
         <source>&lt;li&gt;Interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; is overlapping with another interval&lt;/li&gt;</source>
-        <translation></translation>
+        <translation>&lt;li&gt;Intervall &quot;&lt;b&gt;%1&lt;/b&gt;&quot; i sidefilteret til filen&quot;&lt;b&gt;%2&lt;/b&gt;&quot; overlapper med et annet intervall&lt;/li&gt;</translation>
     </message>
 </context>
 </TS>
