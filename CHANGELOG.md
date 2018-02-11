@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 0.3
+
+**Release date:** unreleased
+
+### Added
+- [ ] **Add PDF N-up feature** (based on podofoimpose)
+- [x] Add Norwegian Bokmål translation
+
+### Changed
+- [ ] Improve GUI
+
 ## Version 0.2.1
 
 **Release date:** 2018-02-03
