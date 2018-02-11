@@ -305,7 +305,7 @@ void MainWindow::generate_pdf_button_pressed()
     if (m_files_list_model->rowCount() == 0)
     {
         m_error_dialog->setWindowTitle(tr("PDF generation error"));
-        m_error_dialog->setText(tr("You must add at least one pdf file!"));
+        m_error_dialog->setText(tr("You must add at least one PDF file."));
         m_error_dialog->show();
         return;
     }
