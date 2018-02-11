@@ -21,7 +21,7 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="66"/>
         <source>An application to split, merge, rotate and mix PDF files.</source>
-        <translation type="unfinished">Et program for å splitte, flette, rotere og mikse PDF-filer.</translation>
+        <translation>Et program for å splitte, flette, rotere og mikse PDF-filer.</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="67"/>
@@ -41,22 +41,22 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="102"/>
         <source>Submit a pull request</source>
-        <translation type="unfinished"></translation>
+        <translation>Send inn en flettingsforespørsel</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="103"/>
         <source>Report a bug</source>
-        <translation type="unfinished"></translation>
+        <translation>Innrapporter en feil</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="104"/>
         <source>Help translating</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjelp til i oversettelsen</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="111"/>
         <source>Contribute</source>
-        <translation type="unfinished"></translation>
+        <translation>Bidra</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="127"/>
@@ -169,7 +169,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="308"/>
         <source>You must add at least one pdf file!</source>
-        <translation type="unfinished">Du må legge til minst én PDF-fil!</translation>
+        <translation>Du må legge til minst én PDF-fil.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="328"/>
