@@ -91,6 +91,25 @@ AboutDialog::AboutDialog(QWidget *parent) :
 
     tab_widget->addTab(license, tr("License"));
 
+    // Dialog contribute tab
+    QLabel *contribute = new QLabel();
+    contribute->setText(
+                QString("<ul>"
+                        "<li><a href=\"https://github.com/marcoscarpetta/pdfmixtool/pulls\">%1</li>"
+                        "<li><a href=\"https://github.com/marcoscarpetta/pdfmixtool/issues\">%2</a></li>"
+                        "<li><a href=\"https://hosted.weblate.org/engage/pdf-mix-tool/\">%3</a></li>"
+                        "</ul>").arg(
+                    tr("Submit a pull request"),
+                    tr("Report a bug"),
+                    tr("Help translating")
+                    )
+                );
+    contribute->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    contribute->setStyleSheet(style);
+    contribute->setOpenExternalLinks(true);
+
+    tab_widget->addTab(contribute, tr("Contribute"));
+
     // Dialog changelog tab
     QScrollArea *scroll_area = new QScrollArea();
     scroll_area->setBackgroundRole(QPalette::Light);

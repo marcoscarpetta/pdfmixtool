@@ -6,6 +6,7 @@
 
 ### Added
 - [ ] **Add PDF N-up feature** (based on podofoimpose)
+- [x] Add a "Contribute" tab to the about dialog
 - [x] Add Norwegian Bokmål translation
 
 ### Changed
@@ -24,7 +25,7 @@
 
 ### Added
 - Show output file page count on bottom
-- Add a changelog tab to the about dialog
+- Add a "Changelog" tab to the about dialog
 
 ### Changed
 - Remember main window geometry on exit
