@@ -46,7 +46,7 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="104"/>
         <source>Help translating</source>
-        <translation>Auita a tradurre</translation>
+        <translation>Aiuta a tradurre</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="111"/>
