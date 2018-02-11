@@ -29,10 +29,9 @@ SET (
     src/pdf_edit_lib/pdffile_podofo.h
 )
 
-SET (
-    TS_FILES
-    languages/pdfmixtool_en.ts
-    languages/pdfmixtool_it.ts
+file(GLOB TS_FILES
+     LIST_DIRECTORIES false
+     languages/pdfmixtool_*.ts
 )
 
 qt5_create_translation(QM_FILES ${SRCS} ${TS_FILES})
