@@ -186,8 +186,12 @@ Un&apos;applicazione per dividere, unire, ruotare e mescolare file PDF
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="308"/>
+        <source>You must add at least one PDF file.</source>
+        <translation>Devi aggiungere almeno un file PDF.</translation>
+    </message>
+    <message>
         <source>You must add at least one pdf file!</source>
-        <translation>Devi aggiungere almeno un file PDF!</translation>
+        <translation type="vanished">Devi aggiungere almeno un file PDF!</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="328"/>

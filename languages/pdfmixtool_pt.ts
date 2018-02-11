@@ -168,7 +168,7 @@
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="308"/>
-        <source>You must add at least one pdf file!</source>
+        <source>You must add at least one PDF file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -168,8 +168,12 @@
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="308"/>
-        <source>You must add at least one pdf file!</source>
+        <source>You must add at least one PDF file.</source>
         <translation>Du må legge til minst én PDF-fil.</translation>
+    </message>
+    <message>
+        <source>You must add at least one pdf file!</source>
+        <translation type="vanished">Du må legge til minst én PDF-fil.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="328"/>
