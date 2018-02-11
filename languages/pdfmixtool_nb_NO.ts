@@ -34,12 +34,32 @@
         <translation>Om</translation>
     </message>
     <message>
-        <location filename="../src/aboutdialog.cpp" line="90"/>
+        <location filename="../src/aboutdialog.cpp" line="92"/>
         <source>License</source>
         <translation>Lisens</translation>
     </message>
     <message>
-        <location filename="../src/aboutdialog.cpp" line="106"/>
+        <location filename="../src/aboutdialog.cpp" line="102"/>
+        <source>Submit a pull request</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/aboutdialog.cpp" line="103"/>
+        <source>Report a bug</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/aboutdialog.cpp" line="104"/>
+        <source>Help translating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/aboutdialog.cpp" line="111"/>
+        <source>Contribute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/aboutdialog.cpp" line="127"/>
         <source>Changelog</source>
         <translation>Endringslogg</translation>
     </message>
