@@ -67,6 +67,8 @@ install(FILES resources/icon_128.png DESTINATION share/icons/hicolor/128x128/app
 install(FILES resources/icon_256.png DESTINATION share/icons/hicolor/256x256/apps RENAME pdfmixtool.png)
 install(FILES ${QM_FILES} DESTINATION share/pdfmixtool/translations)
 install(FILES ${CMAKE_BINARY_DIR}/changelog.html DESTINATION share/pdfmixtool)
+install(FILES AUTHORS.md DESTINATION share/pdfmixtool)
+install(FILES TRANSLATORS.md DESTINATION share/pdfmixtool)
 install(FILES pdfmixtool.desktop DESTINATION share/applications)
 
 add_custom_command(

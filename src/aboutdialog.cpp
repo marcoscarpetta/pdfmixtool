@@ -73,6 +73,33 @@ AboutDialog::AboutDialog(QWidget *parent) :
 
     tab_widget->addTab(info_label, tr("About"));
 
+    // Dialog credits tab
+    QScrollArea *scroll_area = new QScrollArea();
+    scroll_area->setBackgroundRole(QPalette::Light);
+
+    QFile authors(QString("%1/../share/pdfmixtool/AUTHORS.md").arg(
+                                 qApp->applicationDirPath()));
+    authors.open(QIODevice::ReadOnly | QIODevice::Text);
+
+    QFile translator_credits(QString("%1/../share/pdfmixtool/TRANSLATORS.md").arg(
+                                 qApp->applicationDirPath()));
+    translator_credits.open(QIODevice::ReadOnly | QIODevice::Text);
+
+    QLabel *credits = new QLabel(this);
+    credits->setText(
+                QString("<h2>%1</h2>").arg(tr("Authors")) +
+                QString::fromStdString(authors.readAll().toStdString()) +
+                QString("<h2>%1</h2>").arg(tr("Translators")) +
+                QString::fromStdString(translator_credits.readAll().toStdString())
+                );
+    credits->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    credits->setStyleSheet(style);
+    credits->setOpenExternalLinks(true);
+
+    scroll_area->setWidget(credits);
+
+    tab_widget->addTab(scroll_area, tr("Credits"));
+
     // Dialog license tab
     QLabel *license = new QLabel();
     license->setText("<p>PDF Mix Tool is free software: you can redistribute it and/or modify<br>"
@@ -111,7 +138,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     tab_widget->addTab(contribute, tr("Contribute"));
 
     // Dialog changelog tab
-    QScrollArea *scroll_area = new QScrollArea();
+    scroll_area = new QScrollArea();
     scroll_area->setBackgroundRole(QPalette::Light);
 
     QFile file(QString("%1/../share/pdfmixtool/changelog.html").arg(qApp->applicationDirPath()));
