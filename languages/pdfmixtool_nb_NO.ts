@@ -34,32 +34,47 @@
         <translation>Om</translation>
     </message>
     <message>
+        <location filename="../src/aboutdialog.cpp" line="90"/>
+        <source>Authors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/aboutdialog.cpp" line="92"/>
+        <source>Translators</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/aboutdialog.cpp" line="101"/>
+        <source>Credits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/aboutdialog.cpp" line="119"/>
         <source>License</source>
         <translation>Lisens</translation>
     </message>
     <message>
-        <location filename="../src/aboutdialog.cpp" line="102"/>
+        <location filename="../src/aboutdialog.cpp" line="129"/>
         <source>Submit a pull request</source>
         <translation>Send inn en flettingsforespørsel</translation>
     </message>
     <message>
-        <location filename="../src/aboutdialog.cpp" line="103"/>
+        <location filename="../src/aboutdialog.cpp" line="130"/>
         <source>Report a bug</source>
         <translation>Innrapporter en feil</translation>
     </message>
     <message>
-        <location filename="../src/aboutdialog.cpp" line="104"/>
+        <location filename="../src/aboutdialog.cpp" line="131"/>
         <source>Help translating</source>
         <translation>Hjelp til i oversettelsen</translation>
     </message>
     <message>
-        <location filename="../src/aboutdialog.cpp" line="111"/>
+        <location filename="../src/aboutdialog.cpp" line="138"/>
         <source>Contribute</source>
         <translation>Bidra</translation>
     </message>
     <message>
-        <location filename="../src/aboutdialog.cpp" line="127"/>
+        <location filename="../src/aboutdialog.cpp" line="154"/>
         <source>Changelog</source>
         <translation>Endringslogg</translation>
     </message>
