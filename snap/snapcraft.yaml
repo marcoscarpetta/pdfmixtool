@@ -32,7 +32,6 @@ parts:
     plugin: cmake
     configflags:
       - -DCMAKE_INSTALL_PREFIX=/usr
-      - -DFREETYPE_INCLUDE_DIR=/usr/include/freetype2
       - -DPODOFO_BUILD_SHARED=1
       - -DPODOFO_HAVE_JPEG_LIB=1
       - -DPODOFO_HAVE_PNG_LIB=1
@@ -42,16 +41,19 @@ parts:
     source-type: svn
     build-packages:
       - build-essential
-      - liblua5.3
-      - libssl1.0.0
-      - libfontconfig1
-      - libtiffxx5
-      - libidn11
-      - libjpeg-turbo8
-    stage-packages:
-      - liblua5.3-dev
+      - pkg-config
       - libssl-dev
       - libfontconfig1-dev
-      - libtiffxx5-dev
+      - libtiff5-dev
       - libidn11-dev
       - libjpeg-turbo8-dev
+      - libfreetype6-dev
+      - libunistring-dev
+    stage-packages:
+      - libssl1.0.0
+      - libfontconfig1
+      - libtiff5
+      - libidn11
+      - libjpeg-turbo8
+      - libfreetype6
+      - libunistring0
