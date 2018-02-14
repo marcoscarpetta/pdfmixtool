@@ -36,17 +36,17 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="90"/>
         <source>Authors</source>
-        <translation type="unfinished"></translation>
+        <translation>Utviklere</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="92"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Oversettelse ved</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="101"/>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Bidragsytere</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="119"/>
