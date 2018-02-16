@@ -22,48 +22,52 @@
 #include <string>
 #include <list>
 
+enum class HAlignment {
+    Left,
+    Center,
+    Right
+};
+
+enum class VAlignment {
+    Top,
+    Center,
+    Bottom
+};
+
+struct NupSettings {
+    double  page_width;
+    double  page_height;
+
+    int rows;
+    int columns;
+
+    int rotation;
+
+    HAlignment h_alignment;
+    VAlignment v_alignment;
+
+    double margin_top;
+    double margin_bottom;
+    double margin_left;
+    double margin_right;
+    double spacing;
+};
+
 enum class Backend {
     PoDoFo
 };
 
-enum class ProblemType {
-    error_invalid_interval,
-    error_invalid_char,
-    error_page_out_of_range,
-    warning_overlapping_interval
-};
+struct IntervalIssue {
+    enum Name {
+        error_invalid_interval,
+        error_invalid_char,
+        error_page_out_of_range,
+        warning_overlapping_interval
+    };
 
-struct Problem {
-    Problem(ProblemType type, const std::string &data) : type(type), data(data), next(NULL) {}
-    ProblemType type;
+    IntervalIssue(Name name, const std::string &data) : name(name), data(data) {}
+    Name name;
     std::string data;
-    Problem *next;
-};
-
-
-struct Problems {
-    Problems() : errors(false), count(0), first(NULL) {}
-    void add(Problem *problem) {
-        if (first == NULL)
-        {
-            first = problem;
-            last = problem;
-        }
-        else
-        {
-            last->next = problem;
-            last = problem;
-        }
-
-        if (problem->type != ProblemType::warning_overlapping_interval)
-            errors = true;
-
-        count++;
-    }
-    bool errors;
-    int count;
-    Problem *first;
-    Problem *last;
 };
 
 #endif // DEFINITIONS_H

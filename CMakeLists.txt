@@ -14,10 +14,10 @@ SET (
     src/main.cpp
     src/aboutdialog.cpp
     src/aboutdialog.h
-    src/comboboxdelegate.cpp
-    src/comboboxdelegate.h
-    src/lineeditdelegate.cpp
-    src/lineeditdelegate.h
+    src/inputpdffiledelegate.cpp
+    src/inputpdffiledelegate.h
+    src/inputpdffilewidget.cpp
+    src/inputpdffilewidget.h
     src/mainwindow.cpp
     src/mainwindow.h
     src/pdf_edit_lib/definitions.h
@@ -25,8 +25,8 @@ SET (
     src/pdf_edit_lib/pdfeditor.h
     src/pdf_edit_lib/pdffile.cpp
     src/pdf_edit_lib/pdffile.h
-    src/pdf_edit_lib/pdffile_podofo.cpp
-    src/pdf_edit_lib/pdffile_podofo.h
+    src/pdf_edit_lib/podofo_pdffile.cpp
+    src/pdf_edit_lib/podofo_pdffile.h
 )
 
 file(GLOB TS_FILES

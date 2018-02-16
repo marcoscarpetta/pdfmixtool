@@ -6,11 +6,12 @@
 
 ### Added
 - [ ] **Add PDF N-up feature** (based on podofoimpose)
+- Add a "Credits" tab to the about dialog
 - Add a "Contribute" tab to the about dialog
 - Add Norwegian Bokmål translation
 
 ### Changed
-- [ ] Improve GUI
+- Improve GUI
 
 ## Version 0.2.1
 

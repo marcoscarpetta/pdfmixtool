@@ -26,12 +26,11 @@
 #include <QLabel>
 #include <QProgressBar>
 #include <QFileDialog>
-#include <QTableView>
+#include <QListView>
 #include <QStandardItemModel>
 #include <QSettings>
 #include <QMessageBox>
-#include "comboboxdelegate.h"
-#include "lineeditdelegate.h"
+#include "inputpdffiledelegate.h"
 #include "aboutdialog.h"
 #include "pdf_edit_lib/pdfeditor.h"
 
@@ -61,6 +60,8 @@ public slots:
     void closeEvent(QCloseEvent *event);
 
 private:
+    const QList<int> selected_indexes();
+
     PdfEditor *m_pdf_editor;
 
     QSettings *m_settings;
@@ -79,9 +80,8 @@ private:
     int m_opened_count;
     QFileDialog *m_dest_file_dialog;
 
-    QTableView *m_files_list_view;
-    ComboBoxDelegate *m_combobox_delegate;
-    LineEditDelegate *m_lineedit_delegate;
+    QListView *m_files_list_view;
+    InputPdfFileDelegate *m_pdfinputfile_delegate;
     QStandardItemModel *m_files_list_model;
 
     QMessageBox *m_error_dialog;

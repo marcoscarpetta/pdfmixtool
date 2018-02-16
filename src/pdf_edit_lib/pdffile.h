@@ -21,6 +21,7 @@
 
 #include <string>
 #include <list>
+#include <vector>
 #include "definitions.h"
 
 class OutputPdfFile
@@ -44,11 +45,19 @@ public:
 
     virtual int output_page_count();
 
-    virtual Problems set_pages_filter_from_string(const std::string &str);
+    virtual void set_pages_filter_from_string(const std::string &str);
 
-    virtual Problem *add_pages_filter(int from, int to);
+    virtual const std::string &pages_filter_string();
+
+    virtual void add_pages_filter(int from, int to);
+
+    virtual const std::vector<IntervalIssue> &pages_filter_errors();
+
+    virtual const std::vector<IntervalIssue> &pages_filter_warnings();
 
     virtual void set_rotation(int rotation);
+
+    virtual int rotation();
 
     virtual void run(OutputPdfFile *output_file) = 0;
 
@@ -56,6 +65,10 @@ protected:
     std::string m_filename;
 
     std::list<std::pair<int, int>> m_filters;
+    std::string m_pages_filter_string;
+    std::vector<IntervalIssue> m_interval_errors;
+    std::vector<IntervalIssue> m_interval_warnings;
+
     int m_rotation;
     int m_output_page_count;
 };

@@ -19,7 +19,7 @@
 #ifndef PDFEDITOR_H
 #define PDFEDITOR_H
 
-#include "pdffile_podofo.h"
+#include "podofo_pdffile.h"
 
 class PdfEditor
 {

@@ -16,18 +16,29 @@
  * along with PDF Mix Tool. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LINEEDITDELEGATE_H
-#define LINEEDITDELEGATE_H
+#ifndef INPUTPDFFILEDELEGATE_H
+#define INPUTPDFFILEDELEGATE_H
 
 #include <QStyledItemDelegate>
+#include <QComboBox>
+#include <QLabel>
 #include <QLineEdit>
-#include "pdf_edit_lib/pdfeditor.h"
 
-class LineEditDelegate : public QStyledItemDelegate
+#include "pdf_edit_lib/pdffile.h"
+
+#define PDF_FILE_ROLE Qt::UserRole
+
+Q_DECLARE_METATYPE(InputPdfFile *)
+
+class InputPdfFileDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    LineEditDelegate(QWidget *parent);
+    InputPdfFileDelegate(QWidget *parent);
+
+    virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
     virtual QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
@@ -39,4 +50,4 @@ signals:
     void data_edit() const;
 };
 
-#endif // LINEEDITDELEGATE_H
+#endif // INPUTPDFFILEDELEGATE_H
