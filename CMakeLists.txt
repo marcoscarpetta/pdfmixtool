@@ -27,8 +27,6 @@ SET (
     src/pdf_edit_lib/pdffile.h
     src/pdf_edit_lib/podofo_pdffile.cpp
     src/pdf_edit_lib/podofo_pdffile.h
-    src/pdf_edit_lib/podofo_pdftranslator.cpp
-    src/pdf_edit_lib/podofo_pdftranslator.h
 )
 
 file(GLOB TS_FILES
