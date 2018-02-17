@@ -200,6 +200,7 @@ void MainWindow::move_down()
     {
         QItemSelection sel;
 
+        /* Qt >= 5.6
         // Move items down
         for (QList<int>::reverse_iterator it = indexes.rbegin(); it != indexes.rend(); ++it)
         {
@@ -207,6 +208,14 @@ void MainWindow::move_down()
             m_files_list_model->insertRow(*it + 1, row);
 
             sel.push_back(QItemSelectionRange(m_files_list_model->index(*it + 1, 0)));
+        }*/
+
+        for (int i = indexes.size() - 1; i >= 0; --i)
+        {
+            QList<QStandardItem *> row = m_files_list_model->takeRow(indexes.at(i));
+            m_files_list_model->insertRow(indexes.at(i) + 1, row);
+
+            sel.push_back(QItemSelectionRange(m_files_list_model->index(indexes.at(i) + 1, 0)));
         }
 
         // Restore selection
