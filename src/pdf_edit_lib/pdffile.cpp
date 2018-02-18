@@ -24,8 +24,8 @@ OutputPdfFile::OutputPdfFile()
 }
 
 InputPdfFile::InputPdfFile() :
-    m_rotation(0),
-    m_output_page_count(-1)
+    m_default_nup_settings(-1),
+    m_rotation(0)
 {
 
 }
@@ -47,12 +47,48 @@ const std::string &InputPdfFile::filename()
     return m_filename;
 }
 
+float InputPdfFile::page_width()
+{
+    return m_page_width;
+}
+
+float InputPdfFile::page_height()
+{
+    return m_page_height;
+}
+
+const PaperSize &InputPdfFile::paper_size()
+{
+    return m_paper_size;
+}
+
 int InputPdfFile::output_page_count()
 {
-    if (m_output_page_count < 0)
-        return this->page_count();
+    int count = 0;
 
-    return m_output_page_count;
+    if (m_filters.size() == 0)
+        count = this->page_count();
+    else
+    {
+        std::list<std::pair<int, int>>::iterator it;
+        for (it=m_filters.begin(); it != m_filters.end(); ++it)
+        {
+            count += it->second - it->first + 1;
+        }
+    }
+
+    if (m_default_nup_settings > -1)
+    {
+        int multipage = nup_settings_defaults[m_default_nup_settings].rows *
+                nup_settings_defaults[m_default_nup_settings].columns;
+
+        if (count % multipage > 0)
+            count = count / multipage + 1;
+        else
+            count = count / multipage;
+    }
+
+    return count;
 }
 
 void InputPdfFile::set_pages_filter_from_string(const std::string &str)
@@ -63,7 +99,6 @@ void InputPdfFile::set_pages_filter_from_string(const std::string &str)
     m_pages_filter_string = str;
 
     m_filters.clear();
-    m_output_page_count = 0;
 
     // Invalid characters
     if (str.find_first_not_of("0123456789- ,") != std::string::npos)
@@ -78,7 +113,6 @@ void InputPdfFile::set_pages_filter_from_string(const std::string &str)
      // Void string
     if (str.find_first_not_of("- ,") == std::string::npos)
     {
-        m_output_page_count = this->page_count();
         return;
     }
 
@@ -171,8 +205,6 @@ void InputPdfFile::add_pages_filter(int from, int to)
     }
 
     m_filters.push_back(std::pair<int, int>(from, to));
-
-    m_output_page_count += to - from + 1;
 }
 
 const std::vector<IntervalIssue> &InputPdfFile::pages_filter_errors()
@@ -183,6 +215,16 @@ const std::vector<IntervalIssue> &InputPdfFile::pages_filter_errors()
 const std::vector<IntervalIssue> &InputPdfFile::pages_filter_warnings()
 {
     return m_interval_warnings;
+}
+
+void InputPdfFile::set_default_nup_settings(int i)
+{
+    m_default_nup_settings = i;
+}
+
+int InputPdfFile::default_nup_settings()
+{
+    return m_default_nup_settings;
 }
 
 void InputPdfFile::set_rotation(int rotation)

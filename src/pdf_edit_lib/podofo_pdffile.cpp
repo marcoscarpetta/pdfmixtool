@@ -43,6 +43,38 @@ PoDoFoInputPdfFile::PoDoFoInputPdfFile(const std::string &filename) :
     m_podofo_file = new PoDoFoFile;
     m_podofo_file->file = new PoDoFo::PdfMemDocument(filename.c_str());
     m_podofo_file->ref_count = 1;
+
+    int page_rotation = m_podofo_file->file->GetPage(0)->GetRotation();
+    bool inv = (page_rotation == 90) || (page_rotation == 270);
+
+    PoDoFo::PdfRect rect(m_podofo_file->file->GetPage(0)->GetMediaBox());
+    if (inv)
+    {
+        m_page_width = std::round((rect.GetHeight() - rect.GetBottom()) / mm) / 10;
+        m_page_height = std::round((rect.GetWidth() - rect.GetLeft()) / mm) / 10;
+    }
+    else
+    {
+        m_page_width = std::round((rect.GetWidth() - rect.GetLeft()) / mm) / 10;
+        m_page_height = std::round((rect.GetHeight() - rect.GetBottom()) / mm) / 10;
+    }
+
+    for (const PaperSize &size : paper_sizes)
+    {
+        if (m_page_width == size.width && m_page_height == size.height)
+        {
+            m_paper_size = size;
+            return;
+        }
+        else if (m_page_height == size.width && m_page_width == size.height)
+        {
+            m_paper_size = size;
+            m_paper_size.portrait = false;
+            return;
+        }
+    }
+
+    m_paper_size = {m_page_width, m_page_height, "", (m_page_height > m_page_width)};
 }
 
 PoDoFoInputPdfFile::PoDoFoInputPdfFile(InputPdfFile *pdf_file) :
@@ -50,6 +82,10 @@ PoDoFoInputPdfFile::PoDoFoInputPdfFile(InputPdfFile *pdf_file) :
 {
     m_podofo_file = static_cast<PoDoFoInputPdfFile *>(pdf_file)->m_podofo_file;
     m_podofo_file->ref_count++;
+
+    m_page_width = pdf_file->page_width();
+    m_page_height = pdf_file->page_height();
+    m_paper_size = pdf_file->paper_size();
 }
 
 PoDoFoInputPdfFile::~PoDoFoInputPdfFile()
@@ -73,33 +109,19 @@ int PoDoFoInputPdfFile::page_count()
 
 void PoDoFoInputPdfFile::run(OutputPdfFile *output_file)
 {
-    PoDoFo::PdfMemDocument *podofo_file = static_cast<PoDoFoOutputPdfFile *>(output_file)->output_file;
+    PoDoFo::PdfMemDocument *podofo_file;
 
-    //test
-    NupSettings ns;
-    ns.columns = 2;
-    ns.rows = 2;
-    ns.rotation = 0;
-    ns.h_alignment = HAlignment::Left;
-    ns.v_alignment = VAlignment::Top;
-    ns.spacing = 1;
-    ns.margin_bottom = 1;
-    ns.margin_left = 1;
-    ns.margin_right = 1;
-    ns.margin_top = 1;
-    ns.page_width = 21;
-    ns.page_height = 29.7;
-
-    PdfTranslator *p = new PdfTranslator();
-    p->setSource(m_podofo_file->file);
-    PoDoFo::PdfMemDocument *tmp = m_podofo_file->file;
-    m_podofo_file->file = p->impose(ns);
-    //end test
+    // Add pages to output PDF file
+    if (m_default_nup_settings > -1)
+        podofo_file = new PoDoFo::PdfMemDocument();
+    // Add pages to a tmp file
+    else
+        podofo_file = static_cast<PoDoFoOutputPdfFile *>(output_file)->output_file;
 
     int page_index = podofo_file->GetPageCount();
     int added_pages = 0;
 
-    //add pages to output document from this document
+    // Add pages to podofo_file from this document
     if (m_filters.size() == 0)
     {
         podofo_file->InsertPages(*(m_podofo_file->file), 0, m_podofo_file->file->GetPageCount());
@@ -108,7 +130,7 @@ void PoDoFoInputPdfFile::run(OutputPdfFile *output_file)
     else
     {
         std::list<std::pair<int, int>>::iterator it;
-        for (it=m_filters.begin(); it != m_filters.end(); ++it)
+        for (it = m_filters.begin(); it != m_filters.end(); ++it)
         {
             int page_count = it->second - it->first + 1;
             podofo_file->InsertPages(*(m_podofo_file->file), it->first - 1, page_count);
@@ -116,16 +138,30 @@ void PoDoFoInputPdfFile::run(OutputPdfFile *output_file)
         }
     }
 
-    //set pages rotation
+    // Multipage
+    if (m_default_nup_settings > -1)
+    {
+        PdfTranslator *translator = new PdfTranslator();
+        translator->setSource(podofo_file);
+        PoDoFo::PdfMemDocument *tmp = translator->impose(nup_settings_defaults[m_default_nup_settings]);
+        PoDoFo::PdfMemDocument *old = podofo_file;
+
+        // Add multipage pages to output file
+        podofo_file = static_cast<PoDoFoOutputPdfFile *>(output_file)->output_file;
+        added_pages = this->output_page_count();
+        podofo_file->InsertPages(*tmp, 0, added_pages);
+
+        delete tmp, old, translator;
+    }
+
+    // Set pages rotation
     if (m_rotation != 0)
     {
-        for (int i=0; i < added_pages; i++)
+        for (int i = 0; i < added_pages; i++)
         {
             PoDoFo::PdfPage *page = podofo_file->GetPage(page_index + i);
-            int rotation = (page->GetRotation() + m_rotation)%360;
+            int rotation = (page->GetRotation() + m_rotation) % 360;
             page->SetRotation(rotation);
         }
     }
-
-    m_podofo_file->file = tmp;
 }

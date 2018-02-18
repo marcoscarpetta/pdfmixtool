@@ -23,6 +23,7 @@
 
 int main(int argc, char *argv[])
 {
+    // Set application informations
     QApplication app (argc, argv);
 
     app.setApplicationName("pdfmixtool");
@@ -35,7 +36,7 @@ int main(int argc, char *argv[])
     app.setDesktopFileName("pdfmixtool");
 #endif
 
-    //set up translations
+    // Set up translations
     QTranslator qtTranslator;
     qtTranslator.load("qt_" + QLocale::system().name(),
             QLibraryInfo::location(QLibraryInfo::TranslationsPath));
@@ -46,6 +47,7 @@ int main(int argc, char *argv[])
                                qApp->applicationDirPath(),  QLocale::system().name())))
         app.installTranslator(&appTranslator);
 
+    // Create and show the main window
     MainWindow *main_window = new MainWindow();
     main_window->show();
 

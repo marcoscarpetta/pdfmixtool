@@ -21,6 +21,33 @@
 
 #include <string>
 #include <list>
+#include <map>
+
+const double inch = 72;
+const double cm = inch / 2.54;
+const double mm = cm / 10;
+
+struct PaperSize {
+    float width;
+    float height;
+    std::string name;
+    bool portrait;
+};
+
+const PaperSize paper_sizes[] = {
+    {21.6, 27.9, "US letter", true},
+    {84.1, 118.9, "A0", true},
+    {59.4, 84.1, "A1", true},
+    {42.0, 59.4, "A2", true},
+    {29.7, 42.0, "A3", true},
+    {21.0, 29.7, "A4", true},
+    {14.8, 21.0, "A5", true},
+    {10.5, 14.8, "A6", true},
+    {7.4, 10.5, "A7", true},
+    {5.2, 7.4, "A8", true},
+    {3.7, 5.2, "A9", true},
+    {2.6, 3.7, "A10", true},
+};
 
 enum class HAlignment {
     Left,
@@ -35,6 +62,8 @@ enum class VAlignment {
 };
 
 struct NupSettings {
+    std::string name;
+
     double  page_width;
     double  page_height;
 
@@ -50,7 +79,39 @@ struct NupSettings {
     double margin_bottom;
     double margin_left;
     double margin_right;
+
     double spacing;
+};
+
+const NupSettings nup_settings_defaults[] = {
+    {
+        "2x1, A4, 0°",
+        21.0, 29.7,
+        2, 1, 0,
+        HAlignment::Center, VAlignment::Center,
+        1, 1, 1, 1, 1
+    },
+    {
+        "2x1, A4, 90°",
+        21.0, 29.7,
+        2, 1, 90,
+        HAlignment::Center, VAlignment::Center,
+        1, 1, 1, 1, 1
+    },
+    {
+        "2x2, A4, 0°",
+        21.0, 29.7,
+        2, 2, 0,
+        HAlignment::Center, VAlignment::Center,
+        1, 1, 1, 1, 1
+    },
+    {
+        "2x2, A4, 90°",
+        21.0, 29.7,
+        2, 2, 90,
+        HAlignment::Center, VAlignment::Center,
+        1, 1, 1, 1, 1
+    }
 };
 
 enum class Backend {

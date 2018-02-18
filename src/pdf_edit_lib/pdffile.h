@@ -41,6 +41,12 @@ public:
 
     virtual const std::string &filename();
 
+    virtual float page_width();
+
+    virtual float page_height();
+
+    virtual const PaperSize &paper_size();
+
     virtual int page_count() = 0;
 
     virtual int output_page_count();
@@ -55,6 +61,10 @@ public:
 
     virtual const std::vector<IntervalIssue> &pages_filter_warnings();
 
+    virtual void set_default_nup_settings(int i);
+
+    virtual int default_nup_settings();
+
     virtual void set_rotation(int rotation);
 
     virtual int rotation();
@@ -64,13 +74,18 @@ public:
 protected:
     std::string m_filename;
 
+    float m_page_width;
+    float m_page_height;
+    PaperSize m_paper_size;
+
     std::list<std::pair<int, int>> m_filters;
     std::string m_pages_filter_string;
     std::vector<IntervalIssue> m_interval_errors;
     std::vector<IntervalIssue> m_interval_warnings;
 
+    int m_default_nup_settings;
+
     int m_rotation;
-    int m_output_page_count;
 };
 
 #endif // PDFFILE_H

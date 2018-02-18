@@ -32,11 +32,13 @@ InputPdfFileWidget::InputPdfFileWidget(QWidget *parent) :
     QGridLayout *layout = new QGridLayout();
     this->setLayout(layout);
 
-    m_multipage_combobox->addItem(tr("Disabled"), 0);
-    m_multipage_combobox->addItem(tr("2x1, A4 portrait, 0°"), 1);
-    m_multipage_combobox->addItem(tr("2x1, A4 landscape, 90°"), 2);
-    m_multipage_combobox->addItem(tr("2x2, A4 portrait, 0°"), 3);
-    m_multipage_combobox->addItem(tr("2x2, A4 landscape, 90°"), 4);
+    m_multipage_combobox->addItem(tr("Disabled"), -1);
+    int i = 0;
+    for (const NupSettings &ns : nup_settings_defaults)
+    {
+        m_multipage_combobox->addItem(QString::fromStdString(ns.name), i);
+        i++;
+    }
 
     m_rotation_combobox->addItem(tr("No rotation"), 0);
     m_rotation_combobox->addItem(tr("90°"), 90);
@@ -60,12 +62,16 @@ void InputPdfFileWidget::set_data_from_pdf_input_file(InputPdfFile *pdf_file)
 {
     m_pages_filter_lineedit->setText(QString::fromStdString(pdf_file->pages_filter_string()));
 
+    m_multipage_combobox->setCurrentIndex(m_multipage_combobox->findData(pdf_file->default_nup_settings()));
+
     m_rotation_combobox->setCurrentIndex(m_rotation_combobox->findData(pdf_file->rotation()));
 }
 
 void InputPdfFileWidget::set_data_to_pdf_input_file(InputPdfFile *pdf_file)
 {
     pdf_file->set_pages_filter_from_string(m_pages_filter_lineedit->text().toStdString());
+
+    pdf_file->set_default_nup_settings(m_multipage_combobox->currentData().toInt());
 
     pdf_file->set_rotation(m_rotation_combobox->currentData().toInt());
 }

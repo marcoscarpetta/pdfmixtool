@@ -68,20 +68,40 @@ void InputPdfFileDelegate::paint(
     int x = option.rect.x() + 5;
     int y = option.rect.y() + line_height;
 
-    painter->drawText(x, y,
-                      QString::fromStdString(pdf_file->filename()) +
-                      QString(" − %1 ").arg(pdf_file->page_count()) +
-                      tr("page", "", pdf_file->page_count())
-                      );
+    QFont font = painter->font();
+    font.setBold(true);
+    painter->setFont(font);
+    QString filename = QString::fromStdString(pdf_file->filename());
+    painter->drawText(x, y, filename);
+    x += painter->fontMetrics().width(filename);
+
+    font.setBold(false);
+    painter->setFont(font);
+    QString file_infos = QString(" − %1 cm x %2 cm%3 − %5 %6").arg(
+                QString::number(pdf_file->page_width()),
+                QString::number(pdf_file->page_height()),
+                pdf_file->paper_size().name.size() > 0 ?
+                        QString(" (") + pdf_file->paper_size().name.c_str() + " " +
+                        (pdf_file->paper_size().portrait ? tr("portrait") : tr("landscape")) + ")" : " ",
+                QString::number(pdf_file->page_count()),
+                tr("page", "", pdf_file->page_count())
+                );
+
+    painter->drawText(x, y, file_infos);
+
     y += line_height;
-    x += 30;
+    x = option.rect.x() + 5 + 30;
 
     QString pages_filter = QString::fromStdString(pdf_file->pages_filter_string());
     if (pages_filter.size() == 0)
         pages_filter = tr("All");
 
     QString pages = tr("Pages:") + QString(" %1").arg(pages_filter);
-    QString multipage = tr("Multipage:") + QString(" %1").arg("");
+    QString multipage = tr("Multipage:") + " " + (
+                pdf_file->default_nup_settings() < 0 ? tr("Disabled") :
+            QString(" %1").arg(QString::fromStdString(
+                                   nup_settings_defaults[pdf_file->default_nup_settings()].name))
+            );
     QString rotation = tr("Rotation:") + QString(" %1°").arg(pdf_file->rotation());
 
     if (pdf_file->pages_filter_errors().size() > 0)
