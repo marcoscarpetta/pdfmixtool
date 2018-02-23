@@ -20,6 +20,8 @@ SET (
     src/inputpdffilewidget.h
     src/mainwindow.cpp
     src/mainwindow.h
+    src/mouseeventfilter.cpp
+    src/mouseeventfilter.h
     src/pdf_edit_lib/definitions.h
     src/pdf_edit_lib/pdfeditor.cpp
     src/pdf_edit_lib/pdfeditor.h

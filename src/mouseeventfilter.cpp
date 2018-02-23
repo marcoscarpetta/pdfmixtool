@@ -16,36 +16,22 @@
  * along with PDF Mix Tool. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INPUTPDFFILEWIDGET_H
-#define INPUTPDFFILEWIDGET_H
+#include "mouseeventfilter.h"
 
-#include <QComboBox>
-#include <QLineEdit>
-#include <QLabel>
-#include <QMouseEvent>
+#include <QEvent>
 
-#include "pdf_edit_lib/pdffile.h"
-
-class InputPdfFileWidget : public QWidget
+MouseEventFilter::MouseEventFilter(QObject *parent) : QObject(parent)
 {
-    Q_OBJECT
-public:
-    explicit InputPdfFileWidget(QWidget *parent = nullptr);
 
-    void set_data_from_pdf_input_file(InputPdfFile *pdf_file);
+}
 
-    void set_data_to_pdf_input_file(InputPdfFile *pdf_file);
+bool MouseEventFilter::eventFilter(QObject *obj, QEvent *event)
+{
+    if (event->type() == QEvent::MouseButtonPress) {
+        QMouseEvent *mouse_event = static_cast<QMouseEvent *>(event);
+        emit mouse_button_pressed(mouse_event);
+    }
 
-signals:
-    void focus_out(QWidget *editor) const;
-
-public slots:
-    void mouse_button_pressed(QMouseEvent *event);
-
-private:
-    QLineEdit *m_pages_filter_lineedit;
-    QComboBox *m_multipage_combobox;
-    QComboBox *m_rotation_combobox;
-};
-
-#endif // INPUTPDFFILEWIDGET_H
+    // Standard event processing
+    return QObject::eventFilter(obj, event);
+}

@@ -19,6 +19,7 @@
 #include "inputpdffilewidget.h"
 
 #include <QGridLayout>
+#include <QFocusEvent>
 
 InputPdfFileWidget::InputPdfFileWidget(QWidget *parent) :
     QWidget(parent),
@@ -62,7 +63,8 @@ void InputPdfFileWidget::set_data_from_pdf_input_file(InputPdfFile *pdf_file)
 {
     m_pages_filter_lineedit->setText(QString::fromStdString(pdf_file->pages_filter_string()));
 
-    m_multipage_combobox->setCurrentIndex(m_multipage_combobox->findData(pdf_file->multipage_default_index()));
+    m_multipage_combobox->setCurrentIndex(
+                m_multipage_combobox->findData(pdf_file->multipage_default_index()));
 
     m_rotation_combobox->setCurrentIndex(m_rotation_combobox->findData(pdf_file->rotation()));
 }
@@ -74,4 +76,21 @@ void InputPdfFileWidget::set_data_to_pdf_input_file(InputPdfFile *pdf_file)
     pdf_file->set_multipage_default_index(m_multipage_combobox->currentData().toInt());
 
     pdf_file->set_rotation(m_rotation_combobox->currentData().toInt());
+}
+
+void InputPdfFileWidget::mouse_button_pressed(QMouseEvent *event)
+{
+    QRect multipage_rect = m_multipage_combobox->rect();
+    multipage_rect.setHeight(6 * multipage_rect.height());
+    multipage_rect.setTop(multipage_rect.top() - 5 * multipage_rect.height());
+
+    QRect rotation_rect = m_rotation_combobox->rect();
+    rotation_rect.setHeight(5 * rotation_rect.height());
+    rotation_rect.setTop(rotation_rect.top() - 4 * rotation_rect.height());
+
+    if (! this->rect().contains(this->mapFromGlobal(event->globalPos())) &&
+            ! multipage_rect.contains(m_multipage_combobox->mapFromGlobal(event->globalPos())) &&
+            ! rotation_rect.contains(m_rotation_combobox->mapFromGlobal(event->globalPos()))
+            )
+        emit focus_out(this);
 }

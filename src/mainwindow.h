@@ -30,6 +30,7 @@
 #include <QStandardItemModel>
 #include <QSettings>
 #include <QMessageBox>
+#include "mouseeventfilter.h"
 #include "inputpdffiledelegate.h"
 #include "aboutdialog.h"
 #include "pdf_edit_lib/pdfeditor.h"
@@ -38,7 +39,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(MouseEventFilter *filter, QWidget *parent = nullptr);
 
 signals:
 

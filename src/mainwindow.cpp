@@ -22,7 +22,7 @@
 #include <QTimer>
 #include <QHeaderView>
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     QMainWindow(parent),
     m_pdf_editor(new PdfEditor()),
     m_settings(new QSettings(this)),
@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_opened_count(0),
     m_dest_file_dialog(new QFileDialog(this)),
     m_files_list_view(new QListView(this)),
-    m_pdfinputfile_delegate(new InputPdfFileDelegate(this)),
+    m_pdfinputfile_delegate(new InputPdfFileDelegate(filter, this)),
     m_files_list_model(new QStandardItemModel(this)),
     m_error_dialog(new QMessageBox(this)),
     m_warning_dialog(new QMessageBox(this)),

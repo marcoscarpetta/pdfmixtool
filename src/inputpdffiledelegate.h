@@ -24,6 +24,7 @@
 #include <QLabel>
 #include <QLineEdit>
 
+#include "mouseeventfilter.h"
 #include "pdf_edit_lib/pdffile.h"
 
 #define PDF_FILE_ROLE Qt::UserRole
@@ -34,7 +35,7 @@ class InputPdfFileDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    InputPdfFileDelegate(QWidget *parent);
+    InputPdfFileDelegate(MouseEventFilter *filter, QWidget *parent);
 
     virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
@@ -48,6 +49,12 @@ public:
 
 signals:
     void data_edit() const;
+
+public slots:
+    void end_editing(QWidget *editor);
+
+private:
+    MouseEventFilter *m_mouse_event_filter;
 };
 
 #endif // INPUTPDFFILEDELEGATE_H

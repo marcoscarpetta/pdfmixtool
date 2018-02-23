@@ -20,6 +20,7 @@
 #include <QTranslator>
 #include <QLibraryInfo>
 #include "mainwindow.h"
+#include "mouseeventfilter.h"
 
 int main(int argc, char *argv[])
 {
@@ -47,8 +48,12 @@ int main(int argc, char *argv[])
                                qApp->applicationDirPath(),  QLocale::system().name())))
         app.installTranslator(&appTranslator);
 
+    // Event filter
+    MouseEventFilter *filter = new MouseEventFilter(&app);
+    app.installEventFilter(filter);
+
     // Create and show the main window
-    MainWindow *main_window = new MainWindow();
+    MainWindow *main_window = new MainWindow(filter);
     main_window->show();
 
     return app.exec();

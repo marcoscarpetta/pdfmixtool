@@ -22,8 +22,9 @@
 
 #include "inputpdffilewidget.h"
 
-InputPdfFileDelegate::InputPdfFileDelegate(QWidget *parent) :
-    QStyledItemDelegate(parent)
+InputPdfFileDelegate::InputPdfFileDelegate(MouseEventFilter *filter, QWidget *parent) :
+    QStyledItemDelegate(parent),
+    m_mouse_event_filter(filter)
 {
 
 }
@@ -152,7 +153,11 @@ QWidget *InputPdfFileDelegate::createEditor(
         const QModelIndex &index
         ) const
 {
-    return new InputPdfFileWidget(parent);
+    InputPdfFileWidget *editor = new InputPdfFileWidget(parent);
+    connect(m_mouse_event_filter, SIGNAL(mouse_button_pressed(QMouseEvent*)),
+            editor, SLOT(mouse_button_pressed(QMouseEvent*)));
+    connect(editor, SIGNAL(focus_out(QWidget*)), this, SLOT(end_editing(QWidget*)));
+    return editor;
 }
 
 void InputPdfFileDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
@@ -177,4 +182,10 @@ void InputPdfFileDelegate::setModelData(
     w->set_data_to_pdf_input_file(pdf_file);
 
     emit data_edit();
+}
+
+void InputPdfFileDelegate::end_editing(QWidget *editor)
+{
+    emit commitData(editor);
+    emit closeEditor(editor);
 }
