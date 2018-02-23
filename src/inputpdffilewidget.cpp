@@ -34,9 +34,9 @@ InputPdfFileWidget::InputPdfFileWidget(QWidget *parent) :
 
     m_multipage_combobox->addItem(tr("Disabled"), -1);
     int i = 0;
-    for (const NupSettings &ns : nup_settings_defaults)
+    for (const Multipage &multipage : multipage_defaults)
     {
-        m_multipage_combobox->addItem(QString::fromStdString(ns.name), i);
+        m_multipage_combobox->addItem(QString::fromStdString(multipage.name), i);
         i++;
     }
 
@@ -62,7 +62,7 @@ void InputPdfFileWidget::set_data_from_pdf_input_file(InputPdfFile *pdf_file)
 {
     m_pages_filter_lineedit->setText(QString::fromStdString(pdf_file->pages_filter_string()));
 
-    m_multipage_combobox->setCurrentIndex(m_multipage_combobox->findData(pdf_file->default_nup_settings()));
+    m_multipage_combobox->setCurrentIndex(m_multipage_combobox->findData(pdf_file->multipage_default_index()));
 
     m_rotation_combobox->setCurrentIndex(m_rotation_combobox->findData(pdf_file->rotation()));
 }
@@ -71,7 +71,7 @@ void InputPdfFileWidget::set_data_to_pdf_input_file(InputPdfFile *pdf_file)
 {
     pdf_file->set_pages_filter_from_string(m_pages_filter_lineedit->text().toStdString());
 
-    pdf_file->set_default_nup_settings(m_multipage_combobox->currentData().toInt());
+    pdf_file->set_multipage_default_index(m_multipage_combobox->currentData().toInt());
 
     pdf_file->set_rotation(m_rotation_combobox->currentData().toInt());
 }

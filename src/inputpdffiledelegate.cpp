@@ -98,9 +98,9 @@ void InputPdfFileDelegate::paint(
 
     QString pages = tr("Pages:") + QString(" %1").arg(pages_filter);
     QString multipage = tr("Multipage:") + " " + (
-                pdf_file->default_nup_settings() < 0 ? tr("Disabled") :
+                pdf_file->multipage_default_index() < 0 ? tr("Disabled") :
             QString(" %1").arg(QString::fromStdString(
-                                   nup_settings_defaults[pdf_file->default_nup_settings()].name))
+                                   multipage_defaults[pdf_file->multipage_default_index()].name))
             );
     QString rotation = tr("Rotation:") + QString(" %1°").arg(pdf_file->rotation());
 

@@ -61,9 +61,9 @@ public:
 
     virtual const std::vector<IntervalIssue> &pages_filter_warnings();
 
-    virtual void set_default_nup_settings(int i);
+    virtual void set_multipage_default_index(int i);
 
-    virtual int default_nup_settings();
+    virtual int multipage_default_index();
 
     virtual void set_rotation(int rotation);
 
@@ -83,7 +83,7 @@ protected:
     std::vector<IntervalIssue> m_interval_errors;
     std::vector<IntervalIssue> m_interval_warnings;
 
-    int m_default_nup_settings;
+    int m_multipage_default_index;
 
     int m_rotation;
 };

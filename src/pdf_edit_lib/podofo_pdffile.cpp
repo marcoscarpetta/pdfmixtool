@@ -45,10 +45,9 @@ PoDoFoInputPdfFile::PoDoFoInputPdfFile(const std::string &filename) :
     m_podofo_file->ref_count = 1;
 
     int page_rotation = m_podofo_file->file->GetPage(0)->GetRotation();
-    bool inv = (page_rotation == 90) || (page_rotation == 270);
 
     PoDoFo::PdfRect rect(m_podofo_file->file->GetPage(0)->GetMediaBox());
-    if (inv)
+    if ((page_rotation == 90) || (page_rotation == 270))
     {
         m_page_width = std::round((rect.GetHeight() - rect.GetBottom()) / mm) / 10;
         m_page_height = std::round((rect.GetWidth() - rect.GetLeft()) / mm) / 10;
@@ -112,7 +111,7 @@ void PoDoFoInputPdfFile::run(OutputPdfFile *output_file)
     PoDoFo::PdfMemDocument *podofo_file;
 
     // Add pages to output PDF file
-    if (m_default_nup_settings > -1)
+    if (m_multipage_default_index > -1)
         podofo_file = new PoDoFo::PdfMemDocument();
     // Add pages to a tmp file
     else
@@ -139,11 +138,17 @@ void PoDoFoInputPdfFile::run(OutputPdfFile *output_file)
     }
 
     // Multipage
-    if (m_default_nup_settings > -1)
+    int initial_rotation = 0;
+    int multipage_rotation = 0;
+
+    if (m_multipage_default_index > -1)
     {
+        initial_rotation = podofo_file->GetPage(0)->GetRotation();
+        multipage_rotation = multipage_defaults[m_multipage_default_index].rotation;
+
         PdfTranslator *translator = new PdfTranslator();
         translator->setSource(podofo_file);
-        PoDoFo::PdfMemDocument *tmp = translator->impose(nup_settings_defaults[m_default_nup_settings]);
+        PoDoFo::PdfMemDocument *tmp = translator->impose(multipage_defaults[m_multipage_default_index]);
         PoDoFo::PdfMemDocument *old = podofo_file;
 
         // Add multipage pages to output file
@@ -155,12 +160,14 @@ void PoDoFoInputPdfFile::run(OutputPdfFile *output_file)
     }
 
     // Set pages rotation
-    if (m_rotation != 0)
+    if (m_rotation != 0 || initial_rotation != 0 || multipage_rotation != 0)
     {
         for (int i = 0; i < added_pages; i++)
         {
             PoDoFo::PdfPage *page = podofo_file->GetPage(page_index + i);
-            int rotation = (page->GetRotation() + m_rotation) % 360;
+            int rotation = (
+                        page->GetRotation() + initial_rotation + multipage_rotation + m_rotation
+                        ) % 360;
             page->SetRotation(rotation);
         }
     }

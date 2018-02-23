@@ -24,7 +24,7 @@ OutputPdfFile::OutputPdfFile()
 }
 
 InputPdfFile::InputPdfFile() :
-    m_default_nup_settings(-1),
+    m_multipage_default_index(-1),
     m_rotation(0)
 {
 
@@ -77,10 +77,10 @@ int InputPdfFile::output_page_count()
         }
     }
 
-    if (m_default_nup_settings > -1)
+    if (m_multipage_default_index > -1)
     {
-        int multipage = nup_settings_defaults[m_default_nup_settings].rows *
-                nup_settings_defaults[m_default_nup_settings].columns;
+        int multipage = multipage_defaults[m_multipage_default_index].rows *
+                multipage_defaults[m_multipage_default_index].columns;
 
         if (count % multipage > 0)
             count = count / multipage + 1;
@@ -217,14 +217,14 @@ const std::vector<IntervalIssue> &InputPdfFile::pages_filter_warnings()
     return m_interval_warnings;
 }
 
-void InputPdfFile::set_default_nup_settings(int i)
+void InputPdfFile::set_multipage_default_index(int i)
 {
-    m_default_nup_settings = i;
+    m_multipage_default_index = i;
 }
 
-int InputPdfFile::default_nup_settings()
+int InputPdfFile::multipage_default_index()
 {
-    return m_default_nup_settings;
+    return m_multipage_default_index;
 }
 
 void InputPdfFile::set_rotation(int rotation)

@@ -61,7 +61,7 @@ enum class VAlignment {
     Bottom
 };
 
-struct NupSettings {
+struct Multipage {
     std::string name;
 
     double  page_width;
@@ -83,7 +83,7 @@ struct NupSettings {
     double spacing;
 };
 
-const NupSettings nup_settings_defaults[] = {
+const Multipage multipage_defaults[] = {
     {
         "2x1, A4, 0°",
         21.0, 29.7,

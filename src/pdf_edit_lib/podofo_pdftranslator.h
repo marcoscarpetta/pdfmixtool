@@ -68,7 +68,7 @@ public:
     /**
         When all is prepared, call it to do the job.
         */
-    PdfMemDocument *impose(const NupSettings &nup_settings);
+    PdfMemDocument *impose(const Multipage &multipage);
 
 private:
     std::string inFilePath;
@@ -102,16 +102,15 @@ private:
     double extraSpace;
 
     std::map<std::string, PdfObject*> migrateMap;
-public:
+
     int pcount;
-    double sourceWidth;
-    double sourceHeight;
+    int m_source_rotation;
+    double m_source_width;
+    double m_source_height;
     double destWidth;
     double destHeight;
     double scaleFactor;
     std::string boundingBox;
-
-
 };
 
 #endif

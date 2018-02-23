@@ -49,8 +49,9 @@ PdfTranslator::PdfTranslator( )
     extraSpace = 0;
     scaleFactor = 1.0;
     pcount = 0;
-    sourceWidth = 0.0;
-    sourceHeight = 0.0;
+    m_source_rotation = 0;
+    m_source_width = 0.0;
+    m_source_height = 0.0;
     destWidth = 0.0;
     destHeight = 0.0;
 }
@@ -63,11 +64,13 @@ void PdfTranslator::setSource(PdfMemDocument *source)
     // only here to avoid possible segfault, but PDF without page is not conform IIRC
     if (pcount > 0)
     {
+        m_source_rotation = sourceDoc->GetPage(0)->GetRotation();
+
         PoDoFo::PdfRect rect (sourceDoc->GetPage(0)->GetMediaBox());
         // keep in mind it’s just a hint since PDF can have different page
         // sizes in a same doc
-        sourceWidth =  rect.GetWidth() - rect.GetLeft();
-        sourceHeight =  rect.GetHeight() - rect.GetBottom() ;
+        m_source_width = rect.GetWidth() - rect.GetLeft();
+        m_source_height = rect.GetHeight() - rect.GetBottom();
     }
 
     // Create target document
@@ -262,41 +265,155 @@ PdfObject* PdfTranslator::getInheritedResources ( PdfPage* page )
 
 }
 
-PdfMemDocument *PdfTranslator::impose(const NupSettings &nup_settings)
+PdfMemDocument *PdfTranslator::impose(const Multipage &multipage)
 {
     // 			std::cerr<<"PdfTranslator::impose"<<std::endl;
     if ( !targetDoc )
         throw std::invalid_argument ( "impose() called with empty target" );
 
-    int plate_page_count = nup_settings.rows * nup_settings.columns;
+    // Pages size and orientation settings
+    int plate_page_count = multipage.rows * multipage.columns;
 
-    double cosR = cos(nup_settings.rotation  *  3.14159 / 180.0);
-    double sinR = sin(nup_settings.rotation  *  3.14159 / 180.0);
+    double dest_width, dest_height, margin_top, margin_bottom, margin_left, margin_right;
+    int rows, columns;
+    double spacing = multipage.spacing * cm;
 
-    double max_width = (nup_settings.page_width -
-                        nup_settings.margin_left - nup_settings.margin_right -
-                        nup_settings.spacing * (nup_settings.rows - 1)) / nup_settings.rows;
+    if (
+            (m_source_rotation == 0 && multipage.rotation == 0) ||
+            (m_source_rotation == 270 && multipage.rotation == 90)
+            )
+    {
+        dest_width = multipage.page_width * cm;
+        dest_height = multipage.page_height * cm;
+        margin_top = multipage.margin_top * cm;
+        margin_bottom = multipage.margin_bottom * cm;
+        margin_left = multipage.margin_left * cm;
+        margin_right = multipage.margin_right * cm;
+        rows = multipage.rows;
+        columns = multipage.columns;
+    }
+    else if (
+             (m_source_rotation == 90 && multipage.rotation == 0) ||
+             (m_source_rotation == 0 && multipage.rotation == 90)
+             )
+    {
+        dest_width = multipage.page_height * cm;
+        dest_height = multipage.page_width * cm;
+        margin_top = multipage.margin_left * cm;
+        margin_bottom = multipage.margin_right * cm;
+        margin_left = multipage.margin_top * cm;
+        margin_right = multipage.margin_bottom * cm;
+        rows = multipage.columns;
+        columns = multipage.rows;
+    }
+    else if (
+             (m_source_rotation == 180 && multipage.rotation == 0) ||
+             (m_source_rotation == 90 && multipage.rotation == 90)
+             )
+    {
+        dest_width = multipage.page_width * cm;
+        dest_height = multipage.page_height * cm;
+        margin_top = multipage.margin_bottom * cm;
+        margin_bottom = multipage.margin_top * cm;
+        margin_left = multipage.margin_right * cm;
+        margin_right = multipage.margin_left * cm;
+        rows = multipage.rows;
+        columns = multipage.columns;
+    }
+    else if (
+             (m_source_rotation == 270 && multipage.rotation == 0) ||
+             (m_source_rotation == 180 && multipage.rotation == 90)
+             )
+    {
+        dest_width = multipage.page_height * cm;
+        dest_height = multipage.page_width * cm;
+        margin_top = multipage.margin_right * cm;
+        margin_bottom = multipage.margin_left * cm;
+        margin_left = multipage.margin_bottom * cm;
+        margin_right = multipage.margin_top * cm;
+        rows = multipage.columns;
+        columns = multipage.rows;
+    }
 
-    double max_height = (nup_settings.page_height -
-                         nup_settings.margin_top - nup_settings.margin_bottom -
-                         nup_settings.spacing * (nup_settings.columns - 1)) / nup_settings.columns;
+    double available_width = (
+                dest_width - margin_left - margin_right - spacing * (columns - 1)
+                ) / columns;
 
-    scaleFactor = std::min(max_width/nup_settings.page_width, max_height/nup_settings.page_height);
+    double available_height = (
+                dest_height - margin_top - margin_bottom - spacing * (rows - 1)
+                ) / rows;
 
-    double page_width = sourceWidth / cm * scaleFactor;
-    double page_height = sourceHeight / cm  * scaleFactor;
+    scaleFactor = std::min(
+                available_width / m_source_width,
+                available_height / m_source_height
+                );
 
-    double delta_x = 0;
-    if (nup_settings.h_alignment == HAlignment::Center)
-        delta_x = (max_width - page_width) / 2;
-    else if (nup_settings.h_alignment == HAlignment::Right)
-        delta_x = max_width - page_width;
+    double page_width = m_source_width * scaleFactor;
+    double page_height = m_source_height * scaleFactor;
 
-    double delta_y = 0;
-    if (nup_settings.v_alignment == VAlignment::Center)
-        delta_y = (max_height - page_height) / 2;
-    else if (nup_settings.v_alignment == VAlignment::Top)
-        delta_y = max_height - page_height;
+    // Alignment settings
+    double delta_x = 0, delta_y = 0;
+
+    if (
+            (m_source_rotation == 0 && multipage.rotation == 0) ||
+            (m_source_rotation == 270 && multipage.rotation == 90)
+            )
+    {
+        if (multipage.h_alignment == HAlignment::Center)
+            delta_x = (available_width - page_width) / 2;
+        else if (multipage.h_alignment == HAlignment::Right)
+            delta_x = available_width - page_width;
+
+        if (multipage.v_alignment == VAlignment::Center)
+            delta_y = (available_height - page_height) / 2;
+        else if (multipage.v_alignment == VAlignment::Top)
+            delta_y = available_height - page_height;
+    }
+    else if (
+             (m_source_rotation == 90 && multipage.rotation == 0) ||
+             (m_source_rotation == 0 && multipage.rotation == 90)
+             )
+    {
+        if (multipage.v_alignment == VAlignment::Center)
+            delta_x = (available_width - page_width) / 2;
+        else if (multipage.v_alignment == VAlignment::Bottom)
+            delta_x = available_width - page_width;
+
+        if (multipage.h_alignment == HAlignment::Center)
+            delta_y = (available_height - page_height) / 2;
+        else if (multipage.h_alignment == HAlignment::Right)
+            delta_y = available_height - page_height;
+    }
+    else if (
+             (m_source_rotation == 180 && multipage.rotation == 0) ||
+             (m_source_rotation == 90 && multipage.rotation == 90)
+             )
+    {
+        if (multipage.h_alignment == HAlignment::Center)
+            delta_x = (available_width - page_width) / 2;
+        else if (multipage.h_alignment == HAlignment::Left)
+            delta_x = available_width - page_width;
+
+        if (multipage.v_alignment == VAlignment::Center)
+            delta_y = (available_height - page_height) / 2;
+        else if (multipage.v_alignment == VAlignment::Bottom)
+            delta_y = available_height - page_height;
+    }
+    else if (
+             (m_source_rotation == 270 && multipage.rotation == 0) ||
+             (m_source_rotation == 180 && multipage.rotation == 90)
+             )
+    {
+        if (multipage.v_alignment == VAlignment::Center)
+            delta_x = (available_width - page_width) / 2;
+        else if (multipage.v_alignment == VAlignment::Top)
+            delta_x = available_width - page_width;
+
+        if (multipage.h_alignment == HAlignment::Center)
+            delta_y = (available_height - page_height) / 2;
+        else if (multipage.h_alignment == HAlignment::Left)
+            delta_y = available_height - page_height;
+    }
 
     //			PdfObject trimbox;
     //			PdfRect trim ( 0, 0, destWidth, destHeight );
@@ -327,7 +444,7 @@ PdfMemDocument *PdfTranslator::impose(const NupSettings &nup_settings)
     while (current_page <= pcount)
     {
         PdfPage *newpage = targetDoc->CreatePage(
-                    PdfRect (0.0, 0.0, nup_settings.page_width * cm, nup_settings.page_height * cm)
+                    PdfRect (0.0, 0.0, dest_width, dest_height)
                     );
 
         // 		newpage->GetObject()->GetDictionary().AddKey ( PdfName ( "TrimBox" ), trimbox );
@@ -335,24 +452,38 @@ PdfMemDocument *PdfTranslator::impose(const NupSettings &nup_settings)
         PdfDictionary xdict;
 
         ostringstream buffer;
-        // Scale
-        buffer << std::fixed << scaleFactor << " 0 0 " << scaleFactor << " 0 0 cm\n";
 
         for (unsigned int i = 0; i < plate_page_count; i++)
         {
             // 					std::cerr<<curRecord.sourcePage<< " " << curRecord.destPage<<std::endl;
             if(current_page <= pcount)
             {
-                double tx = (
-                            nup_settings.margin_left +
-                            (max_width + nup_settings.spacing) * (i % nup_settings.rows) +
-                            delta_x * ((i % nup_settings.rows) + 1)
-                            ) * cm / scaleFactor;
-                double ty = (
-                            nup_settings.page_height - nup_settings.margin_top - max_height -
-                            (max_height + nup_settings.spacing) * (i / nup_settings.rows) +
-                            delta_y * ((i / nup_settings.rows) + 1)
-                            ) * cm / scaleFactor;
+                int matrix_row, matrix_col;
+
+                if (m_source_rotation == 0)
+                {
+                    matrix_row = i / columns;
+                    matrix_col = i % columns;
+                }
+                else if (m_source_rotation == 90)
+                {
+                    matrix_row = rows - 1 - (i % rows);
+                    matrix_col = i / rows;
+                }
+                else if (m_source_rotation == 180)
+                {
+                    matrix_row = rows - 1 - (i / columns);
+                    matrix_col = columns - 1 - (i % columns);
+                }
+                else if (m_source_rotation == 270)
+                {
+                    matrix_row = i % rows;
+                    matrix_col = columns - 1 - (i / rows);
+                }
+
+                double tx = margin_left + (available_width + spacing) * matrix_col + delta_x;
+                double ty = dest_height - margin_top - (available_height + spacing) * matrix_row -
+                        available_height + delta_y;
 
                 /*(curRecord.duplicateOf > 0) ? curRecord.duplicateOf : */
                 int resourceIndex(current_page);
@@ -398,9 +529,12 @@ PdfMemDocument *PdfTranslator::impose(const NupSettings &nup_settings)
                 // plan into content stream.
                 buffer << "q\n";
                 buffer << std::fixed <<
-                          cosR << " " << sinR << " " <<
-                          -sinR << " " << cosR << " " <<
-                          tx << " " <<  ty << " cm\n";
+                          // Translation
+                          "1 0 0 1 " << tx << " " <<  ty << " cm\n" <<
+                          // Rotation (clockwise)
+                          // cosR << " " << -sinR << " " << sinR << " " << cosR << " 0 0 cm\n" <<
+                          // Scale
+                          scaleFactor << " 0 0 " << scaleFactor << " 0 0 cm\n";
                 buffer << "/OriginalPage" << resourceIndex << " Do\n";
                 buffer << "Q\n";
             }
@@ -415,5 +549,4 @@ PdfMemDocument *PdfTranslator::impose(const NupSettings &nup_settings)
     }
 
     return targetDoc;
-
 }
