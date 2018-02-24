@@ -76,7 +76,7 @@ void PdfTranslator::setSource(PdfMemDocument *source)
     // Create target document
     targetDoc = new PdfMemDocument;
 
-    for (int i = 0; i < pcount ; ++i)
+    for (int i = 0; i < pcount; ++i)
     {
         PdfPage * page = sourceDoc->GetPage(i);
         PdfMemoryOutputStream outMemStream(1);
@@ -140,12 +140,12 @@ void PdfTranslator::setSource(PdfMemDocument *source)
         PdfMemoryInputStream inStream ( outMemStream.TakeBuffer(),outMemStream.GetLength() );
         xobj->GetContents()->GetStream()->Set ( &inStream );
 
-        resources[i+1] = getInheritedResources ( page );
-        xobjects[i+1] = xobj;
-        cropRect[i+1] = page->GetCropBox();
-        bleedRect[i+1] = page->GetBleedBox();
-        trimRect[i+1] = page->GetTrimBox();
-        artRect[i+1] = page->GetArtBox();
+        resources[i] = getInheritedResources ( page );
+        xobjects[i] = xobj;
+        cropRect[i] = page->GetCropBox();
+        bleedRect[i] = page->GetBleedBox();
+        trimRect[i] = page->GetTrimBox();
+        artRect[i] = page->GetArtBox();
 
     }
 
@@ -418,7 +418,7 @@ PdfMemDocument *PdfTranslator::impose(const Multipage &multipage)
     //			PdfObject trimbox;
     //			PdfRect trim ( 0, 0, destWidth, destHeight );
     //			trim.ToVariant ( trimbox );
-    std::map<int, PdfRect>* bbIndex = NULL;
+    std::map<int, PdfRect> *bbIndex = NULL;
     if(boundingBox.size() > 0)
     {
         if(boundingBox.find("crop") != std::string::npos)
@@ -439,9 +439,9 @@ PdfMemDocument *PdfTranslator::impose(const Multipage &multipage)
         }
     }
 
-    int current_page = 1;
+    int current_page = 0;
 
-    while (current_page <= pcount)
+    while (current_page < pcount)
     {
         PdfPage *newpage = targetDoc->CreatePage(
                     PdfRect (0.0, 0.0, dest_width, dest_height)
