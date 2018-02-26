@@ -13,6 +13,7 @@ apps:
     command: desktop-launch $SNAP/usr/bin/pdfmixtool
     plugs:
       - home
+      - desktop
       - x11
       - wayland
       - opengl
