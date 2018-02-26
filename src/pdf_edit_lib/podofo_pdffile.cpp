@@ -68,6 +68,8 @@ PoDoFoInputPdfFile::PoDoFoInputPdfFile(const std::string &filename) :
         else if (m_page_height == size.width && m_page_width == size.height)
         {
             m_paper_size = size;
+            m_paper_size.width = m_page_width;
+            m_paper_size.height = m_page_height;
             m_paper_size.portrait = false;
             return;
         }

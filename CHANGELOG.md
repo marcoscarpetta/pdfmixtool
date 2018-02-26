@@ -5,8 +5,9 @@
 **Release date:** unreleased
 
 ### Added
-- **Add ability to create multipage PDF (N-up)** (based on podofoimpose)
+- **Add ability to create multipage PDF files (N-up)** (based on podofoimpose)
 - [ ] Add ability to create custom multipage profiles
+- Add live preview of output pages layout
 - Add a "Credits" tab to the about dialog
 - Add a "Contribute" tab to the about dialog
 - Add Norwegian Bokmål translation

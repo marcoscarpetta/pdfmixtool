@@ -26,15 +26,25 @@
 
 #include "pdf_edit_lib/pdffile.h"
 
+double draw_preview_page(QPainter *painter,
+                       int max_width, int max_height,
+                       double page_width, double page_height,
+                       HAlignment h_alignment, VAlignment v_alignment,
+                       const QString &text);
+
+void draw_preview(QPainter *painter, const QRect &rect,
+                  double source_width, double source_height,
+                  int rotation, int multipage_default_index);
+
 class InputPdfFileWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit InputPdfFileWidget(QWidget *parent = nullptr);
+    explicit InputPdfFileWidget(InputPdfFile *pdf_file, int preview_size, QWidget *parent = nullptr);
 
-    void set_data_from_pdf_input_file(InputPdfFile *pdf_file);
+    void set_data_from_pdf_input_file();
 
-    void set_data_to_pdf_input_file(InputPdfFile *pdf_file);
+    void set_data_to_pdf_input_file();
 
 signals:
     void focus_out(QWidget *editor) const;
@@ -42,7 +52,12 @@ signals:
 public slots:
     void mouse_button_pressed(QMouseEvent *event);
 
+    void update_preview();
+
 private:
+    InputPdfFile *m_pdf_file;
+    int m_preview_size;
+    QLabel *m_preview_label;
     QLineEdit *m_pages_filter_lineedit;
     QComboBox *m_multipage_combobox;
     QComboBox *m_rotation_combobox;

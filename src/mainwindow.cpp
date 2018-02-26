@@ -28,7 +28,7 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     m_settings(new QSettings(this)),
     m_add_file_button(new QPushButton(QIcon::fromTheme("list-add"), tr("Add PDF file"), this)),
     m_move_up_button(new QPushButton(QIcon::fromTheme("go-up"), tr("Move up"), this)),
-    m_move_down_button(new QPushButton(QIcon::fromTheme("go-down"), tr("Move Down"), this)),
+    m_move_down_button(new QPushButton(QIcon::fromTheme("go-down"), tr("Move down"), this)),
     m_remove_file_button(new QPushButton(QIcon::fromTheme("list-remove"), tr("Remove file"), this)),
     m_about_button(new QPushButton(QIcon::fromTheme("help-about"), tr("About"), this)),
     m_generate_pdf_button(new QPushButton(QIcon::fromTheme("document-save-as"), tr("Generate PDF"), this)),

@@ -36,6 +36,8 @@ void InputPdfFileDelegate::paint(
 {
     InputPdfFile *pdf_file = index.data(PDF_FILE_ROLE).value<InputPdfFile *>();
 
+    QColor text_color = option.palette.text().color();
+
     // Draw border
     QPen pen;
     pen.setBrush(option.palette.mid());
@@ -48,16 +50,24 @@ void InputPdfFileDelegate::paint(
     painter->drawRect(border);
 
     // Draw background
-    painter->setPen(option.palette.text().color());
     border.setTopLeft(border.topLeft() + QPoint(1, 1));
 
     if (option.state & QStyle::State_Selected)
     {
         painter->fillRect(border, option.palette.highlight());
-        painter->setPen(option.palette.highlightedText().color());
+        text_color = option.palette.highlightedText().color();
     }
     else if (option.state & QStyle::State_MouseOver)
         painter->fillRect(border, option.palette.midlight());
+
+    // Draw preview
+    draw_preview(painter,
+                 QRect(option.rect.x() + 2,
+                       option.rect.y() + 2,
+                       option.rect.height() - 4,
+                       option.rect.height() - 4),
+                 pdf_file->page_width(), pdf_file->page_height(),
+                 pdf_file->rotation(), pdf_file->multipage_default_index());
 
     // Draw text
     QFontMetrics fm = painter->fontMetrics();
@@ -66,9 +76,10 @@ void InputPdfFileDelegate::paint(
 
     int line_height = (int)(1.2 * font_height);
 
-    int x = option.rect.x() + 5;
+    int x = option.rect.x() + option.rect.height() + 10;
     int y = option.rect.y() + line_height;
 
+    painter->setPen(text_color);
     QFont font = painter->font();
     font.setBold(true);
     painter->setFont(font);
@@ -91,7 +102,7 @@ void InputPdfFileDelegate::paint(
     painter->drawText(x, y, file_infos);
 
     y += line_height;
-    x = option.rect.x() + 5 + 30;
+    x = option.rect.x() + option.rect.height() + 10 + 30;
 
     QString pages_filter = QString::fromStdString(pdf_file->pages_filter_string());
     if (pages_filter.size() == 0)
@@ -107,18 +118,21 @@ void InputPdfFileDelegate::paint(
 
     if (pdf_file->pages_filter_errors().size() > 0)
     {
-        painter->fillRect(
+        painter->setPen(QPen(QColor(190, 20, 20), 2, Qt::DotLine));
+        painter->drawRect(
                     x - 3, y - font_height,
-                    fm.width(pages) + 6, font_height + 8,
-                    QColor(255, 0, 0, 100));
+                    fm.width(pages) + 6, font_height + 8);
+        painter->setPen(text_color);
     }
     else if (pdf_file->pages_filter_warnings().size() > 0)
     {
-        painter->fillRect(
+        painter->setPen(QPen(QColor(240, 240, 20), 2, Qt::DotLine));
+        painter->drawRect(
                     x - 3, y - font_height,
-                    fm.width(pages) + 6, font_height + 8,
-                    QColor(255, 255, 0, 100));
+                    fm.width(pages) + 6, font_height + 8);
+        painter->setPen(text_color);
     }
+
     painter->drawText(x, y, pages);
     y += line_height;
 
@@ -136,6 +150,8 @@ QSize InputPdfFileDelegate::sizeHint(
         const QModelIndex &index
         ) const
 {
+    InputPdfFile *pdf_file = index.data(PDF_FILE_ROLE).value<InputPdfFile *>();
+
     QFontMetrics fm = option.fontMetrics;
 
     int font_height = fm.height();
@@ -144,7 +160,43 @@ QSize InputPdfFileDelegate::sizeHint(
 
     int h = line_height * 3 + 15;
 
-    return QSize(300, h);
+    int w = h + 20;
+
+    QString file_infos = QString(" − %1 cm x %2 cm%3 − %5 %6").arg(
+                QString::number(pdf_file->page_width()),
+                QString::number(pdf_file->page_height()),
+                pdf_file->paper_size().name.size() > 0 ?
+                        QString(" (") + pdf_file->paper_size().name.c_str() + " " +
+                        (pdf_file->paper_size().portrait ? tr("portrait") : tr("landscape")) + ")" : " ",
+                QString::number(pdf_file->page_count()),
+                tr("page", "", pdf_file->page_count())
+                );
+
+    int first_row = fm.width(file_infos);
+
+    QString pages_filter = QString::fromStdString(pdf_file->pages_filter_string());
+    if (pages_filter.size() == 0)
+        pages_filter = tr("All");
+
+    QString pages = tr("Pages:") + QString(" %1").arg(pages_filter);
+    QString multipage = tr("Multipage:") + " " + (
+                pdf_file->multipage_default_index() < 0 ? tr("Disabled") :
+            QString(" %1").arg(QString::fromStdString(
+                                   multipage_defaults[pdf_file->multipage_default_index()].name))
+            );
+    QString rotation = tr("Rotation:") + QString(" %1°").arg(pdf_file->rotation());
+
+    int second_row = std::max(fm.width(pages), fm.width(rotation)) + 40 + fm.width(multipage);
+
+    QFont font = option.font;
+    font.setBold(true);
+    fm = QFontMetrics(font);
+    QString filename = QString::fromStdString(pdf_file->filename());
+    first_row += fm.width(filename);
+
+    w += std::max(first_row, second_row);
+
+    return QSize(w, h);
 }
 
 QWidget *InputPdfFileDelegate::createEditor(
@@ -153,7 +205,10 @@ QWidget *InputPdfFileDelegate::createEditor(
         const QModelIndex &index
         ) const
 {
-    InputPdfFileWidget *editor = new InputPdfFileWidget(parent);
+    InputPdfFileWidget *editor = new InputPdfFileWidget(
+                index.data(PDF_FILE_ROLE).value<InputPdfFile *>(),
+                option.rect.height(),
+                parent);
     connect(m_mouse_event_filter, SIGNAL(mouse_button_pressed(QMouseEvent*)),
             editor, SLOT(mouse_button_pressed(QMouseEvent*)));
     connect(editor, SIGNAL(focus_out(QWidget*)), this, SLOT(end_editing(QWidget*)));
@@ -162,11 +217,8 @@ QWidget *InputPdfFileDelegate::createEditor(
 
 void InputPdfFileDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-    InputPdfFile *pdf_file = index.data(PDF_FILE_ROLE).value<InputPdfFile *>();
-
     InputPdfFileWidget *w = static_cast<InputPdfFileWidget *>(editor);
-
-    w->set_data_from_pdf_input_file(pdf_file);
+    w->set_data_from_pdf_input_file();
 }
 
 void InputPdfFileDelegate::setModelData(
@@ -175,11 +227,8 @@ void InputPdfFileDelegate::setModelData(
         const QModelIndex &index
         ) const
 {
-    InputPdfFile *pdf_file = index.data(PDF_FILE_ROLE).value<InputPdfFile *>();
-
     InputPdfFileWidget *w = static_cast<InputPdfFileWidget *>(editor);
-
-    w->set_data_to_pdf_input_file(pdf_file);
+    w->set_data_to_pdf_input_file();
 
     emit data_edit();
 }
