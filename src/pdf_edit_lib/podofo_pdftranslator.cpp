@@ -456,7 +456,7 @@ PdfMemDocument *PdfTranslator::impose(const Multipage &multipage)
         for (unsigned int i = 0; i < plate_page_count; i++)
         {
             // 					std::cerr<<curRecord.sourcePage<< " " << curRecord.destPage<<std::endl;
-            if(current_page <= pcount)
+            if(current_page < pcount)
             {
                 int matrix_row, matrix_col;
 
