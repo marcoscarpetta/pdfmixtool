@@ -34,9 +34,6 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     m_generate_pdf_button(new QPushButton(QIcon::fromTheme("document-save-as"), tr("Generate PDF"), this)),
     m_output_page_count(new QLabel(this)),
     m_progress_bar(new QProgressBar(this)),
-    m_open_file_dialog(new QFileDialog(this)),
-    m_opened_count(0),
-    m_dest_file_dialog(new QFileDialog(this)),
     m_files_list_view(new QListView(this)),
     m_pdfinputfile_delegate(new InputPdfFileDelegate(filter, this)),
     m_files_list_model(new QStandardItemModel(this)),
@@ -59,18 +56,6 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     m_warning_dialog->setDefaultButton(QMessageBox::Ignore);
 
     m_progress_bar->hide();
-
-    m_open_file_dialog->setNameFilter(tr("PDF files (*.pdf)"));
-    m_open_file_dialog->setFilter(QDir::Files);
-    m_open_file_dialog->setFileMode(QFileDialog::ExistingFiles);
-    m_open_file_dialog->setDirectory(m_settings->value("open_directory", "").toString());
-    m_open_file_dialog->setModal(true);
-
-    m_dest_file_dialog->setNameFilter(tr("PDF files (*.pdf)"));
-    m_dest_file_dialog->setFilter(QDir::Files);
-    m_dest_file_dialog->setAcceptMode(QFileDialog::AcceptSave);
-    m_dest_file_dialog->setDirectory(m_settings->value("save_directory", "").toString());
-    m_dest_file_dialog->setModal(true);
 
     m_files_list_view->setWordWrap(false);
     m_files_list_view->setSelectionBehavior(QAbstractItemView::SelectItems);
@@ -118,9 +103,7 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     layout->addWidget(m_generate_pdf_button);
     v_layout->addLayout(layout);
 
-    connect(m_add_file_button, SIGNAL(pressed()), m_open_file_dialog, SLOT(exec()));
-    connect(m_open_file_dialog, SIGNAL(filesSelected(QStringList)),
-            this, SLOT(pdf_file_added(QStringList)));
+    connect(m_add_file_button, SIGNAL(pressed()), this, SLOT(add_pdf_files()));
 
     connect(m_move_up_button, SIGNAL(pressed()), this, SLOT(move_up()));
     connect(m_move_down_button, SIGNAL(pressed()), this, SLOT(move_down()));
@@ -132,14 +115,18 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
 
     connect(m_generate_pdf_button, SIGNAL(pressed()), this, SLOT(generate_pdf_button_pressed()));
 
-    connect(ignore_warning, SIGNAL(released()), m_dest_file_dialog, SLOT(show()));
-
-    connect(m_dest_file_dialog, SIGNAL(fileSelected(QString)), this, SLOT(generate_pdf(QString)));
+    connect(ignore_warning, SIGNAL(released()), this, SLOT(generate_pdf()));
 }
 
-void MainWindow::pdf_file_added(const QStringList &selected)
+void MainWindow::add_pdf_files()
 {
-    for (int i=m_opened_count; i<selected.count(); i++)
+    QStringList selected = QFileDialog::getOpenFileNames(
+                            this,
+                            tr("Select one or more PDF files to open"),
+                            m_settings->value("open_directory", "").toString(),
+                            tr("PDF files (*.pdf)"));
+
+    for (int i=0; i<selected.count(); i++)
     {
         // Check if filename is already in the model
         InputPdfFile * pdf_file = NULL;
@@ -157,17 +144,16 @@ void MainWindow::pdf_file_added(const QStringList &selected)
         else
             pdf_file = m_pdf_editor->new_input_file(selected.at(i).toStdString());
 
-        QStandardItem *item = new QStandardItem(selected.at(i));
+        QStandardItem *item = new QStandardItem();
         item->setData(QVariant::fromValue<InputPdfFile *>(pdf_file), PDF_FILE_ROLE);
         m_files_list_model->setItem(m_files_list_model->rowCount(), item);
     }
 
-    m_opened_count = selected.count();
-    m_open_file_dialog->setDirectory(m_open_file_dialog->directory());
-    m_dest_file_dialog->setDirectory(m_open_file_dialog->directory());
-    m_settings->setValue("open_directory", m_open_file_dialog->directory().absolutePath());
-
-    this->update_output_page_count();
+    if (selected.size() > 0)
+    {
+        m_settings->setValue("open_directory", QFileInfo(selected.at(0)).dir().absolutePath());
+        this->update_output_page_count();
+    }
 }
 
 void MainWindow::move_up()
@@ -331,34 +317,41 @@ void MainWindow::generate_pdf_button_pressed()
         m_warning_dialog->show();
     }
     else
-        m_dest_file_dialog->show();
+        generate_pdf();
 }
 
-void MainWindow::generate_pdf(const QString &file_selected)
+void MainWindow::generate_pdf()
 {
-    m_settings->setValue("save_directory", m_dest_file_dialog->directory().absolutePath());
+    QString selected_file = QFileDialog::getSaveFileName(this, tr("Save PDF file"),
+                               m_settings->value("save_directory", "").toString(),
+                               tr("PDF files (*.pdf)"));
 
-    m_progress_bar->setValue(0);
-    m_progress_bar->show();
-
-    OutputPdfFile *output_file = m_pdf_editor->new_output_file();
-
-    // Write each file to the output file
-    for (int i=0; i<m_files_list_model->rowCount(); i++)
+    if (! selected_file.isNull())
     {
-        InputPdfFile *pdf_file = m_files_list_model->item(i)->data(PDF_FILE_ROLE).value<InputPdfFile *>();
+        m_settings->setValue("save_directory", QFileInfo(selected_file).dir().absolutePath());
 
-        pdf_file->run(output_file);
+        m_progress_bar->setValue(0);
+        m_progress_bar->show();
 
-        m_progress_bar->setValue((i+1)*100/(m_files_list_model->rowCount()+1));
+        OutputPdfFile *output_file = m_pdf_editor->new_output_file();
+
+        // Write each file to the output file
+        for (int i=0; i<m_files_list_model->rowCount(); i++)
+        {
+            InputPdfFile *pdf_file = m_files_list_model->item(i)->data(PDF_FILE_ROLE).value<InputPdfFile *>();
+
+            pdf_file->run(output_file);
+
+            m_progress_bar->setValue((i+1)*100/(m_files_list_model->rowCount()+1));
+        }
+
+        // Save output file on disk
+        output_file->write(selected_file.toStdString());
+        delete output_file;
+
+        m_progress_bar->setValue(100);
+        QTimer::singleShot(4000, m_progress_bar, SLOT(hide()));
     }
-
-    // Save output file on disk
-    output_file->write(file_selected.toStdString());
-    delete output_file;
-
-    m_progress_bar->setValue(100);
-    QTimer::singleShot(4000, m_progress_bar, SLOT(hide()));
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)

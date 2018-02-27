@@ -44,7 +44,7 @@ public:
 signals:
 
 public slots:
-    void pdf_file_added(const QStringList &selected);
+    void add_pdf_files();
 
     void move_up();
 
@@ -56,7 +56,7 @@ public slots:
 
     void generate_pdf_button_pressed();
 
-    void generate_pdf(const QString &file_selected);
+    void generate_pdf();
 
     void closeEvent(QCloseEvent *event);
 
@@ -76,10 +76,6 @@ private:
 
     QLabel *m_output_page_count;
     QProgressBar *m_progress_bar;
-
-    QFileDialog *m_open_file_dialog;
-    int m_opened_count;
-    QFileDialog *m_dest_file_dialog;
 
     QListView *m_files_list_view;
     InputPdfFileDelegate *m_pdfinputfile_delegate;
