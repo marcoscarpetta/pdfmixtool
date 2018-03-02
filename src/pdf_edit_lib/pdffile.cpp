@@ -24,7 +24,7 @@ OutputPdfFile::OutputPdfFile()
 }
 
 InputPdfFile::InputPdfFile() :
-    m_multipage_default_index(-1),
+    m_multipage(multipage_defaults[0]),
     m_rotation(0)
 {
 
@@ -77,10 +77,9 @@ int InputPdfFile::output_page_count()
         }
     }
 
-    if (m_multipage_default_index > -1)
+    if (m_multipage.enabled)
     {
-        int multipage = multipage_defaults[m_multipage_default_index].rows *
-                multipage_defaults[m_multipage_default_index].columns;
+        int multipage = m_multipage.rows * m_multipage.columns;
 
         if (count % multipage > 0)
             count = count / multipage + 1;
@@ -217,14 +216,14 @@ const std::vector<IntervalIssue> &InputPdfFile::pages_filter_warnings()
     return m_interval_warnings;
 }
 
-void InputPdfFile::set_multipage_default_index(int i)
+void InputPdfFile::set_multipage(const Multipage &multipage)
 {
-    m_multipage_default_index = i;
+    m_multipage = multipage;
 }
 
-int InputPdfFile::multipage_default_index()
+const Multipage &InputPdfFile::multipage()
 {
-    return m_multipage_default_index;
+    return m_multipage;
 }
 
 void InputPdfFile::set_rotation(int rotation)

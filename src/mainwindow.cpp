@@ -20,7 +20,66 @@
 
 #include <QApplication>
 #include <QTimer>
-#include <QHeaderView>
+
+QDataStream &operator<<(QDataStream &out, const Multipage &multipage)
+{
+    out << multipage.enabled;
+
+    out << multipage.name.c_str();
+
+    out << multipage.page_width;
+    out << multipage.page_height;
+
+    out << multipage.rows;
+    out << multipage.columns;
+
+    out << multipage.rotation;
+
+    out << multipage.h_alignment;
+    out << multipage.v_alignment;
+
+    out << multipage.margin_left;
+    out << multipage.margin_right;
+    out << multipage.margin_top;
+    out << multipage.margin_bottom;
+
+    out << multipage.spacing;
+
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, Multipage &multipage)
+{
+    in >> multipage.enabled;
+
+    char *name;
+    in >> name;
+    multipage.name = name;
+
+    in >> multipage.page_width;
+    in >> multipage.page_height;
+
+    in >> multipage.rows;
+    in >> multipage.columns;
+
+    in >> multipage.rotation;
+
+    int h_alignment;
+    int v_alignment;
+    in >> h_alignment;
+    multipage.h_alignment = static_cast<Multipage::Alignment>(h_alignment);
+    in >> v_alignment;
+    multipage.v_alignment = static_cast<Multipage::Alignment>(v_alignment);
+
+    in >> multipage.margin_left;
+    in >> multipage.margin_right;
+    in >> multipage.margin_top;
+    in >> multipage.margin_bottom;
+
+    in >> multipage.spacing;
+
+    return in;
+}
 
 MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     QMainWindow(parent),
@@ -30,12 +89,13 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     m_move_up_button(new QPushButton(QIcon::fromTheme("go-up"), tr("Move up"), this)),
     m_move_down_button(new QPushButton(QIcon::fromTheme("go-down"), tr("Move down"), this)),
     m_remove_file_button(new QPushButton(QIcon::fromTheme("list-remove"), tr("Remove file"), this)),
+    m_multipage_profiles_button(new QPushButton(QIcon::fromTheme("document-properties"), tr("Multipage profiles..."), this)),
     m_about_button(new QPushButton(QIcon::fromTheme("help-about"), tr("About"), this)),
     m_generate_pdf_button(new QPushButton(QIcon::fromTheme("document-save-as"), tr("Generate PDF"), this)),
     m_output_page_count(new QLabel(this)),
     m_progress_bar(new QProgressBar(this)),
     m_files_list_view(new QListView(this)),
-    m_pdfinputfile_delegate(new InputPdfFileDelegate(filter, this)),
+    m_pdfinputfile_delegate(new InputPdfFileDelegate(filter, m_custom_multipages, this)),
     m_files_list_model(new QStandardItemModel(this)),
     m_error_dialog(new QMessageBox(this)),
     m_warning_dialog(new QMessageBox(this)),
@@ -44,6 +104,15 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     this->setWindowIcon(QIcon(QString("%1/../share/icons/hicolor/48x48/apps/pdfmixtool.png").arg(qApp->applicationDirPath())));
     this->setWindowTitle(tr("PDF Mix Tool"));
     this->restoreGeometry(m_settings->value("main_window_geometry").toByteArray());
+
+    // Load custom multipage profiles
+    qRegisterMetaTypeStreamOperators<Multipage>("Multipage");
+    m_settings->beginGroup("custom_maltipage_profiles");
+    for (QString key : m_settings->childKeys())
+         m_custom_multipages[key.toInt()] = m_settings->value(key).value<Multipage>();
+    m_settings->endGroup();
+
+    m_multipage_profiles_manager = new MultipageProfilesManager(&m_custom_multipages, m_settings, this);
 
     m_error_dialog->setIcon(QMessageBox::Critical);
     m_error_dialog->setTextFormat(Qt::RichText);
@@ -71,13 +140,15 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     m_move_up_button->setDefault(true);
     m_move_down_button->setDefault(true);
     m_remove_file_button->setDefault(true);
+    m_multipage_profiles_button->setDefault(true);
     m_about_button->setDefault(true);
     m_generate_pdf_button->setAutoDefault(true);
 
     QWidget::setTabOrder(m_add_file_button, m_move_up_button);
     QWidget::setTabOrder(m_move_up_button, m_move_down_button);
     QWidget::setTabOrder(m_move_down_button, m_remove_file_button);
-    QWidget::setTabOrder(m_remove_file_button, m_about_button);
+    QWidget::setTabOrder(m_remove_file_button, m_multipage_profiles_button);
+    QWidget::setTabOrder(m_multipage_profiles_button, m_about_button);
     QWidget::setTabOrder(m_about_button, m_generate_pdf_button);
 
     QVBoxLayout *v_layout = new QVBoxLayout();
@@ -90,7 +161,14 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     layout->addWidget(m_move_up_button);
     layout->addWidget(m_move_down_button);
     layout->addWidget(m_remove_file_button);
+
+    QFrame *separator = new QFrame(this);
+    separator->setFrameShape(QFrame::VLine);
+    separator->setLineWidth(1);
+    layout->addWidget(separator);
+
     layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
+    layout->addWidget(m_multipage_profiles_button);
     layout->addWidget(m_about_button);
     v_layout->addLayout(layout);
 
@@ -108,6 +186,8 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     connect(m_move_up_button, SIGNAL(pressed()), this, SLOT(move_up()));
     connect(m_move_down_button, SIGNAL(pressed()), this, SLOT(move_down()));
     connect(m_remove_file_button, SIGNAL(pressed()), this, SLOT(remove_pdf_file()));
+
+    connect(m_multipage_profiles_button, SIGNAL(pressed()), m_multipage_profiles_manager, SLOT(show()));
 
     connect(m_about_button, SIGNAL(pressed()), m_about_dialog, SLOT(show()));
 
@@ -357,6 +437,19 @@ void MainWindow::generate_pdf()
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     m_settings->setValue("main_window_geometry", this->saveGeometry());
+
+    // Save custom multipage profiles
+    m_settings->beginGroup("custom_maltipage_profiles");
+
+    for (QString key : m_settings->childKeys())
+         m_settings->remove(key);
+
+    QMap<int, Multipage>::const_iterator it;
+    for (it = m_custom_multipages.constBegin(); it != m_custom_multipages.constEnd(); ++it)
+        m_settings->setValue(QString::number(it.key()), QVariant::fromValue<Multipage>(it.value()));
+
+    m_settings->endGroup();
+
     QMainWindow::closeEvent(event);
 }
 

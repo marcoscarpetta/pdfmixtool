@@ -359,14 +359,14 @@ PdfMemDocument *PdfTranslator::impose(const Multipage &multipage)
             (m_source_rotation == 270 && multipage.rotation == 90)
             )
     {
-        if (multipage.h_alignment == HAlignment::Center)
+        if (multipage.h_alignment == Multipage::Center)
             delta_x = (available_width - page_width) / 2;
-        else if (multipage.h_alignment == HAlignment::Right)
+        else if (multipage.h_alignment == Multipage::Right)
             delta_x = available_width - page_width;
 
-        if (multipage.v_alignment == VAlignment::Center)
+        if (multipage.v_alignment == Multipage::Center)
             delta_y = (available_height - page_height) / 2;
-        else if (multipage.v_alignment == VAlignment::Top)
+        else if (multipage.v_alignment == Multipage::Top)
             delta_y = available_height - page_height;
     }
     else if (
@@ -374,14 +374,14 @@ PdfMemDocument *PdfTranslator::impose(const Multipage &multipage)
              (m_source_rotation == 0 && multipage.rotation == 90)
              )
     {
-        if (multipage.v_alignment == VAlignment::Center)
+        if (multipage.v_alignment == Multipage::Center)
             delta_x = (available_width - page_width) / 2;
-        else if (multipage.v_alignment == VAlignment::Bottom)
+        else if (multipage.v_alignment == Multipage::Bottom)
             delta_x = available_width - page_width;
 
-        if (multipage.h_alignment == HAlignment::Center)
+        if (multipage.h_alignment == Multipage::Center)
             delta_y = (available_height - page_height) / 2;
-        else if (multipage.h_alignment == HAlignment::Right)
+        else if (multipage.h_alignment == Multipage::Right)
             delta_y = available_height - page_height;
     }
     else if (
@@ -389,14 +389,14 @@ PdfMemDocument *PdfTranslator::impose(const Multipage &multipage)
              (m_source_rotation == 90 && multipage.rotation == 90)
              )
     {
-        if (multipage.h_alignment == HAlignment::Center)
+        if (multipage.h_alignment == Multipage::Center)
             delta_x = (available_width - page_width) / 2;
-        else if (multipage.h_alignment == HAlignment::Left)
+        else if (multipage.h_alignment == Multipage::Left)
             delta_x = available_width - page_width;
 
-        if (multipage.v_alignment == VAlignment::Center)
+        if (multipage.v_alignment == Multipage::Center)
             delta_y = (available_height - page_height) / 2;
-        else if (multipage.v_alignment == VAlignment::Bottom)
+        else if (multipage.v_alignment == Multipage::Bottom)
             delta_y = available_height - page_height;
     }
     else if (
@@ -404,14 +404,14 @@ PdfMemDocument *PdfTranslator::impose(const Multipage &multipage)
              (m_source_rotation == 180 && multipage.rotation == 90)
              )
     {
-        if (multipage.v_alignment == VAlignment::Center)
+        if (multipage.v_alignment == Multipage::Center)
             delta_x = (available_width - page_width) / 2;
-        else if (multipage.v_alignment == VAlignment::Top)
+        else if (multipage.v_alignment == Multipage::Top)
             delta_x = available_width - page_width;
 
-        if (multipage.h_alignment == HAlignment::Center)
+        if (multipage.h_alignment == Multipage::Center)
             delta_y = (available_height - page_height) / 2;
-        else if (multipage.h_alignment == HAlignment::Left)
+        else if (multipage.h_alignment == Multipage::Left)
             delta_y = available_height - page_height;
     }
 

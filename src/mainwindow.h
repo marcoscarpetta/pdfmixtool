@@ -32,8 +32,14 @@
 #include <QMessageBox>
 #include "mouseeventfilter.h"
 #include "inputpdffiledelegate.h"
+#include "multipageprofilesmanager.h"
 #include "aboutdialog.h"
 #include "pdf_edit_lib/pdfeditor.h"
+
+Q_DECLARE_METATYPE(Multipage)
+
+QDataStream &operator<<(QDataStream &out, const Multipage &maltipage);
+QDataStream &operator>>(QDataStream &in, Multipage &maltipage);
 
 class MainWindow : public QMainWindow
 {
@@ -71,6 +77,7 @@ private:
     QPushButton *m_remove_file_button;
     QPushButton *m_move_up_button;
     QPushButton *m_move_down_button;
+    QPushButton *m_multipage_profiles_button;
     QPushButton *m_about_button;
     QPushButton *m_generate_pdf_button;
 
@@ -83,7 +90,10 @@ private:
 
     QMessageBox *m_error_dialog;
     QMessageBox *m_warning_dialog;
+    MultipageProfilesManager *m_multipage_profiles_manager;
     AboutDialog *m_about_dialog;
+
+    QMap<int, Multipage> m_custom_multipages;
 };
 
 #endif // MAINWINDOW_H

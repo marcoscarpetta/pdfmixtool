@@ -25,6 +25,7 @@
 #include <QLineEdit>
 
 #include "mouseeventfilter.h"
+#include "inputpdffilewidget.h"
 #include "pdf_edit_lib/pdffile.h"
 
 #define PDF_FILE_ROLE Qt::UserRole
@@ -35,7 +36,9 @@ class InputPdfFileDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    InputPdfFileDelegate(MouseEventFilter *filter, QWidget *parent);
+    InputPdfFileDelegate(MouseEventFilter *filter,
+                         const QMap<int, Multipage> &custom_multipages,
+                         QWidget *parent);
 
     virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
@@ -55,6 +58,7 @@ public slots:
 
 private:
     MouseEventFilter *m_mouse_event_filter;
+    const QMap<int, Multipage> &m_custom_multipages;
 };
 
 #endif // INPUTPDFFILEDELEGATE_H

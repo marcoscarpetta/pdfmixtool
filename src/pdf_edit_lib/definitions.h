@@ -49,19 +49,17 @@ const PaperSize paper_sizes[] = {
     {2.6, 3.7, "A10", true},
 };
 
-enum class HAlignment {
-    Left,
-    Center,
-    Right
-};
-
-enum class VAlignment {
-    Top,
-    Center,
-    Bottom
-};
-
 struct Multipage {
+    enum Alignment {
+        Left,
+        Right,
+        Top,
+        Bottom,
+        Center
+    };
+
+    bool enabled;
+
     std::string name;
 
     double  page_width;
@@ -72,44 +70,56 @@ struct Multipage {
 
     int rotation;
 
-    HAlignment h_alignment;
-    VAlignment v_alignment;
+    Alignment h_alignment;
+    Alignment v_alignment;
 
-    double margin_top;
-    double margin_bottom;
     double margin_left;
     double margin_right;
+    double margin_top;
+    double margin_bottom;
 
     double spacing;
 };
 
 const Multipage multipage_defaults[] = {
     {
+        false,
+        "",
+        0, 0,
+        0, 0, 0,
+        Multipage::Center, Multipage::Center,
+        0, 0, 0, 0, 0
+    },
+    {
+        true,
         "2x1, A4, 0°",
         21.0, 29.7,
         2, 1, 0,
-        HAlignment::Center, VAlignment::Center,
+        Multipage::Center, Multipage::Center,
         1, 1, 1, 1, 1
     },
     {
+        true,
         "2x1, A4, 90°",
         21.0, 29.7,
         2, 1, 90,
-        HAlignment::Center, VAlignment::Center,
+        Multipage::Center, Multipage::Center,
         1, 1, 1, 1, 1
     },
     {
+        true,
         "2x2, A4, 0°",
         21.0, 29.7,
         2, 2, 0,
-        HAlignment::Center, VAlignment::Center,
+        Multipage::Center, Multipage::Center,
         1, 1, 1, 1, 1
     },
     {
+        true,
         "2x2, A4, 90°",
         21.0, 29.7,
         2, 2, 90,
-        HAlignment::Center, VAlignment::Center,
+        Multipage::Center, Multipage::Center,
         1, 1, 1, 1, 1
     }
 };

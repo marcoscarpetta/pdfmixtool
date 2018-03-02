@@ -29,18 +29,21 @@
 double draw_preview_page(QPainter *painter,
                        int max_width, int max_height,
                        double page_width, double page_height,
-                       HAlignment h_alignment, VAlignment v_alignment,
+                       Multipage::Alignment h_alignment, Multipage::Alignment v_alignment,
                        const QString &text);
 
 void draw_preview(QPainter *painter, const QRect &rect,
                   double source_width, double source_height,
-                  int rotation, int multipage_default_index);
+                  int rotation, const Multipage &multipage);
 
 class InputPdfFileWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit InputPdfFileWidget(InputPdfFile *pdf_file, int preview_size, QWidget *parent = nullptr);
+    explicit InputPdfFileWidget(InputPdfFile *pdf_file,
+                                const QMap<int, Multipage> &custom_multipages,
+                                int preview_size,
+                                QWidget *parent = nullptr);
 
     void set_data_from_pdf_input_file();
 
@@ -56,6 +59,7 @@ public slots:
 
 private:
     InputPdfFile *m_pdf_file;
+    const QMap<int, Multipage> &m_custom_multipages;
     int m_preview_size;
     QLabel *m_preview_label;
     QLineEdit *m_pages_filter_lineedit;

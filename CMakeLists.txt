@@ -14,6 +14,8 @@ SET (
     src/main.cpp
     src/aboutdialog.cpp
     src/aboutdialog.h
+    src/editmultipageprofiledialog.cpp
+    src/editmultipageprofiledialog.h
     src/inputpdffiledelegate.cpp
     src/inputpdffiledelegate.h
     src/inputpdffilewidget.cpp
@@ -22,6 +24,8 @@ SET (
     src/mainwindow.h
     src/mouseeventfilter.cpp
     src/mouseeventfilter.h
+    src/multipageprofilesmanager.cpp
+    src/multipageprofilesmanager.h
     src/pdf_edit_lib/definitions.h
     src/pdf_edit_lib/pdfeditor.cpp
     src/pdf_edit_lib/pdfeditor.h

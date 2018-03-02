@@ -20,11 +20,12 @@
 
 #include <QPainter>
 
-#include "inputpdffilewidget.h"
-
-InputPdfFileDelegate::InputPdfFileDelegate(MouseEventFilter *filter, QWidget *parent) :
+InputPdfFileDelegate::InputPdfFileDelegate(MouseEventFilter *filter,
+                                           const QMap<int, Multipage> &custom_multipages,
+                                           QWidget *parent) :
     QStyledItemDelegate(parent),
-    m_mouse_event_filter(filter)
+    m_mouse_event_filter(filter),
+    m_custom_multipages(custom_multipages)
 {
 
 }
@@ -67,7 +68,7 @@ void InputPdfFileDelegate::paint(
                        option.rect.height() - 4,
                        option.rect.height() - 4),
                  pdf_file->page_width(), pdf_file->page_height(),
-                 pdf_file->rotation(), pdf_file->multipage_default_index());
+                 pdf_file->rotation(), pdf_file->multipage());
 
     // Draw text
     QFontMetrics fm = painter->fontMetrics();
@@ -110,10 +111,9 @@ void InputPdfFileDelegate::paint(
 
     QString pages = tr("Pages:") + QString(" %1").arg(pages_filter);
     QString multipage = tr("Multipage:") + " " + (
-                pdf_file->multipage_default_index() < 0 ? tr("Disabled") :
-            QString(" %1").arg(QString::fromStdString(
-                                   multipage_defaults[pdf_file->multipage_default_index()].name))
-            );
+                pdf_file->multipage().enabled ?
+                    QString(" %1").arg(QString::fromStdString(pdf_file->multipage().name)) :
+                    tr("Disabled"));
     QString rotation = tr("Rotation:") + QString(" %1°").arg(pdf_file->rotation());
 
     if (pdf_file->pages_filter_errors().size() > 0)
@@ -180,10 +180,9 @@ QSize InputPdfFileDelegate::sizeHint(
 
     QString pages = tr("Pages:") + QString(" %1").arg(pages_filter);
     QString multipage = tr("Multipage:") + " " + (
-                pdf_file->multipage_default_index() < 0 ? tr("Disabled") :
-            QString(" %1").arg(QString::fromStdString(
-                                   multipage_defaults[pdf_file->multipage_default_index()].name))
-            );
+                pdf_file->multipage().enabled ?
+                    QString(" %1").arg(QString::fromStdString(pdf_file->multipage().name)) :
+                    tr("Disabled"));
     QString rotation = tr("Rotation:") + QString(" %1°").arg(pdf_file->rotation());
 
     int second_row = std::max(fm.width(pages), fm.width(rotation)) + 40 + fm.width(multipage);
@@ -207,6 +206,7 @@ QWidget *InputPdfFileDelegate::createEditor(
 {
     InputPdfFileWidget *editor = new InputPdfFileWidget(
                 index.data(PDF_FILE_ROLE).value<InputPdfFile *>(),
+                m_custom_multipages,
                 option.rect.height(),
                 parent);
     connect(m_mouse_event_filter, SIGNAL(mouse_button_pressed(QMouseEvent*)),

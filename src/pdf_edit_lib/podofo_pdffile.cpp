@@ -113,7 +113,7 @@ void PoDoFoInputPdfFile::run(OutputPdfFile *output_file)
     PoDoFo::PdfMemDocument *podofo_file;
 
     // Add pages to output PDF file
-    if (m_multipage_default_index > -1)
+    if (m_multipage.enabled)
         podofo_file = new PoDoFo::PdfMemDocument();
     // Add pages to a tmp file
     else
@@ -143,14 +143,14 @@ void PoDoFoInputPdfFile::run(OutputPdfFile *output_file)
     int initial_rotation = 0;
     int multipage_rotation = 0;
 
-    if (m_multipage_default_index > -1)
+    if (m_multipage.enabled)
     {
         initial_rotation = podofo_file->GetPage(0)->GetRotation();
-        multipage_rotation = multipage_defaults[m_multipage_default_index].rotation;
+        multipage_rotation = m_multipage.rotation;
 
         PdfTranslator *translator = new PdfTranslator();
         translator->setSource(podofo_file);
-        PoDoFo::PdfMemDocument *tmp = translator->impose(multipage_defaults[m_multipage_default_index]);
+        PoDoFo::PdfMemDocument *tmp = translator->impose(m_multipage);
         PoDoFo::PdfMemDocument *old = podofo_file;
 
         // Add multipage pages to output file
