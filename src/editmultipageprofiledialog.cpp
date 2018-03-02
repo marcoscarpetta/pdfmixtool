@@ -155,13 +155,13 @@ EditMultipageProfileDialog::EditMultipageProfileDialog(QWidget *parent) :
 
     layout->addWidget(new QLabel(tr("Margins"), this), row++, 1, 1, 4, Qt::AlignCenter);
 
-    layout->addWidget(new QLabel(tr("Left:"), this), row, 1);
+    layout->addWidget(new QLabel(tr("Left") + ":", this), row, 1);
     layout->addWidget(&m_margin_left, row, 2);
-    layout->addWidget(new QLabel(tr("Right:"), this), row, 3);
+    layout->addWidget(new QLabel(tr("Right") + ":", this), row, 3);
     layout->addWidget(&m_margin_right, row++, 4);
-    layout->addWidget(new QLabel(tr("Top:"), this), row, 1);
+    layout->addWidget(new QLabel(tr("Top") + ":", this), row, 1);
     layout->addWidget(&m_margin_top, row, 2);
-    layout->addWidget(new QLabel(tr("Bottom:"), this), row, 3);
+    layout->addWidget(new QLabel(tr("Bottom") + ":", this), row, 3);
     layout->addWidget(&m_margin_bottom, row++, 4);
 
     QPushButton *cancel_button = new QPushButton("Cancel", this);

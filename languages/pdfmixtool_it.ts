@@ -74,174 +74,357 @@
         <translation>Changelog</translation>
     </message>
     <message>
-        <source>Version %1
-
-</source>
-        <translation type="vanished">Versione %1
-
-</translation>
-    </message>
-    <message>
-        <source>
-An application to split, merge, rotate and mix PDF files
-
-</source>
-        <translation type="vanished">
-Un&apos;applicazione per dividere, unire, ruotare e mescolare file PDF
-
-</translation>
-    </message>
-    <message>
         <location filename="../src/aboutdialog.cpp" line="67"/>
         <source>Website</source>
         <translation>Sito web</translation>
     </message>
 </context>
 <context>
-    <name>ComboBoxDelegate</name>
+    <name>EditMultipageProfileDialog</name>
     <message>
-        <location filename="../src/comboboxdelegate.cpp" line="38"/>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="29"/>
+        <source>Edit multipage profile</source>
+        <translation>Modifica il profilo multipagina</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="60"/>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="158"/>
+        <source>Left</source>
+        <translation>Sinistra</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="61"/>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="65"/>
+        <source>Center</source>
+        <translation>Centro</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="62"/>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="160"/>
+        <source>Right</source>
+        <translation>Destra</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="64"/>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="162"/>
+        <source>Top</source>
+        <translation>Superiore</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="66"/>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="164"/>
+        <source>Bottom</source>
+        <translation>Inferiore</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="97"/>
+        <source>Name:</source>
+        <translation>Nome:</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="105"/>
+        <source>Output page size</source>
+        <translation>Dimensione della pagina in uscita</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="107"/>
+        <source>Standard size:</source>
+        <translation>Dimensione standard:</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="110"/>
+        <source>Custom size:</source>
+        <translation>Dimensione personalizzata:</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="113"/>
+        <source>Width:</source>
+        <translation>Larghezza:</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="116"/>
+        <source>Height:</source>
+        <translation>Altezza:</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="124"/>
+        <source>Pages layout</source>
+        <translation>Disposizione delle pagine</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="126"/>
+        <source>Rows:</source>
+        <translation>Righe:</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="129"/>
+        <source>Columns:</source>
+        <translation>Colonne:</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="132"/>
+        <source>Rotation:</source>
+        <translation>Rotazione:</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="135"/>
+        <source>Spacing:</source>
+        <translation>Spaziamento:</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="143"/>
+        <source>Pages alignment</source>
+        <translation>Allineamento delle pagine</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="145"/>
+        <source>Horizontal:</source>
+        <translation>Orizzontale:</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="148"/>
+        <source>Vertical:</source>
+        <translation>Verticale:</translation>
+    </message>
+    <message>
+        <location filename="../src/editmultipageprofiledialog.cpp" line="156"/>
+        <source>Margins</source>
+        <translation>Margini</translation>
+    </message>
+</context>
+<context>
+    <name>InputPdfFileDelegate</name>
+    <message>
+        <location filename="../src/inputpdffiledelegate.cpp" line="98"/>
+        <location filename="../src/inputpdffiledelegate.cpp" line="169"/>
+        <source>portrait</source>
+        <translation>verticale</translation>
+    </message>
+    <message>
+        <location filename="../src/inputpdffiledelegate.cpp" line="98"/>
+        <location filename="../src/inputpdffiledelegate.cpp" line="169"/>
+        <source>landscape</source>
+        <translation>orizzontale</translation>
+    </message>
+    <message>
+        <location filename="../src/inputpdffiledelegate.cpp" line="109"/>
+        <location filename="../src/inputpdffiledelegate.cpp" line="177"/>
+        <source>All</source>
+        <translation>Tutte</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/inputpdffiledelegate.cpp" line="99"/>
+        <location filename="../src/inputpdffiledelegate.cpp" line="170"/>
+        <source>%n page(s)</source>
+        <translation>
+            <numerusform>%n pagina</numerusform>
+            <numerusform>%n pagine</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../src/inputpdffiledelegate.cpp" line="111"/>
+        <location filename="../src/inputpdffiledelegate.cpp" line="179"/>
+        <source>Pages:</source>
+        <translation>Pagine:</translation>
+    </message>
+    <message>
+        <location filename="../src/inputpdffiledelegate.cpp" line="112"/>
+        <location filename="../src/inputpdffiledelegate.cpp" line="180"/>
+        <source>Multipage:</source>
+        <translation>Multipagina:</translation>
+    </message>
+    <message>
+        <location filename="../src/inputpdffiledelegate.cpp" line="115"/>
+        <location filename="../src/inputpdffiledelegate.cpp" line="183"/>
+        <source>Disabled</source>
+        <translation>Disabilitato</translation>
+    </message>
+    <message>
+        <location filename="../src/inputpdffiledelegate.cpp" line="116"/>
+        <location filename="../src/inputpdffiledelegate.cpp" line="184"/>
+        <source>Rotation:</source>
+        <translation>Rotazione:</translation>
+    </message>
+</context>
+<context>
+    <name>InputPdfFileWidget</name>
+    <message>
+        <location filename="../src/inputpdffilewidget.cpp" line="170"/>
+        <source>Disabled</source>
+        <translation>Disabilitato</translation>
+    </message>
+    <message>
+        <location filename="../src/inputpdffilewidget.cpp" line="183"/>
         <source>No rotation</source>
         <translation>Non ruotare</translation>
     </message>
     <message>
-        <location filename="../src/comboboxdelegate.cpp" line="39"/>
-        <source>90°</source>
-        <translation>90°</translation>
+        <location filename="../src/inputpdffilewidget.cpp" line="189"/>
+        <source>Pages:</source>
+        <translation>Pagine:</translation>
     </message>
     <message>
-        <location filename="../src/comboboxdelegate.cpp" line="40"/>
-        <source>180°</source>
-        <translation>180°</translation>
+        <location filename="../src/inputpdffilewidget.cpp" line="191"/>
+        <source>Multipage:</source>
+        <translation>Multipagina:</translation>
     </message>
     <message>
-        <location filename="../src/comboboxdelegate.cpp" line="41"/>
-        <source>270°</source>
-        <translation>270°</translation>
+        <location filename="../src/inputpdffilewidget.cpp" line="193"/>
+        <source>Rotation:</source>
+        <translation>Rotazione:</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/mainwindow.cpp" line="37"/>
+        <location filename="../src/mainwindow.cpp" line="88"/>
         <source>Add PDF file</source>
         <translation>Aggiungi file PDF</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="38"/>
+        <location filename="../src/mainwindow.cpp" line="89"/>
         <source>Move up</source>
         <translation>Sposta su</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="39"/>
-        <source>Move Down</source>
-        <translation>Sposta giù</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="40"/>
+        <location filename="../src/mainwindow.cpp" line="91"/>
         <source>Remove file</source>
         <translation>Rimuovi file</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="41"/>
+        <location filename="../src/mainwindow.cpp" line="92"/>
+        <source>Multipage profiles...</source>
+        <translation>Profili multipagina...</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="93"/>
         <source>About</source>
         <translation>Informazioni</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="42"/>
+        <location filename="../src/mainwindow.cpp" line="94"/>
         <source>Generate PDF</source>
         <translation>Genera PDF</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="57"/>
+        <location filename="../src/mainwindow.cpp" line="105"/>
         <source>PDF Mix Tool</source>
         <translation>PDF Mix Tool</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="71"/>
-        <location filename="../src/mainwindow.cpp" line="77"/>
+        <location filename="../src/mainwindow.cpp" line="205"/>
+        <source>Select one or more PDF files to open</source>
+        <translation>Seleziona uno o più file PDF da aprire</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="207"/>
+        <location filename="../src/mainwindow.cpp" line="407"/>
         <source>PDF files (*.pdf)</source>
         <translation>File PDF (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="89"/>
-        <source>Filename</source>
-        <translation>Nome del file</translation>
+        <location filename="../src/mainwindow.cpp" line="405"/>
+        <source>Save PDF file</source>
+        <translation>Salva file PDF</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="90"/>
-        <source>Page count</source>
-        <translation>Numero di pagine</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="91"/>
-        <source>Pages filter</source>
-        <translation>Filtri sulle pagine</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="92"/>
-        <source>Rotation</source>
-        <translation>Rotazione</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="190"/>
-        <source>No rotation</source>
-        <translation>Non ruotare</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="299"/>
+        <location filename="../src/mainwindow.cpp" line="314"/>
         <source>Output pages: %1</source>
         <translation>Pagine in uscita: %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="307"/>
-        <location filename="../src/mainwindow.cpp" line="327"/>
+        <location filename="../src/mainwindow.cpp" line="119"/>
         <source>PDF generation error</source>
         <translation>Errore nella generazione del file PDF</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="308"/>
+        <location filename="../src/mainwindow.cpp" line="322"/>
         <source>You must add at least one PDF file.</source>
         <translation>Devi aggiungere almeno un file PDF.</translation>
     </message>
     <message>
-        <source>You must add at least one pdf file!</source>
-        <translation type="vanished">Devi aggiungere almeno un file PDF!</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="328"/>
+        <location filename="../src/mainwindow.cpp" line="387"/>
         <source>&lt;p&gt;The PDF generation failed due to the following errors:&lt;/p&gt;</source>
         <translation>&lt;p&gt;La generazione del PDF è fallita a causa dei seguenti errori:&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="340"/>
+        <location filename="../src/mainwindow.cpp" line="346"/>
         <source>&lt;li&gt;Invalid character &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</source>
         <translation>&lt;li&gt;Carattere non valido &quot;&lt;b&gt;%1&lt;/b&gt;&quot; nel filtro delle pagine del file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="346"/>
+        <location filename="../src/mainwindow.cpp" line="90"/>
+        <source>Move down</source>
+        <translation>Sposta giù</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="352"/>
         <source>&lt;li&gt;Invalid interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</source>
         <translation>&lt;li&gt;Intervallo non valido &quot;&lt;b&gt;%1&lt;/b&gt;&quot; nel filtro delle pagine del file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="352"/>
+        <location filename="../src/mainwindow.cpp" line="358"/>
         <source>&lt;li&gt;Boundaries of interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; are out of allowed interval&lt;/li&gt;</source>
         <translation>&lt;li&gt;I limiti dell&apos;intervallo &quot;&lt;b&gt;%1&lt;/b&gt;&quot; nel filtro delle pagine del file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; sono oltre i valori consentiti&lt;/li&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="368"/>
-        <source>PDF generation warning</source>
-        <translation>Warning nella generazione del PDF</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="369"/>
+        <location filename="../src/mainwindow.cpp" line="394"/>
         <source>&lt;p&gt;The following problems were encountered while generating the PDF file:&lt;/p&gt;</source>
         <translation>&lt;p&gt;Sono stati riscontrati i seguenti problemi durante la generazione del file PDF:&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="381"/>
+        <location filename="../src/mainwindow.cpp" line="377"/>
         <source>&lt;li&gt;Interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; is overlapping with another interval&lt;/li&gt;</source>
         <translation>&lt;li&gt;L&apos;intervallo &quot;&lt;b&gt;%1&lt;/b&gt;&quot; nel filtro delle pagine del file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; è sovrapposto ad un altro intervallo&lt;/li&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>MultipageProfilesManager</name>
+    <message>
+        <location filename="../src/multipageprofilesmanager.cpp" line="31"/>
+        <source>New profile...</source>
+        <translation>Nuovo profilo...</translation>
+    </message>
+    <message>
+        <location filename="../src/multipageprofilesmanager.cpp" line="32"/>
+        <source>Delete profile</source>
+        <translation>Cancella profilo</translation>
+    </message>
+    <message>
+        <location filename="../src/multipageprofilesmanager.cpp" line="37"/>
+        <source>Manage multipage profiles</source>
+        <translation>Gestisci i profili multipagina</translation>
+    </message>
+    <message>
+        <location filename="../src/multipageprofilesmanager.cpp" line="94"/>
+        <location filename="../src/multipageprofilesmanager.cpp" line="96"/>
+        <source>Custom profile</source>
+        <translation>Profilo personalizzato</translation>
+    </message>
+    <message>
+        <location filename="../src/multipageprofilesmanager.cpp" line="142"/>
+        <location filename="../src/multipageprofilesmanager.cpp" line="149"/>
+        <location filename="../src/multipageprofilesmanager.cpp" line="157"/>
+        <location filename="../src/multipageprofilesmanager.cpp" line="166"/>
+        <source>Error</source>
+        <translation>Errore</translation>
+    </message>
+    <message>
+        <location filename="../src/multipageprofilesmanager.cpp" line="142"/>
+        <source>Profile name can not be empty.</source>
+        <translation>Il nome del profilo non può essere vuoto.</translation>
+    </message>
+    <message>
+        <location filename="../src/multipageprofilesmanager.cpp" line="147"/>
+        <source>Disabled</source>
+        <translation>Disabilitato</translation>
+    </message>
+    <message>
+        <location filename="../src/multipageprofilesmanager.cpp" line="149"/>
+        <location filename="../src/multipageprofilesmanager.cpp" line="157"/>
+        <location filename="../src/multipageprofilesmanager.cpp" line="166"/>
+        <source>Profile name already exists.</source>
+        <translation>Il nome del profilo è già esistente.</translation>
     </message>
 </context>
 </TS>

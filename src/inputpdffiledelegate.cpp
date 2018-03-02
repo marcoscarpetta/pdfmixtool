@@ -90,14 +90,13 @@ void InputPdfFileDelegate::paint(
 
     font.setBold(false);
     painter->setFont(font);
-    QString file_infos = QString(" − %1 cm x %2 cm%3 − %5 %6").arg(
+    QString file_infos = QString(" − %1 cm x %2 cm%3 − %5").arg(
                 QString::number(pdf_file->page_width()),
                 QString::number(pdf_file->page_height()),
                 pdf_file->paper_size().name.size() > 0 ?
                         QString(" (") + pdf_file->paper_size().name.c_str() + " " +
                         (pdf_file->paper_size().portrait ? tr("portrait") : tr("landscape")) + ")" : " ",
-                QString::number(pdf_file->page_count()),
-                tr("page", "", pdf_file->page_count())
+                tr("%n page(s)", "", pdf_file->page_count())
                 );
 
     painter->drawText(x, y, file_infos);
@@ -162,14 +161,13 @@ QSize InputPdfFileDelegate::sizeHint(
 
     int w = h + 20;
 
-    QString file_infos = QString(" − %1 cm x %2 cm%3 − %5 %6").arg(
+    QString file_infos = QString(" − %1 cm x %2 cm%3 − %5").arg(
                 QString::number(pdf_file->page_width()),
                 QString::number(pdf_file->page_height()),
                 pdf_file->paper_size().name.size() > 0 ?
                         QString(" (") + pdf_file->paper_size().name.c_str() + " " +
                         (pdf_file->paper_size().portrait ? tr("portrait") : tr("landscape")) + ")" : " ",
-                QString::number(pdf_file->page_count()),
-                tr("page", "", pdf_file->page_count())
+                tr("%n page(s)", "", pdf_file->page_count())
                 );
 
     int first_row = fm.width(file_infos);

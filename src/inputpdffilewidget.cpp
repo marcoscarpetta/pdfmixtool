@@ -181,9 +181,9 @@ InputPdfFileWidget::InputPdfFileWidget(InputPdfFile *pdf_file,
         m_multipage_combobox->addItem(QString::fromStdString(it.value().name), it.key());
 
     m_rotation_combobox->addItem(tr("No rotation"), 0);
-    m_rotation_combobox->addItem(tr("90°"), 90);
-    m_rotation_combobox->addItem(tr("180°"), 180);
-    m_rotation_combobox->addItem(tr("270°"), 270);
+    m_rotation_combobox->addItem("90°", 90);
+    m_rotation_combobox->addItem("180°", 180);
+    m_rotation_combobox->addItem("270°", 270);
 
     layout->addWidget(m_preview_label, 1, 1, 3, 1);
     layout->addWidget(new QLabel(tr("Pages:"), this), 1, 2);

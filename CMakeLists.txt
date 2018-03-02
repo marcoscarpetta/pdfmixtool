@@ -42,7 +42,7 @@ file(GLOB TS_FILES
      languages/pdfmixtool_*.ts
 )
 
-qt5_create_translation(QM_FILES ${SRCS} ${TS_FILES})
+qt5_create_translation(QM_FILES src/ ${TS_FILES} OPTIONS -no-obsolete)
 
 add_executable (
     pdfmixtool
@@ -59,7 +59,7 @@ target_link_libraries (
 add_custom_command (
     OUTPUT ${CMAKE_BINARY_DIR}/changelog.html
     DEPENDS ${CMAKE_SOURCE_DIR}/CHANGELOG.md
-    COMMAND markdown ${CMAKE_SOURCE_DIR}/CHANGELOG.md -o ${CMAKE_BINARY_DIR}/changelog.html
+    COMMAND markdown -o ${CMAKE_BINARY_DIR}/changelog.html ${CMAKE_SOURCE_DIR}/CHANGELOG.md
 )
 
 add_custom_target(
