@@ -161,7 +161,7 @@ void MultipageProfilesManager::edit_dialog_accepted()
 
     QMap<int, Multipage>::const_iterator it;
     for (it = m_custom_multipages->constBegin(); it != m_custom_multipages->constEnd(); ++it)
-        if (multipage.name == it.value().name)
+        if (multipage.name == it.value().name && m_edit_dialog->get_index() != it.key())
         {
             QMessageBox::critical(this, tr("Error"), tr("Profile name already exists."));
             m_edit_dialog->show();
