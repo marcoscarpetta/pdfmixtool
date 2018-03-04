@@ -194,14 +194,14 @@ void InputPdfFile::add_pages_filter(int from, int to)
     // Check if the new interval intersects old ones
     std::list<std::pair<int, int>>::iterator it;
     for (it=m_filters.begin(); it != m_filters.end(); ++it)
-    {
-        // Intersection found
-        if (!(from > it->second || to < it->first))
+        if (!(from > it->second || to < it->first)) // Intersection found
+        {
             m_interval_warnings.push_back(IntervalIssue(
                         IntervalIssue::warning_overlapping_interval,
                         std::to_string(from) + "-" + std::to_string(to)
                         ));
-    }
+            break;
+        }
 
     m_filters.push_back(std::pair<int, int>(from, to));
 }
