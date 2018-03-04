@@ -88,8 +88,6 @@ private:
     InputPdfFileDelegate *m_pdfinputfile_delegate;
     QStandardItemModel *m_files_list_model;
 
-    QMessageBox *m_error_dialog;
-    QMessageBox *m_warning_dialog;
     MultipageProfilesManager *m_multipage_profiles_manager;
     AboutDialog *m_about_dialog;
 

@@ -97,8 +97,6 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     m_files_list_view(new QListView(this)),
     m_pdfinputfile_delegate(new InputPdfFileDelegate(filter, m_custom_multipages, this)),
     m_files_list_model(new QStandardItemModel(this)),
-    m_error_dialog(new QMessageBox(this)),
-    m_warning_dialog(new QMessageBox(this)),
     m_about_dialog(new AboutDialog(this))
 {
     this->setWindowIcon(QIcon(QString("%1/../share/icons/hicolor/48x48/apps/pdfmixtool.png").arg(qApp->applicationDirPath())));
@@ -113,16 +111,6 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     m_settings->endGroup();
 
     m_multipage_profiles_manager = new MultipageProfilesManager(&m_custom_multipages, m_settings, this);
-
-    m_error_dialog->setIcon(QMessageBox::Critical);
-    m_error_dialog->setTextFormat(Qt::RichText);
-    m_error_dialog->setWindowTitle(tr("PDF generation error"));
-
-    m_warning_dialog->setIcon(QMessageBox::Warning);
-    m_warning_dialog->setTextFormat(Qt::RichText);
-    m_warning_dialog->addButton(QMessageBox::Cancel);
-    QPushButton *ignore_warning = m_warning_dialog->addButton(QMessageBox::Ignore);
-    m_warning_dialog->setDefaultButton(QMessageBox::Ignore);
 
     m_progress_bar->hide();
 
@@ -194,8 +182,6 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     connect(m_pdfinputfile_delegate, SIGNAL(data_edit()), this, SLOT(update_output_page_count()));
 
     connect(m_generate_pdf_button, SIGNAL(pressed()), this, SLOT(generate_pdf_button_pressed()));
-
-    connect(ignore_warning, SIGNAL(released()), this, SLOT(generate_pdf()));
 }
 
 void MainWindow::add_pdf_files()
@@ -319,8 +305,9 @@ void MainWindow::generate_pdf_button_pressed()
     // Check if there is at least one input file
     if (m_files_list_model->rowCount() == 0)
     {
-        m_error_dialog->setText(tr("You must add at least one PDF file."));
-        m_error_dialog->show();
+        QMessageBox::critical(this,
+                              tr("PDF generation error"),
+                              tr("You must add at least one PDF file."));
         return;
     }
 
@@ -386,15 +373,21 @@ void MainWindow::generate_pdf_button_pressed()
     {
         QString error_message(tr("<p>The PDF generation failed due to the following errors:</p>"));
         error_message += QString("<ul>") + errors_list + QString("</ul>");
-        m_error_dialog->setText(error_message);
-        m_error_dialog->show();
+        QMessageBox::critical(this,
+                              tr("PDF generation error"),
+                              error_message);
     }
     else if (warnings)
     {
         QString warning_message(tr("<p>The following problems were encountered while generating the PDF file:</p>"));
         warning_message += QString("<ul>") + warnings_list + QString("</ul>");
-        m_warning_dialog->setText(warning_message);
-        m_warning_dialog->show();
+        int ret = QMessageBox::warning(this,
+                              "",
+                              warning_message,
+                             QMessageBox::Cancel | QMessageBox::Ignore,
+                             QMessageBox::Ignore);
+        if (ret == QMessageBox::Ignore)
+            generate_pdf();
     }
     else
         generate_pdf();
