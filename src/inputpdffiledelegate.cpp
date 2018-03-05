@@ -117,24 +117,24 @@ void InputPdfFileDelegate::paint(
 
     if (pdf_file->pages_filter_errors().size() > 0)
     {
-        painter->setPen(QPen(QColor(190, 20, 20), 2, Qt::DotLine));
-        painter->drawRect(
-                    x - 3, y - font_height,
-                    fm.width(pages) + 6, font_height + 8);
-        painter->setPen(text_color);
+        //painter->setPen(QPen(QColor(190, 20, 20), 2, Qt::DotLine));
+        QRect rect(x - 3, y - font_height + 3, fm.width(pages) + 6, font_height + 5);
+        painter->fillRect(rect, QColor(255,150,150));
+        painter->setPen(option.palette.text().color());
+        painter->drawRect(rect);
     }
     else if (pdf_file->pages_filter_warnings().size() > 0)
     {
-        painter->setPen(QPen(QColor(240, 240, 20), 2, Qt::DotLine));
-        painter->drawRect(
-                    x - 3, y - font_height,
-                    fm.width(pages) + 6, font_height + 8);
-        painter->setPen(text_color);
+        QRect rect(x - 3, y - font_height + 3, fm.width(pages) + 6, font_height + 5);
+        painter->fillRect(rect, QColor(255,255,150));
+        painter->setPen(option.palette.text().color());
+        painter->drawRect(rect);
     }
 
     painter->drawText(x, y, pages);
     y += line_height;
 
+    painter->setPen(text_color);
     painter->drawText(x, y, rotation);
     y += line_height;
 

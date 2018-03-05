@@ -117,10 +117,11 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     m_files_list_view->setWordWrap(false);
     m_files_list_view->setSelectionBehavior(QAbstractItemView::SelectItems);
     m_files_list_view->setSelectionMode(QAbstractItemView::ExtendedSelection);
-    m_files_list_view->setEditTriggers(QAbstractItemView::DoubleClicked);
+    m_files_list_view->setEditTriggers(QAbstractItemView::DoubleClicked |
+                                       QAbstractItemView::AnyKeyPressed);
     m_files_list_view->setModel(m_files_list_model);
     m_files_list_view->setItemDelegate(m_pdfinputfile_delegate);
-    m_files_list_view->setFocusPolicy(Qt::ClickFocus);
+    m_files_list_view->setFocusPolicy(Qt::WheelFocus);
     m_files_list_view->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
     m_files_list_view->setSpacing(2);
 
