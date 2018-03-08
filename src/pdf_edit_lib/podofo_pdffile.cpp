@@ -112,14 +112,14 @@ void PoDoFoInputPdfFile::run(OutputPdfFile *output_file)
 {
     PoDoFo::PdfMemDocument *podofo_file;
 
-    // Add pages to output PDF file
+    // Add pages to a tmp file
     if (m_multipage.enabled)
         podofo_file = new PoDoFo::PdfMemDocument();
-    // Add pages to a tmp file
+    // Add pages to output PDF file
     else
         podofo_file = static_cast<PoDoFoOutputPdfFile *>(output_file)->output_file;
 
-    int page_index = podofo_file->GetPageCount();
+    int page_index = static_cast<PoDoFoOutputPdfFile *>(output_file)->output_file->GetPageCount();
     int added_pages = 0;
 
     // Add pages to podofo_file from this document
