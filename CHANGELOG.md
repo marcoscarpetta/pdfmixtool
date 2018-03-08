@@ -2,7 +2,7 @@
 
 ## Version 0.3
 
-**Release date:** unreleased
+**Release date:** 2018-03-08
 
 ### Added
 - **Add ability to create multipage PDF files (N-up)** (based on podofoimpose)
@@ -14,6 +14,9 @@
 
 ### Changed
 - Improve GUI
+
+### Known issues
+- Multipage function sometimes produces PDF files with defects
 
 ## Version 0.2.1
 
