@@ -28,7 +28,7 @@ MultipageProfilesManager::MultipageProfilesManager(QMap<int, Multipage> *custom_
     m_custom_multipages(custom_multipages),
     m_edit_dialog(new EditMultipageProfileDialog(this)),
     m_settings(app_settings),
-    m_new_profile_button(new QPushButton(QIcon::fromTheme("list-add"), tr("New profile..."), this)),
+    m_new_profile_button(new QPushButton(QIcon::fromTheme("list-add"), tr("New profile…"), this)),
     m_delete_profile_button(new QPushButton(QIcon::fromTheme("list-remove"), tr("Delete profile"), this)),
     m_profiles_view(new QListView(this)),
     m_profiles_model(new QStandardItemModel(this))

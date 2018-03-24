@@ -89,7 +89,7 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     m_move_up_button(new QPushButton(QIcon::fromTheme("go-up"), tr("Move up"), this)),
     m_move_down_button(new QPushButton(QIcon::fromTheme("go-down"), tr("Move down"), this)),
     m_remove_file_button(new QPushButton(QIcon::fromTheme("list-remove"), tr("Remove file"), this)),
-    m_multipage_profiles_button(new QPushButton(QIcon::fromTheme("document-properties"), tr("Multipage profiles..."), this)),
+    m_multipage_profiles_button(new QPushButton(QIcon::fromTheme("document-properties"), tr("Multipage profiles…"), this)),
     m_about_button(new QPushButton(QIcon::fromTheme("help-about"), tr("About"), this)),
     m_generate_pdf_button(new QPushButton(QIcon::fromTheme("document-save-as"), tr("Generate PDF"), this)),
     m_output_page_count(new QLabel(this)),
