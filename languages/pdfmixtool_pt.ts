@@ -297,11 +297,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="92"/>
-        <source>Multipage profiles...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow.cpp" line="93"/>
         <source>About</source>
         <translation type="unfinished"></translation>
@@ -312,68 +307,74 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="105"/>
+        <location filename="../src/mainwindow.cpp" line="103"/>
         <source>PDF Mix Tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="119"/>
+        <location filename="../src/mainwindow.cpp" line="310"/>
+        <location filename="../src/mainwindow.cpp" line="378"/>
         <source>PDF generation error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="205"/>
+        <location filename="../src/mainwindow.cpp" line="192"/>
         <source>Select one or more PDF files to open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="207"/>
-        <location filename="../src/mainwindow.cpp" line="407"/>
+        <location filename="../src/mainwindow.cpp" line="92"/>
+        <source>Multipage profiles…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="194"/>
+        <location filename="../src/mainwindow.cpp" line="401"/>
         <source>PDF files (*.pdf)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="314"/>
+        <location filename="../src/mainwindow.cpp" line="301"/>
         <source>Output pages: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="322"/>
+        <location filename="../src/mainwindow.cpp" line="311"/>
         <source>You must add at least one PDF file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="346"/>
+        <location filename="../src/mainwindow.cpp" line="334"/>
         <source>&lt;li&gt;Invalid character &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="352"/>
+        <location filename="../src/mainwindow.cpp" line="340"/>
         <source>&lt;li&gt;Invalid interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="358"/>
+        <location filename="../src/mainwindow.cpp" line="346"/>
         <source>&lt;li&gt;Boundaries of interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; are out of allowed interval&lt;/li&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="377"/>
+        <location filename="../src/mainwindow.cpp" line="365"/>
         <source>&lt;li&gt;Interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; is overlapping with another interval&lt;/li&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="387"/>
+        <location filename="../src/mainwindow.cpp" line="375"/>
         <source>&lt;p&gt;The PDF generation failed due to the following errors:&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="394"/>
+        <location filename="../src/mainwindow.cpp" line="383"/>
         <source>&lt;p&gt;The following problems were encountered while generating the PDF file:&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="405"/>
+        <location filename="../src/mainwindow.cpp" line="399"/>
         <source>Save PDF file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -382,7 +383,7 @@
     <name>MultipageProfilesManager</name>
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="31"/>
-        <source>New profile...</source>
+        <source>New profile…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
