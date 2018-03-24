@@ -84,112 +84,112 @@
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="29"/>
         <source>Edit multipage profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Rediger flersidig profil</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="60"/>
         <location filename="../src/editmultipageprofiledialog.cpp" line="158"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Venstre</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="61"/>
         <location filename="../src/editmultipageprofiledialog.cpp" line="65"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>Senter</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="62"/>
         <location filename="../src/editmultipageprofiledialog.cpp" line="160"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Høyre</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="64"/>
         <location filename="../src/editmultipageprofiledialog.cpp" line="162"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Topp</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="66"/>
         <location filename="../src/editmultipageprofiledialog.cpp" line="164"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Bunn</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="97"/>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Navn:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="105"/>
         <source>Output page size</source>
-        <translation type="unfinished"></translation>
+        <translation>Utdata-sidestørrelse</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="107"/>
         <source>Standard size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Forvalgt størrelse:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="110"/>
         <source>Custom size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Egendefinert størrelse:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="113"/>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bredde:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="116"/>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Høyde:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="124"/>
         <source>Pages layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Sideoppsett</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="126"/>
         <source>Rows:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rader:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="129"/>
         <source>Columns:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolonner:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="132"/>
         <source>Rotation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sideretning:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="135"/>
         <source>Spacing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Avstand:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="143"/>
         <source>Pages alignment</source>
-        <translation type="unfinished"></translation>
+        <translation>Sidejustering</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="145"/>
         <source>Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Horisontal:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="148"/>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikal:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="156"/>
         <source>Margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Marg</translation>
     </message>
 </context>
 <context>
@@ -198,52 +198,50 @@
         <location filename="../src/inputpdffiledelegate.cpp" line="98"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="169"/>
         <source>portrait</source>
-        <translation type="unfinished"></translation>
+        <translation>stående</translation>
     </message>
     <message>
         <location filename="../src/inputpdffiledelegate.cpp" line="98"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="169"/>
         <source>landscape</source>
-        <translation type="unfinished"></translation>
+        <translation>liggende</translation>
     </message>
     <message>
         <location filename="../src/inputpdffiledelegate.cpp" line="109"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="177"/>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/inputpdffiledelegate.cpp" line="99"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="170"/>
         <source>%n page(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
+        <translation><numerusform>%n side</numerusform>
+        <numerusform>%n sider</numerusform>
+        </translation></message>
     <message>
         <location filename="../src/inputpdffiledelegate.cpp" line="111"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="179"/>
         <source>Pages:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sider:</translation>
     </message>
     <message>
         <location filename="../src/inputpdffiledelegate.cpp" line="112"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="180"/>
         <source>Multipage:</source>
-        <translation type="unfinished"></translation>
+        <translation>Flersidig:</translation>
     </message>
     <message>
         <location filename="../src/inputpdffiledelegate.cpp" line="115"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="183"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Avskrudd</translation>
     </message>
     <message>
         <location filename="../src/inputpdffiledelegate.cpp" line="116"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="184"/>
         <source>Rotation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sideretning:</translation>
     </message>
 </context>
 <context>
@@ -251,7 +249,7 @@
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="170"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Avskrudd</translation>
     </message>
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="183"/>
@@ -261,17 +259,17 @@
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="189"/>
         <source>Pages:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sider:</translation>
     </message>
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="191"/>
         <source>Multipage:</source>
-        <translation type="unfinished"></translation>
+        <translation>Flersidig:</translation>
     </message>
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="193"/>
         <source>Rotation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sideretning:</translation>
     </message>
 </context>
 <context>
@@ -294,7 +292,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="92"/>
         <source>Multipage profiles...</source>
-        <translation type="unfinished"></translation>
+        <translation>Flersidige profiler…</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="93"/>
@@ -314,7 +312,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="205"/>
         <source>Select one or more PDF files to open</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg én eller flere PDF-filer å åpne</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="207"/>
@@ -325,7 +323,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="405"/>
         <source>Save PDF file</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre PDF-fil</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="314"/>
@@ -355,7 +353,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="90"/>
         <source>Move down</source>
-        <translation type="unfinished"></translation>
+        <translation>Flytt nedover</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="352"/>
@@ -383,23 +381,23 @@
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="31"/>
         <source>New profile...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ny profil…</translation>
     </message>
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="32"/>
         <source>Delete profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Slett profil</translation>
     </message>
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="37"/>
         <source>Manage multipage profiles</source>
-        <translation type="unfinished"></translation>
+        <translation>Behandle flersidige profiler</translation>
     </message>
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="94"/>
         <location filename="../src/multipageprofilesmanager.cpp" line="96"/>
         <source>Custom profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Egendefinert profil</translation>
     </message>
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="142"/>
@@ -407,24 +405,24 @@
         <location filename="../src/multipageprofilesmanager.cpp" line="157"/>
         <location filename="../src/multipageprofilesmanager.cpp" line="166"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Feil</translation>
     </message>
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="142"/>
         <source>Profile name can not be empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Profilnavnet kan ikke være tomt.</translation>
     </message>
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="147"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Avskrudd</translation>
     </message>
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="149"/>
         <location filename="../src/multipageprofilesmanager.cpp" line="157"/>
         <location filename="../src/multipageprofilesmanager.cpp" line="166"/>
         <source>Profile name already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>Profilnavnet finnes allerede.</translation>
     </message>
 </context>
 </TS>
