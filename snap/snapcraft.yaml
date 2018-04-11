@@ -40,9 +40,8 @@ parts:
       - -DPODOFO_BUILD_LIB_ONLY=1
     source: https://datapacket.dl.sourceforge.net/project/podofo/podofo/0.9.6/podofo-0.9.6-rc1.tar.gz
     source-type: tar
-    source-subdir: podofo-0.9.6-rc1
     prepare: |
-        sed -i "44i #include <limits>" src/base/PdfObjectStreamParserObject.cpp
+        sed -i "44i #include <limits>" ../src/src/base/PdfObjectStreamParserObject.cpp
     build-packages:
       - build-essential
       - pkg-config
