@@ -1,5 +1,18 @@
 # Changelog
 
+## Version 0.3.1
+
+**Release date:** 2018-05-27
+
+### Added
+- Add German translation
+
+### Changed
+- Update Norwegian Bokmål translation
+
+### Known issues
+- Multipage function sometimes produces PDF files with defects
+
 ## Version 0.3
 
 **Release date:** 2018-03-08
