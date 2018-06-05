@@ -122,8 +122,8 @@ AboutDialog::AboutDialog(QWidget *parent) :
     QLabel *contribute = new QLabel();
     contribute->setText(
                 QString("<ul>"
-                        "<li><a href=\"https://github.com/marcoscarpetta/pdfmixtool/pulls\">%1</li>"
-                        "<li><a href=\"https://github.com/marcoscarpetta/pdfmixtool/issues\">%2</a></li>"
+                        "<li><a href=\"https://gitlab.com/scarpetta/pdfmixtool/merge_requests\">%1</li>"
+                        "<li><a href=\"https://gitlab.com/scarpetta/pdfmixtool/issues\">%2</a></li>"
                         "<li><a href=\"https://hosted.weblate.org/engage/pdf-mix-tool/\">%3</a></li>"
                         "</ul>").arg(
                     tr("Submit a pull request"),

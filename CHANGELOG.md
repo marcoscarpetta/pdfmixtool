@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 0.3.2
+
+**Release date:** unreleased
+
+### Changed
+- Move to GitLab
+
+### Known issues
+- Multipage function sometimes produces PDF files with defects
+
 ## Version 0.3.1
 
 **Release date:** 2018-05-27
