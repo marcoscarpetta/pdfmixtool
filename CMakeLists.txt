@@ -56,17 +56,6 @@ target_link_libraries (
     ${Qt5Widgets_LIBRARIES}
 )
 
-add_custom_command (
-    OUTPUT ${CMAKE_BINARY_DIR}/changelog.html
-    DEPENDS ${CMAKE_SOURCE_DIR}/CHANGELOG.md
-    COMMAND markdown -o ${CMAKE_BINARY_DIR}/changelog.html ${CMAKE_SOURCE_DIR}/CHANGELOG.md
-)
-
-add_custom_target(
-    changelog ALL
-    DEPENDS ${CMAKE_BINARY_DIR}/changelog.html
-)
-
 install(TARGETS pdfmixtool RUNTIME DESTINATION bin)
 install(FILES resources/icon.svg DESTINATION share/icons/hicolor/scalable/apps RENAME pdfmixtool.svg)
 install(FILES resources/icon_48.png DESTINATION share/icons/hicolor/48x48/apps RENAME pdfmixtool.png)
@@ -74,7 +63,7 @@ install(FILES resources/icon_64.png DESTINATION share/icons/hicolor/64x64/apps R
 install(FILES resources/icon_128.png DESTINATION share/icons/hicolor/128x128/apps RENAME pdfmixtool.png)
 install(FILES resources/icon_256.png DESTINATION share/icons/hicolor/256x256/apps RENAME pdfmixtool.png)
 install(FILES ${QM_FILES} DESTINATION share/pdfmixtool/translations)
-install(FILES ${CMAKE_BINARY_DIR}/changelog.html DESTINATION share/pdfmixtool)
+install(FILES CHANGELOG.md DESTINATION share/pdfmixtool)
 install(FILES AUTHORS.md DESTINATION share/pdfmixtool)
 install(FILES TRANSLATORS.md DESTINATION share/pdfmixtool)
 install(FILES pdfmixtool.desktop DESTINATION share/applications)

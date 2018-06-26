@@ -1,76 +1,115 @@
-# Changelog
+<h1>Changelog</h1>
 
-## Version 0.3.2
+<h2>Version 0.3.2</h2>
 
-**Release date:** unreleased
+<p><strong>Release date:</strong> unreleased</p>
 
-### Changed
-- Move to GitLab
+<h3>Changed</h3>
 
-### Known issues
-- Multipage function sometimes produces PDF files with defects
+<ul>
+<li>Move to GitLab</li>
+</ul>
 
-## Version 0.3.1
+<h3>Known issues</h3>
 
-**Release date:** 2018-05-27
+<ul>
+<li>Multipage function sometimes produces PDF files with defects</li>
+</ul>
 
-### Added
-- Add German translation
+<h2>Version 0.3.1</h2>
 
-### Changed
-- Update Norwegian Bokmål translation
+<p><strong>Release date:</strong> 2018-05-27</p>
 
-### Known issues
-- Multipage function sometimes produces PDF files with defects
+<h3>Added</h3>
 
-## Version 0.3
+<ul>
+<li>Add German translation</li>
+</ul>
 
-**Release date:** 2018-03-08
+<h3>Changed</h3>
 
-### Added
-- **Add ability to create multipage PDF files (N-up)** (based on podofoimpose)
-- Add ability to create custom multipage profiles
-- Add live preview of output pages layout
-- Add a "Credits" tab to the about dialog
-- Add a "Contribute" tab to the about dialog
-- Add Norwegian Bokmål translation
+<ul>
+<li>Update Norwegian Bokmål translation</li>
+</ul>
 
-### Changed
-- Improve GUI
+<h3>Known issues</h3>
 
-### Known issues
-- Multipage function sometimes produces PDF files with defects
+<ul>
+<li>Multipage function sometimes produces PDF files with defects</li>
+</ul>
 
-## Version 0.2.1
+<h2>Version 0.3</h2>
 
-**Release date:** 2018-02-03
+<p><strong>Release date:</strong> 2018-03-08</p>
 
-### Fixed
-- Small fixes
+<h3>Added</h3>
 
-## Version 0.2
+<ul>
+<li><strong>Add ability to create multipage PDF files (N-up)</strong> (based on podofoimpose)</li>
+<li>Add ability to create custom multipage profiles</li>
+<li>Add live preview of output pages layout</li>
+<li>Add a &ldquo;Credits&rdquo; tab to the about dialog</li>
+<li>Add a &ldquo;Contribute&rdquo; tab to the about dialog</li>
+<li>Add Norwegian Bokmål translation</li>
+</ul>
 
-**Release date:** 2018-01-09
+<h3>Changed</h3>
 
-### Added
-- Show output file page count on bottom
-- Add a "Changelog" tab to the about dialog
+<ul>
+<li>Improve GUI</li>
+</ul>
 
-### Changed
-- Remember main window geometry on exit
-- Output PDF contains now page intervals in the same order as they were inserted
-- Page intervals can now overlap (with a warning)
-- Also check for page intervals while editing
+<h3>Known issues</h3>
 
-### Fixed
-- Fix widgets Tab ordering
+<ul>
+<li>Multipage function sometimes produces PDF files with defects</li>
+</ul>
 
-## Version 0.1
+<h2>Version 0.2.1</h2>
 
-**Release date:** 2017-10-05
+<p><strong>Release date:</strong> 2018-02-03</p>
 
-### Added
-- Initial release
-- Ability to split, merge, rotate and mix PDF files
-- Italian translation
-- Snap support
+<h3>Fixed</h3>
+
+<ul>
+<li>Small fixes</li>
+</ul>
+
+<h2>Version 0.2</h2>
+
+<p><strong>Release date:</strong> 2018-01-09</p>
+
+<h3>Added</h3>
+
+<ul>
+<li>Show output file page count on bottom</li>
+<li>Add a &ldquo;Changelog&rdquo; tab to the about dialog</li>
+</ul>
+
+<h3>Changed</h3>
+
+<ul>
+<li>Remember main window geometry on exit</li>
+<li>Output PDF contains now page intervals in the same order as they were inserted</li>
+<li>Page intervals can now overlap (with a warning)</li>
+<li>Also check for page intervals while editing</li>
+</ul>
+
+<h3>Fixed</h3>
+
+<ul>
+<li>Fix widgets Tab ordering</li>
+</ul>
+
+<h2>Version 0.1</h2>
+
+<p><strong>Release date:</strong> 2017-10-05</p>
+
+<h3>Added</h3>
+
+<ul>
+<li>Initial release</li>
+<li>Ability to split, merge, rotate and mix PDF files</li>
+<li>Italian translation</li>
+<li>Snap support</li>
+</ul>

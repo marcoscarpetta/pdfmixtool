@@ -141,7 +141,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     scroll_area = new QScrollArea();
     scroll_area->setBackgroundRole(QPalette::Light);
 
-    QFile file(QString("%1/../share/pdfmixtool/changelog.html").arg(qApp->applicationDirPath()));
+    QFile file(QString("%1/../share/pdfmixtool/CHANGELOG.md").arg(qApp->applicationDirPath()));
     file.open(QIODevice::ReadOnly | QIODevice::Text);
 
     QLabel *changelog = new QLabel(this);
