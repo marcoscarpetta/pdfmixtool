@@ -99,7 +99,7 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     m_files_list_model(new QStandardItemModel(this)),
     m_about_dialog(new AboutDialog(this))
 {
-    this->setWindowIcon(QIcon(QString("%1/../share/icons/hicolor/48x48/apps/pdfmixtool.png").arg(qApp->applicationDirPath())));
+    this->setWindowIcon(QIcon(QString("%1/../share/icons/hicolor/48x48/apps/eu.scarpetta.PDFMixTool.png").arg(qApp->applicationDirPath())));
     this->setWindowTitle(tr("PDF Mix Tool"));
     this->restoreGeometry(m_settings->value("main_window_geometry").toByteArray());
 

@@ -30,7 +30,6 @@ AboutDialog::AboutDialog(QWidget *parent) :
     QMainWindow(parent)
 {
     // Dialog header
-    this->setWindowIcon(QIcon(QString("%1/../share/icons/hicolor/48x48/apps/pdfmixtool.png").arg(qApp->applicationDirPath())));
     this->setWindowTitle(tr("About PDF Mix Tool"));
 
     QWidget *central_widget = new QWidget(this);
@@ -46,7 +45,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     connect(close_button, SIGNAL(pressed()), this, SLOT(close()));
 
     QLabel *application_icon = new QLabel(this);
-    application_icon->setPixmap(QPixmap(QString("%1/../share/icons/hicolor/128x128/apps/pdfmixtool.png").arg(qApp->applicationDirPath())));
+    application_icon->setPixmap(QPixmap(QString("%1/../share/icons/hicolor/128x128/apps/eu.scarpetta.PDFMixTool.png").arg(qApp->applicationDirPath())));
     application_icon->setAlignment(Qt::AlignCenter);
 
     QLabel *application_name = new QLabel(
