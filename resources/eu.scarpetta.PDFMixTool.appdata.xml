@@ -1,53 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-​<component type="desktop-application">
-​  <id>eu.scarpetta.PDFMixTool</id>
-​  <metadata_license>FSFAP</metadata_license>
-​  <project_license>GPL-3.0+</project_license>
-​
-​  <description>
+<!-- Copyright 2018 Marco Scarpetta <marcoscarpetta02@gmail.com> -->
+<component type="desktop-application">
+  <id>eu.scarpetta.PDFMixTool</id>
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+
+  <description>
     <p>
       PDF Mix Tool is a simple and lightweight application that allows you
       to split, merge, rotate and mix PDF files. Since version 0.3 it can
       also combine more pages of a document into one.
     </p>
-​  </description>
-​
-​  <launchable type="desktop-id">eu.scarpetta.PDFMixTool.desktop</launchable>
-​
-​  <screenshots>
-​    <screenshot type="default">
-​      <caption>Merge 4 PDF files</caption>
-​      <image>http://www.scarpetta.eu/pdfmixtool/merge_4_files.png</image>
-​    </screenshot>
-​    <screenshot>
+  </description>
+
+  <launchable type="desktop-id">eu.scarpetta.PDFMixTool.desktop</launchable>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>Merge 4 PDF files</caption>
+      <image>http://www.scarpetta.eu/pdfmixtool/merge_4_files.png</image>
+    </screenshot>
+    <screenshot>
       <caption>Multipage feature</caption>
-​      <image>http://www.scarpetta.eu/pdfmixtool/multipage.png</image>
-​    </screenshot>
+      <image>http://www.scarpetta.eu/pdfmixtool/multipage.png</image>
+    </screenshot>
     <screenshot>
       <caption>Rotate a PDF file</caption>
-​      <image>http://www.scarpetta.eu/pdfmixtool/rotate_file.png</image>
-​    </screenshot>
+      <image>http://www.scarpetta.eu/pdfmixtool/rotate_file.png</image>
+    </screenshot>
     <screenshot>
       <caption>Mix 3 PDF files</caption>
-​      <image>http://www.scarpetta.eu/pdfmixtool/mix_3_files.png</image>
-​    </screenshot>
+      <image>http://www.scarpetta.eu/pdfmixtool/mix_3_files.png</image>
+    </screenshot>
     <screenshot>
       <caption>Extract the first 20 pages from a PDF file</caption>
-​      <image>http://www.scarpetta.eu/pdfmixtool/split_file.png</image>
-​    </screenshot>
-​  </screenshots>
-​
-​  <url type="homepage">http://www.scarpetta.eu/pdfmixtool</url>
-​
-​  <provides>
-​    <binary>pdfmixtool</binary>
-​  </provides>
-​
-​  <releases>
-​    <release version="0.3.1" date="2018-05-27" />
-​    <release version="0.3" date="2018-03-08" />
-​    <release version="0.2.1" date="2018-02-03" />
-​    <release version="0.2" date="2018-01-09" />
-​    <release version="0.1" date="2017-10-05" />
-​  </releases>
-​</component>
+      <image>http://www.scarpetta.eu/pdfmixtool/split_file.png</image>
+    </screenshot>
+  </screenshots>
+
+  <url type="homepage">http://www.scarpetta.eu/pdfmixtool</url>
+
+  <provides>
+    <binary>pdfmixtool</binary>
+  </provides>
+
+  <releases>
+    <release version="0.3.1" date="2018-05-27" />
+    <release version="0.3" date="2018-03-08" />
+    <release version="0.2.1" date="2018-02-03" />
+    <release version="0.2" date="2018-01-09" />
+    <release version="0.1" date="2017-10-05" />
+  </releases>
+</component>
