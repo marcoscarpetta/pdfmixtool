@@ -2,7 +2,13 @@
 
 <h2>Version 0.3.2</h2>
 
-<p><strong>Release date:</strong> unreleased</p>
+<p><strong>Release date:</strong> 2018-06-26</p>
+
+<h3>Added</h3>
+
+<ul>
+<li>Add Flatpak support</li>
+</ul>
 
 <h3>Changed</h3>
 
