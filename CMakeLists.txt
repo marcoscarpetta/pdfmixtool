@@ -57,6 +57,8 @@ target_link_libraries (
 )
 
 install(TARGETS pdfmixtool RUNTIME DESTINATION bin)
+install(FILES resources/eu.scarpetta.PDFMixTool.desktop DESTINATION share/applications)
+install(FILES resources/eu.scarpetta.PDFMixTool.appdata.xml DESTINATION share/metainfo)
 install(FILES resources/icon.svg DESTINATION share/icons/hicolor/scalable/apps RENAME eu.scarpetta.PDFMixTool.svg)
 install(FILES resources/icon_48.png DESTINATION share/icons/hicolor/48x48/apps RENAME eu.scarpetta.PDFMixTool.png)
 install(FILES resources/icon_64.png DESTINATION share/icons/hicolor/64x64/apps RENAME eu.scarpetta.PDFMixTool.png)
@@ -66,7 +68,6 @@ install(FILES ${QM_FILES} DESTINATION share/pdfmixtool/translations)
 install(FILES CHANGELOG.md DESTINATION share/pdfmixtool)
 install(FILES AUTHORS.md DESTINATION share/pdfmixtool)
 install(FILES TRANSLATORS.md DESTINATION share/pdfmixtool)
-install(FILES pdfmixtool.desktop DESTINATION share/applications RENAME eu.scarpetta.PDFMixTool.desktop)
 
 add_custom_command(
     TARGET pdfmixtool

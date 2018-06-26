@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     app.setApplicationVersion("0.3.2");
 
 #if QT_VERSION >= 0x050700
-    app.setDesktopFileName("pdfmixtool");
+    app.setDesktopFileName("eu.scarpetta.PDFMixTool");
 #endif
 
     // Set up translations
