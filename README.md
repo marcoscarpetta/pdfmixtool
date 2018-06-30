@@ -9,4 +9,4 @@ An application to split, merge, rotate and mix PDF files. Starting from version 
 
 [Changelog/Roadmap](CHANGELOG.md)
 
-You can find more informations about the project on [this](http://www.scarpetta.eu/pdfmixtool/) web page.
+You can find more informations about the project on [this](https://scarpetta.eu/pdfmixtool/) web page.

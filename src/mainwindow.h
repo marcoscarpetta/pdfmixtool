@@ -20,20 +20,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include <QPushButton>
 #include <QLabel>
 #include <QProgressBar>
-#include <QFileDialog>
 #include <QListView>
 #include <QStandardItemModel>
 #include <QSettings>
-#include <QMessageBox>
+
 #include "mouseeventfilter.h"
-#include "inputpdffiledelegate.h"
-#include "multipageprofilesmanager.h"
-#include "aboutdialog.h"
 #include "pdf_edit_lib/pdfeditor.h"
 
 Q_DECLARE_METATYPE(Multipage)
@@ -73,23 +66,11 @@ private:
 
     QSettings *m_settings;
 
-    QPushButton *m_add_file_button;
-    QPushButton *m_remove_file_button;
-    QPushButton *m_move_up_button;
-    QPushButton *m_move_down_button;
-    QPushButton *m_multipage_profiles_button;
-    QPushButton *m_about_button;
-    QPushButton *m_generate_pdf_button;
-
     QLabel *m_output_page_count;
     QProgressBar *m_progress_bar;
 
     QListView *m_files_list_view;
-    InputPdfFileDelegate *m_pdfinputfile_delegate;
     QStandardItemModel *m_files_list_model;
-
-    MultipageProfilesManager *m_multipage_profiles_manager;
-    AboutDialog *m_about_dialog;
 
     QMap<int, Multipage> m_custom_multipages;
 };

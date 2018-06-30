@@ -1,5 +1,21 @@
 <h1>Changelog</h1>
 
+<h2>Version 0.3.3</h2>
+
+<p><strong>Release date:</strong> unreleased</p>
+
+<h3>Added</h3>
+
+<ul>
+<li>Keyboard shortcuts</li>
+</ul>
+
+<h3>Known issues</h3>
+
+<ul>
+<li>Multipage function sometimes produces PDF files with defects</li>
+</ul>
+
 <h2>Version 0.3.2</h2>
 
 <p><strong>Release date:</strong> 2018-06-26</p>

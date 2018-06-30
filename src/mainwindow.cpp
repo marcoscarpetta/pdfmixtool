@@ -20,6 +20,19 @@
 
 #include <QApplication>
 #include <QTimer>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QMenu>
+#include <QToolBar>
+#include <QPushButton>
+#include <QFileDialog>
+#include <QMessageBox>
+
+#include "multipageprofilesmanager.h"
+#include "aboutdialog.h"
+#include "inputpdffiledelegate.h"
+
+#define TOOLTIP_STRING "%1 <br /><b>%2<?b>"
 
 QDataStream &operator<<(QDataStream &out, const Multipage &multipage)
 {
@@ -85,20 +98,12 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     QMainWindow(parent),
     m_pdf_editor(new PdfEditor()),
     m_settings(new QSettings(this)),
-    m_add_file_button(new QPushButton(QIcon::fromTheme("list-add"), tr("Add PDF file"), this)),
-    m_move_up_button(new QPushButton(QIcon::fromTheme("go-up"), tr("Move up"), this)),
-    m_move_down_button(new QPushButton(QIcon::fromTheme("go-down"), tr("Move down"), this)),
-    m_remove_file_button(new QPushButton(QIcon::fromTheme("list-remove"), tr("Remove file"), this)),
-    m_multipage_profiles_button(new QPushButton(QIcon::fromTheme("document-properties"), tr("Multipage profiles…"), this)),
-    m_about_button(new QPushButton(QIcon::fromTheme("help-about"), tr("About"), this)),
-    m_generate_pdf_button(new QPushButton(QIcon::fromTheme("document-save-as"), tr("Generate PDF"), this)),
     m_output_page_count(new QLabel(this)),
     m_progress_bar(new QProgressBar(this)),
     m_files_list_view(new QListView(this)),
-    m_pdfinputfile_delegate(new InputPdfFileDelegate(filter, m_custom_multipages, this)),
-    m_files_list_model(new QStandardItemModel(this)),
-    m_about_dialog(new AboutDialog(this))
+    m_files_list_model(new QStandardItemModel(this))
 {
+    // Main winow properties
     this->setWindowIcon(QIcon(QString("%1/../share/icons/hicolor/48x48/apps/eu.scarpetta.PDFMixTool.png").arg(qApp->applicationDirPath())));
     this->setWindowTitle(tr("PDF Mix Tool"));
     this->restoreGeometry(m_settings->value("main_window_geometry").toByteArray());
@@ -110,9 +115,13 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
          m_custom_multipages[key.toInt()] = m_settings->value(key).value<Multipage>();
     m_settings->endGroup();
 
-    m_multipage_profiles_manager = new MultipageProfilesManager(&m_custom_multipages, m_settings, this);
+    // Create child and configure widgets
+    MultipageProfilesManager *multipage_profiles_manager = new MultipageProfilesManager(&m_custom_multipages, m_settings, this);
+    AboutDialog *about_dialog = new AboutDialog(new AboutDialog(this));
 
     m_progress_bar->hide();
+
+    InputPdfFileDelegate *pdfinputfile_delegate = new InputPdfFileDelegate(filter, m_custom_multipages, this);
 
     m_files_list_view->setWordWrap(false);
     m_files_list_view->setSelectionBehavior(QAbstractItemView::SelectItems);
@@ -120,45 +129,52 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     m_files_list_view->setEditTriggers(QAbstractItemView::DoubleClicked |
                                        QAbstractItemView::AnyKeyPressed);
     m_files_list_view->setModel(m_files_list_model);
-    m_files_list_view->setItemDelegate(m_pdfinputfile_delegate);
+    m_files_list_view->setItemDelegate(pdfinputfile_delegate);
     m_files_list_view->setFocusPolicy(Qt::WheelFocus);
     m_files_list_view->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
     m_files_list_view->setSpacing(2);
 
-    m_add_file_button->setDefault(true);
-    m_move_up_button->setDefault(true);
-    m_move_down_button->setDefault(true);
-    m_remove_file_button->setDefault(true);
-    m_multipage_profiles_button->setDefault(true);
-    m_about_button->setDefault(true);
-    m_generate_pdf_button->setAutoDefault(true);
+    QToolBar *toolbar = new QToolBar(tr("Main toolbar"), this);
+    toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    toolbar->setFloatable(false);
+    toolbar->setMovable(false);
 
-    QWidget::setTabOrder(m_add_file_button, m_move_up_button);
-    QWidget::setTabOrder(m_move_up_button, m_move_down_button);
-    QWidget::setTabOrder(m_move_down_button, m_remove_file_button);
-    QWidget::setTabOrder(m_remove_file_button, m_multipage_profiles_button);
-    QWidget::setTabOrder(m_multipage_profiles_button, m_about_button);
-    QWidget::setTabOrder(m_about_button, m_generate_pdf_button);
+    QAction *add_file_action = toolbar->addAction(QIcon::fromTheme("list-add"), tr("Add PDF file"), this, SLOT(add_pdf_files()));
+    QAction *move_up_action = toolbar->addAction(QIcon::fromTheme("go-up"), tr("Move up"), this, SLOT(move_up()));
+    QAction *move_down_action = toolbar->addAction(QIcon::fromTheme("go-down"), tr("Move down"), this, SLOT(move_down()));
+    QAction *remove_file_action = toolbar->addAction(QIcon::fromTheme("list-remove"), tr("Remove file"), this, SLOT(remove_pdf_file()));
 
+    add_file_action->setShortcut(QKeySequence::Open);
+    move_up_action->setShortcut(QKeySequence("Ctrl+up"));
+    move_down_action->setShortcut(QKeySequence("Ctrl+down"));
+    remove_file_action->setShortcut(QKeySequence::Delete);
+    add_file_action->setToolTip(QString(TOOLTIP_STRING).arg(add_file_action->text(), add_file_action->shortcut().toString()));
+    move_up_action->setToolTip(QString(TOOLTIP_STRING).arg(move_up_action->text(), move_up_action->shortcut().toString()));
+    move_down_action->setToolTip(QString(TOOLTIP_STRING).arg(move_down_action->text(), move_down_action->shortcut().toString()));
+    remove_file_action->setToolTip(QString(TOOLTIP_STRING).arg(remove_file_action->text(), remove_file_action->shortcut().toString()));
+
+    QPushButton *main_menu_button = new QPushButton(QIcon::fromTheme("preferences-other"), tr("Menu"));
+    main_menu_button->setDefault(true);
+    QMenu *main_menu = new QMenu(main_menu_button);
+    main_menu->addAction(QIcon::fromTheme("document-properties"), tr("Multipage profiles…"), multipage_profiles_manager, SLOT(show()));
+    main_menu->addAction(QIcon::fromTheme("help-about"), tr("About"), about_dialog, SLOT(show()));
+    main_menu->addAction(QIcon::fromTheme("application-exit"), tr("Exit"), qApp, SLOT(quit()), QKeySequence::Quit);
+    main_menu_button->setMenu(main_menu);
+
+    QPushButton *generate_pdf_button = new QPushButton(QIcon::fromTheme("document-save-as"), tr("Generate PDF"), this);
+    generate_pdf_button->setShortcut(QKeySequence::Save);
+    generate_pdf_button->setToolTip(QString(TOOLTIP_STRING).arg(generate_pdf_button->text(), generate_pdf_button->shortcut().toString()));
+
+    // Add widgets to the main window
     QVBoxLayout *v_layout = new QVBoxLayout();
     QWidget *central_widget = new QWidget(this);
     central_widget->setLayout(v_layout);
     this->setCentralWidget(central_widget);
 
     QHBoxLayout *layout = new QHBoxLayout();
-    layout->addWidget(m_add_file_button);
-    layout->addWidget(m_move_up_button);
-    layout->addWidget(m_move_down_button);
-    layout->addWidget(m_remove_file_button);
-
-    QFrame *separator = new QFrame(this);
-    separator->setFrameShape(QFrame::VLine);
-    separator->setLineWidth(1);
-    layout->addWidget(separator);
-
+    layout->addWidget(toolbar);
     layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
-    layout->addWidget(m_multipage_profiles_button);
-    layout->addWidget(m_about_button);
+    layout->addWidget(main_menu_button);
     v_layout->addLayout(layout);
 
     v_layout->addWidget(m_files_list_view);
@@ -167,22 +183,12 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     layout->addWidget(m_output_page_count);
     layout->addWidget(m_progress_bar, 1);
     layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
-    layout->addWidget(m_generate_pdf_button);
+    layout->addWidget(generate_pdf_button);
     v_layout->addLayout(layout);
 
-    connect(m_add_file_button, SIGNAL(pressed()), this, SLOT(add_pdf_files()));
-
-    connect(m_move_up_button, SIGNAL(pressed()), this, SLOT(move_up()));
-    connect(m_move_down_button, SIGNAL(pressed()), this, SLOT(move_down()));
-    connect(m_remove_file_button, SIGNAL(pressed()), this, SLOT(remove_pdf_file()));
-
-    connect(m_multipage_profiles_button, SIGNAL(pressed()), m_multipage_profiles_manager, SLOT(show()));
-
-    connect(m_about_button, SIGNAL(pressed()), m_about_dialog, SLOT(show()));
-
-    connect(m_pdfinputfile_delegate, SIGNAL(data_edit()), this, SLOT(update_output_page_count()));
-
-    connect(m_generate_pdf_button, SIGNAL(pressed()), this, SLOT(generate_pdf_button_pressed()));
+    // Connect signals to slots
+    connect(pdfinputfile_delegate, SIGNAL(data_edit()), this, SLOT(update_output_page_count()));
+    connect(generate_pdf_button, SIGNAL(pressed()), this, SLOT(generate_pdf_button_pressed()));
 }
 
 void MainWindow::add_pdf_files()
