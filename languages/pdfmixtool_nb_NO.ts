@@ -6,7 +6,7 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="33"/>
         <source>About PDF Mix Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Om</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="43"/>
@@ -351,7 +351,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="137"/>
         <source>Main toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Hovedverktøyslinje</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="144"/>
@@ -361,7 +361,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="156"/>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Meny</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="159"/>
@@ -371,7 +371,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="161"/>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Avslutt</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="346"/>
