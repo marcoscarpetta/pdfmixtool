@@ -306,7 +306,6 @@ void MainWindow::remove_pdf_file()
 
 void MainWindow::edit_menu_activated()
 {
-    //QList<int> indexes = this->selected_indexes();
     QModelIndexList indexes = m_files_list_view->selectionModel()->selectedIndexes();
 
     if (indexes.count() == 1)
