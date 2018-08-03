@@ -16,6 +16,8 @@ SET (
     src/aboutdialog.h
     src/editmultipageprofiledialog.cpp
     src/editmultipageprofiledialog.h
+    src/editpdfentrydialog.cpp
+    src/editpdfentrydialog.h
     src/inputpdffiledelegate.cpp
     src/inputpdffiledelegate.h
     src/inputpdffilewidget.cpp

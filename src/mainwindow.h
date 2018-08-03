@@ -51,6 +51,10 @@ public slots:
 
     void remove_pdf_file();
 
+    void edit_menu_activated();
+
+    void item_mouse_pressed(const QModelIndex &index);
+
     void update_output_page_count();
 
     void generate_pdf_button_pressed();
@@ -58,6 +62,9 @@ public slots:
     void generate_pdf();
 
     void closeEvent(QCloseEvent *event);
+
+protected:
+    bool eventFilter(QObject *obj, QEvent *ev);
 
 private:
     const QList<int> selected_indexes();
@@ -71,6 +78,8 @@ private:
 
     QListView *m_files_list_view;
     QStandardItemModel *m_files_list_model;
+
+    QMenu *m_edit_menu;
 
     QMap<int, Multipage> m_custom_multipages;
 };

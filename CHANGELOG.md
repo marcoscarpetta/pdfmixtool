@@ -8,6 +8,7 @@
 
 <ul>
 <li>Keyboard shortcuts</li>
+<li>Ability to edit multiple PDF files entries at once</li>
 </ul>
 
 <h3>Known issues</h3>
