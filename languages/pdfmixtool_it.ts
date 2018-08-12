@@ -197,37 +197,37 @@
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="33"/>
         <source>Edit PDF files&apos; properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica le proprietà dei file PDF</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="36"/>
         <source>No rotation</source>
-        <translation type="unfinished">Non ruotare</translation>
+        <translation>Non ruotare</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="41"/>
         <source>Disabled</source>
-        <translation type="unfinished">Disabilitato</translation>
+        <translation>Disabilitato</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="87"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="90"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="100"/>
         <source>Multipage:</source>
-        <translation type="unfinished">Multipagina:</translation>
+        <translation>Multipagina:</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="102"/>
         <source>Rotation:</source>
-        <translation type="unfinished">Rotazione:</translation>
+        <translation>Rotazione:</translation>
     </message>
 </context>
 <context>
@@ -389,7 +389,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="143"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="145"/>

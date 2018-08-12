@@ -202,12 +202,12 @@
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="36"/>
         <source>No rotation</source>
-        <translation type="unfinished">Ingen rotasjon</translation>
+        <translation>Ingen rotasjon</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="41"/>
         <source>Disabled</source>
-        <translation type="unfinished">Avskrudd</translation>
+        <translation>Avskrudd</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="87"/>
@@ -222,12 +222,12 @@
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="100"/>
         <source>Multipage:</source>
-        <translation type="unfinished">Flersidig:</translation>
+        <translation>Flersidig:</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="102"/>
         <source>Rotation:</source>
-        <translation type="unfinished">Sideretning:</translation>
+        <translation>Sideretning:</translation>
     </message>
 </context>
 <context>

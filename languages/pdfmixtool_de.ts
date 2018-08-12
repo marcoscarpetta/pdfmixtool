@@ -202,12 +202,12 @@
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="36"/>
         <source>No rotation</source>
-        <translation type="unfinished">Keine Drehung</translation>
+        <translation>Keine Drehung</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="41"/>
         <source>Disabled</source>
-        <translation type="unfinished">Deaktiviert</translation>
+        <translation>Deaktiviert</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="87"/>
@@ -222,12 +222,12 @@
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="100"/>
         <source>Multipage:</source>
-        <translation type="unfinished">Mehrseiten:</translation>
+        <translation>Mehrseiten:</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="102"/>
         <source>Rotation:</source>
-        <translation type="unfinished">Drehung:</translation>
+        <translation>Drehung:</translation>
     </message>
 </context>
 <context>
