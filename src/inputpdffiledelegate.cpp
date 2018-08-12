@@ -19,6 +19,8 @@
 #include "inputpdffiledelegate.h"
 
 #include <QPainter>
+#include <QFileInfo>
+#include <QDir>
 
 InputPdfFileDelegate::InputPdfFileDelegate(MouseEventFilter *filter,
                                            const QMap<int, Multipage> &custom_multipages,
@@ -75,21 +77,18 @@ void InputPdfFileDelegate::paint(
 
     int font_height = fm.height();
 
-    int line_height = (int)(1.2 * font_height);
+    int line_height = static_cast<int>(1.2 * font_height);
 
     int x = option.rect.x() + option.rect.height() + 10;
     int y = option.rect.y() + line_height;
 
+    // Define fonts
     painter->setPen(text_color);
     QFont font = painter->font();
-    font.setBold(true);
-    painter->setFont(font);
-    QString filename = QString::fromStdString(pdf_file->filename());
-    painter->drawText(x, y, filename);
-    x += painter->fontMetrics().width(filename);
+    QFont bold = font;
+    bold.setBold(true);
 
-    font.setBold(false);
-    painter->setFont(font);
+    // First row minimum width
     QString file_infos = QString(" − %1 cm x %2 cm%3 − %5").arg(
                 QString::number(pdf_file->page_width()),
                 QString::number(pdf_file->page_height()),
@@ -99,6 +98,41 @@ void InputPdfFileDelegate::paint(
                 tr("%n page(s)", "", pdf_file->page_count())
                 );
 
+    int first_row = fm.boundingRect(file_infos).width();
+
+    QFileInfo fileinfo(QString::fromStdString(pdf_file->filename()));
+    QFontMetrics fmb(bold);
+    first_row += fmb.boundingRect(fileinfo.fileName()).width();
+
+    int path_available_width = option.rect.width() - (x - option.rect.x() + first_row + 30);
+    QString path = QDir::separator();
+    QStringList path_split = fileinfo.absolutePath().split(QDir::separator());
+
+    int i = path_split.size() - 1;
+
+    while (i > -1)
+    {
+        if (fm.boundingRect(path_split.at(i) + path).width() > path_available_width)
+            break;
+
+        path.prepend(path_split.at(i));
+        if (i != 0)
+            path.prepend(QDir::separator());
+
+        i--;
+    }
+
+    if (i > -1)
+        path.prepend("…");
+
+    painter->drawText(x, y, path);
+    x += fm.boundingRect(path).width();
+
+    painter->setFont(bold);
+    painter->drawText(x, y, fileinfo.fileName());
+    x += fmb.boundingRect(fileinfo.fileName()).width();
+
+    painter->setFont(font);
     painter->drawText(x, y, file_infos);
 
     y += line_height;
@@ -118,14 +152,14 @@ void InputPdfFileDelegate::paint(
     if (pdf_file->pages_filter_errors().size() > 0)
     {
         //painter->setPen(QPen(QColor(190, 20, 20), 2, Qt::DotLine));
-        QRect rect(x - 3, y - font_height + 3, fm.width(pages) + 6, font_height + 5);
+        QRect rect(x - 3, y - font_height + 3, fm.boundingRect(pages).width() + 6, font_height + 5);
         painter->fillRect(rect, QColor(255,150,150));
         painter->setPen(option.palette.text().color());
         painter->drawRect(rect);
     }
     else if (pdf_file->pages_filter_warnings().size() > 0)
     {
-        QRect rect(x - 3, y - font_height + 3, fm.width(pages) + 6, font_height + 5);
+        QRect rect(x - 3, y - font_height + 3, fm.boundingRect(pages).width() + 6, font_height + 5);
         painter->fillRect(rect, QColor(255,255,150));
         painter->setPen(option.palette.text().color());
         painter->drawRect(rect);
@@ -139,7 +173,7 @@ void InputPdfFileDelegate::paint(
     y += line_height;
 
     y = option.rect.y() + 2 * line_height;
-    x += std::max(fm.width(pages), fm.width(rotation)) + 40;
+    x += std::max(fm.boundingRect(pages).width(), fm.boundingRect(rotation).width()) + 40;
     painter->drawText(x, y, multipage);
     y += line_height;
 }
@@ -155,23 +189,13 @@ QSize InputPdfFileDelegate::sizeHint(
 
     int font_height = fm.height();
 
-    int line_height = (int)(1.2 * font_height);
+    int line_height = static_cast<int>(1.2 * font_height);
 
     int h = line_height * 3 + 15;
 
     int w = h + 20;
 
-    QString file_infos = QString(" − %1 cm x %2 cm%3 − %5").arg(
-                QString::number(pdf_file->page_width()),
-                QString::number(pdf_file->page_height()),
-                pdf_file->paper_size().name.size() > 0 ?
-                        QString(" (") + pdf_file->paper_size().name.c_str() + " " +
-                        (pdf_file->paper_size().portrait ? tr("portrait") : tr("landscape")) + ")" : " ",
-                tr("%n page(s)", "", pdf_file->page_count())
-                );
-
-    int first_row = fm.width(file_infos);
-
+    // Second row width
     QString pages_filter = QString::fromStdString(pdf_file->pages_filter_string());
     if (pages_filter.size() == 0)
         pages_filter = tr("All");
@@ -183,13 +207,27 @@ QSize InputPdfFileDelegate::sizeHint(
                     tr("Disabled"));
     QString rotation = tr("Rotation:") + QString(" %1°").arg(pdf_file->rotation());
 
-    int second_row = std::max(fm.width(pages), fm.width(rotation)) + 40 + fm.width(multipage);
+    int second_row = std::max(
+                fm.boundingRect(pages).width(),
+                fm.boundingRect(rotation).width()) + 40 + fm.boundingRect(multipage).width();
 
+    // First row minimum width
+    QString file_infos = QString(" − %1 cm x %2 cm%3 − %5").arg(
+                QString::number(pdf_file->page_width()),
+                QString::number(pdf_file->page_height()),
+                pdf_file->paper_size().name.size() > 0 ?
+                        QString(" (") + pdf_file->paper_size().name.c_str() + " " +
+                        (pdf_file->paper_size().portrait ? tr("portrait") : tr("landscape")) + ")" : " ",
+                tr("%n page(s)", "", pdf_file->page_count())
+                );
+
+    int first_row = fm.boundingRect(file_infos).width();
+
+    QFileInfo fileinfo(QString::fromStdString(pdf_file->filename()));
     QFont font = option.font;
     font.setBold(true);
-    fm = QFontMetrics(font);
-    QString filename = QString::fromStdString(pdf_file->filename());
-    first_row += fm.width(filename);
+    QFontMetrics fmb(font);
+    first_row += fmb.boundingRect(fileinfo.fileName()).width() + 30;
 
     w += std::max(first_row, second_row);
 
@@ -215,6 +253,7 @@ QWidget *InputPdfFileDelegate::createEditor(
 
 void InputPdfFileDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
+    Q_UNUSED(index)
     InputPdfFileWidget *w = static_cast<InputPdfFileWidget *>(editor);
     w->set_data_from_pdf_input_file();
 }
@@ -225,6 +264,9 @@ void InputPdfFileDelegate::setModelData(
         const QModelIndex &index
         ) const
 {
+    Q_UNUSED(editor)
+    Q_UNUSED(model)
+    Q_UNUSED(index)
     InputPdfFileWidget *w = static_cast<InputPdfFileWidget *>(editor);
     w->set_data_to_pdf_input_file();
 

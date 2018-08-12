@@ -453,7 +453,7 @@ PdfMemDocument *PdfTranslator::impose(const Multipage &multipage)
 
         ostringstream buffer;
 
-        for (unsigned int i = 0; i < plate_page_count; i++)
+        for (int i = 0; i < plate_page_count; i++)
         {
             // 					std::cerr<<curRecord.sourcePage<< " " << curRecord.destPage<<std::endl;
             if(current_page < pcount)

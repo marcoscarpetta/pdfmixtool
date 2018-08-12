@@ -45,6 +45,9 @@ double draw_preview_page(QPainter *painter,
         break;
     case Multipage::Right:
         dx = max_width / 2 - w;
+        break;
+    default:
+        dx = - max_width / 2;
     }
 
     switch (v_alignment)
@@ -57,6 +60,9 @@ double draw_preview_page(QPainter *painter,
         break;
     case Multipage::Bottom:
         dy = max_height / 2 - h;
+        break;
+    default:
+        dy = - max_height / 2;
     }
 
     painter->drawRect(dx, dy, w, h);
@@ -68,7 +74,7 @@ double draw_preview_page(QPainter *painter,
         font.setPixelSize(h / 5 * 4);
         painter->setFont(font);
 
-        painter->drawText(dx + w / 2 - painter->fontMetrics().width(text) / 2,
+        painter->drawText(dx + w / 2 - painter->fontMetrics().boundingRect(text).width() / 2,
                           dy + h / 2 + font.pixelSize() / 2,
                           text);
     }

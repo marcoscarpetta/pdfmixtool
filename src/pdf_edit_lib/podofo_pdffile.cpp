@@ -158,7 +158,9 @@ void PoDoFoInputPdfFile::run(OutputPdfFile *output_file)
         added_pages = this->output_page_count();
         podofo_file->InsertPages(*tmp, 0, added_pages);
 
-        delete tmp, old, translator;
+        delete tmp;
+        delete old;
+        delete translator;
     }
 
     // Set pages rotation

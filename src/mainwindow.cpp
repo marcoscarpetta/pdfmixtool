@@ -123,7 +123,9 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
 
     m_progress_bar->hide();
 
-    InputPdfFileDelegate *pdfinputfile_delegate = new InputPdfFileDelegate(filter, m_custom_multipages, this);
+    InputPdfFileDelegate *pdfinputfile_delegate = new InputPdfFileDelegate(filter,
+                                                                           m_custom_multipages,
+                                                                           this);
 
     m_files_list_view->setWordWrap(false);
     m_files_list_view->setSelectionBehavior(QAbstractItemView::SelectItems);

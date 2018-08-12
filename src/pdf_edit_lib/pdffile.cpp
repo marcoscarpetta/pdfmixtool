@@ -47,12 +47,12 @@ const std::string &InputPdfFile::filename()
     return m_filename;
 }
 
-float InputPdfFile::page_width()
+double InputPdfFile::page_width()
 {
     return m_page_width;
 }
 
-float InputPdfFile::page_height()
+double InputPdfFile::page_height()
 {
     return m_page_height;
 }

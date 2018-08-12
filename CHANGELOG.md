@@ -11,6 +11,12 @@
 <li>Ability to edit multiple PDF files entries at once</li>
 </ul>
 
+<h3>Changed</h3>
+
+<ul>
+<li>Improve PDF files listing appearence</li>
+</ul>
+
 <h3>Known issues</h3>
 
 <ul>

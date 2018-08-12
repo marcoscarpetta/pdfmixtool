@@ -28,8 +28,8 @@ const double cm = inch / 2.54;
 const double mm = cm / 10;
 
 struct PaperSize {
-    float width;
-    float height;
+    double width;
+    double height;
     std::string name;
     bool portrait;
 };

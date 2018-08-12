@@ -33,6 +33,7 @@ class PoDoFoOutputPdfFile : public OutputPdfFile
 {
 public:
     PoDoFoOutputPdfFile();
+
     ~PoDoFoOutputPdfFile();
 
     void write(const std::string &filename);
@@ -45,6 +46,7 @@ class PoDoFoInputPdfFile : public InputPdfFile
 public:
     PoDoFoInputPdfFile(const std::string &filename);
     PoDoFoInputPdfFile(InputPdfFile *pdf_file);
+
     ~PoDoFoInputPdfFile();
 
     int page_count();

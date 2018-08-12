@@ -29,6 +29,8 @@ class OutputPdfFile
 public:
     OutputPdfFile();
 
+    virtual ~OutputPdfFile() {}
+
     virtual void write(const std::string &filename) = 0;
 };
 
@@ -39,11 +41,13 @@ public:
     InputPdfFile(const std::string &filename);
     InputPdfFile(InputPdfFile *pdf_file);
 
+    virtual ~InputPdfFile() {}
+
     virtual const std::string &filename();
 
-    virtual float page_width();
+    virtual double page_width();
 
-    virtual float page_height();
+    virtual double page_height();
 
     virtual const PaperSize &paper_size();
 
@@ -74,8 +78,8 @@ public:
 protected:
     std::string m_filename;
 
-    float m_page_width;
-    float m_page_height;
+    double m_page_width;
+    double m_page_height;
     PaperSize m_paper_size;
 
     std::list<std::pair<int, int>> m_filters;
