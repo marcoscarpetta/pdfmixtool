@@ -9,6 +9,8 @@
 <ul>
 <li>Keyboard shortcuts</li>
 <li>Ability to edit multiple PDF files entries at once</li>
+<li>Add French translation</li>
+<li>Add Spanish translation</li>
 </ul>
 
 <h3>Changed</h3>
