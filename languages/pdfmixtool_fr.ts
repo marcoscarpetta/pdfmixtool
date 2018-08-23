@@ -134,17 +134,17 @@
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="110"/>
         <source>Custom size:</source>
-        <translation>Taille personnalisée :</translation>
+        <translation>Taille personnalisée:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="113"/>
         <source>Width:</source>
-        <translation>Largeur :</translation>
+        <translation>Largeur:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="116"/>
         <source>Height:</source>
-        <translation>Hauteur :</translation>
+        <translation>Hauteur:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="124"/>
@@ -154,22 +154,22 @@
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="126"/>
         <source>Rows:</source>
-        <translation>Lignes :</translation>
+        <translation>Lignes:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="129"/>
         <source>Columns:</source>
-        <translation>Colonnes :</translation>
+        <translation>Colonnes:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="132"/>
         <source>Rotation:</source>
-        <translation>Rotation :</translation>
+        <translation>Rotation:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="135"/>
         <source>Spacing:</source>
-        <translation>Écartement :</translation>
+        <translation>Écartement:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="143"/>
@@ -179,12 +179,12 @@
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="145"/>
         <source>Horizontal:</source>
-        <translation>Horizontal :</translation>
+        <translation>Horizontal:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="148"/>
         <source>Vertical:</source>
-        <translation>Vertical :</translation>
+        <translation>Vertical:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="156"/>
@@ -222,12 +222,12 @@
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="100"/>
         <source>Multipage:</source>
-        <translation>Multipage :</translation>
+        <translation>Multipage:</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="102"/>
         <source>Rotation:</source>
-        <translation>Rotation :</translation>
+        <translation>Rotation:</translation>
     </message>
 </context>
 <context>
@@ -269,19 +269,19 @@
         <location filename="../src/inputpdffiledelegate.cpp" line="146"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="204"/>
         <source>Multipage:</source>
-        <translation type="unfinished">Multipage :</translation>
+        <translation>Multipage:</translation>
     </message>
     <message>
         <location filename="../src/inputpdffiledelegate.cpp" line="149"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="207"/>
         <source>Disabled</source>
-        <translation type="unfinished">Désactivé</translation>
+        <translation>Désactivé</translation>
     </message>
     <message>
         <location filename="../src/inputpdffiledelegate.cpp" line="150"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="208"/>
         <source>Rotation:</source>
-        <translation type="unfinished">Rotation :</translation>
+        <translation>Rotation:</translation>
     </message>
 </context>
 <context>
@@ -289,12 +289,12 @@
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="176"/>
         <source>Disabled</source>
-        <translation type="unfinished">Désactivé</translation>
+        <translation>Désactivé</translation>
     </message>
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="189"/>
         <source>No rotation</source>
-        <translation type="unfinished">Sans rotation</translation>
+        <translation>Sans rotation</translation>
     </message>
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="195"/>
@@ -304,12 +304,12 @@
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="197"/>
         <source>Multipage:</source>
-        <translation type="unfinished">Multipage :</translation>
+        <translation>Multipage:</translation>
     </message>
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="199"/>
         <source>Rotation:</source>
-        <translation type="unfinished">Rotation :</translation>
+        <translation>Rotation:</translation>
     </message>
 </context>
 <context>
@@ -337,7 +337,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="168"/>
         <source>About</source>
-        <translation type="unfinished">À propos</translation>
+        <translation>À propos</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="172"/>
@@ -476,7 +476,7 @@
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="147"/>
         <source>Disabled</source>
-        <translation type="unfinished">Désactivé</translation>
+        <translation>Désactivé</translation>
     </message>
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="149"/>
