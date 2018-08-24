@@ -170,8 +170,10 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     main_menu_button->setMenu(main_menu);
 
     QPushButton *generate_pdf_button = new QPushButton(QIcon::fromTheme("document-save-as"), tr("Generate PDF"), this);
-    generate_pdf_button->setShortcut(QKeySequence::Save);
-    generate_pdf_button->setToolTip(QString(TOOLTIP_STRING).arg(generate_pdf_button->text(), generate_pdf_button->shortcut().toString()));
+    QAction *generate_pdf_action = new QAction(tr("Generate PDF"), generate_pdf_button);
+    generate_pdf_action->setShortcut(QKeySequence::Save);
+    generate_pdf_button->addAction(generate_pdf_action);
+    generate_pdf_button->setToolTip(QString(TOOLTIP_STRING).arg(generate_pdf_button->text(), generate_pdf_action->shortcut().toString()));
 
     // Add widgets to the main window
     QVBoxLayout *v_layout = new QVBoxLayout();
@@ -197,7 +199,8 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     // Connect signals to slots
     connect(m_files_list_view, SIGNAL(pressed(QModelIndex)), this, SLOT(item_mouse_pressed(QModelIndex)));
     connect(pdfinputfile_delegate, SIGNAL(data_edit()), this, SLOT(update_output_page_count()));
-    connect(generate_pdf_button, SIGNAL(pressed()), this, SLOT(generate_pdf_button_pressed()));
+    connect(generate_pdf_button, SIGNAL(released()), this, SLOT(generate_pdf_button_pressed()));
+    connect(generate_pdf_action, SIGNAL(triggered(bool)), this, SLOT(generate_pdf_button_pressed()));
 }
 
 void MainWindow::add_pdf_files()
