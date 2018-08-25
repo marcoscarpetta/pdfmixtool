@@ -21,12 +21,12 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="65"/>
         <source>An application to split, merge, rotate and mix PDF files.</source>
-        <translation>Программа для разделения, слияния, вращения и соединения PDF-файлов.</translation>
+        <translation>Программа для разбиения, объединения, поворота и компоновки PDF файлов.</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="66"/>
         <source>Website</source>
-        <translation>Веб-сайт</translation>
+        <translation>Вебсайт</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="73"/>
