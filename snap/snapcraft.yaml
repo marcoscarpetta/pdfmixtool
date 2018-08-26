@@ -11,6 +11,7 @@ confinement: strict
 apps:
   pdfmixtool:
     command: desktop-launch $SNAP/usr/bin/pdfmixtool
+    desktop: $SNAP/usr/share/applications/eu.scarpetta.PDFMixTool.desktop
     plugs:
       - home
       - desktop
