@@ -16,6 +16,10 @@
 <td><ul><li><a href="mailto:epost@anotheragency.no">Allan Nordhøy</a></li></ul></td>
 </tr>
 <tr>
+<th>Russian</th>
+<td><ul><li><a href="mailto:abomze@mail.ru">Adolph Bomze</a></li></ul></td>
+</tr>
+<tr>
 <th>Spanish</th>
 <td><ul><li><a href="mailto:mgfuentesl@outlook.com">M. G. Fuentes</a></li></ul></td>
 </tr>

@@ -1,5 +1,5 @@
 name: pdfmixtool
-version: '0.3.3'
+version: '0.3.4'
 summary: An application to split, merge, rotate and mix PDF files
 description: |
   PDF Mix Tool is a simple and lightweight application that allows you to split, merge, rotate and mix PDF files.
