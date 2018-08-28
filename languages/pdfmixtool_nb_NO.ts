@@ -197,7 +197,7 @@
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="33"/>
         <source>Edit PDF files&apos; properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Rediger PDF-filers egenskaper</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="36"/>
@@ -212,12 +212,12 @@
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="87"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="90"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="100"/>
@@ -390,7 +390,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="143"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Rediger</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="145"/>
