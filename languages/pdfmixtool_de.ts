@@ -197,7 +197,7 @@
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="33"/>
         <source>Edit PDF files&apos; properties</source>
-        <translation>Ändere Eigenschaften der PDF-Dateien</translation>
+        <translation>Bearbeite Eigenschaften der PDF-Dateien</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="36"/>
