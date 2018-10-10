@@ -8,6 +8,7 @@
 
 <ul>
 <li>Add Japanese translation</li>
+<li>Add Portuguese (Brazil) translation</li>
 <li>Add Russian translation</li>
 </ul>
 

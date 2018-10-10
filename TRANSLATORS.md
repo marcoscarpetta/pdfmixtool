@@ -20,6 +20,10 @@
 <td><ul><li><a href="mailto:epost@anotheragency.no">Allan Nordhøy</a></li></ul></td>
 </tr>
 <tr>
+<th>Portuguese (Brazil)</th>
+<td><ul><li><a href="mailto:fga.fulvio@gmail.com">Fúlvio Alves</a></li></ul></td>
+</tr>
+<tr>
 <th>Russian</th>
 <td><ul><li><a href="mailto:abomze@mail.ru">Adolph Bomze</a></li></ul></td>
 </tr>
