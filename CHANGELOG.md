@@ -2,7 +2,7 @@
 
 <h2>Version 0.3.4</h2>
 
-<p><strong>Release date:</strong> unreleased</p>
+<p><strong>Release date:</strong> 2018-11-09</p>
 
 <h3>Added</h3>
 

@@ -254,9 +254,11 @@
         <location filename="../src/inputpdffiledelegate.cpp" line="98"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="221"/>
         <source>%n page(s)</source>
-        <translation><numerusform>%n página(s)</numerusform>
-        <numerusform>%n páginas</numerusform>
-        </translation></message>
+        <translation>
+            <numerusform>%n página(s)</numerusform>
+            <numerusform>%n páginas</numerusform>
+        </translation>
+    </message>
     <message>
         <location filename="../src/inputpdffiledelegate.cpp" line="145"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="203"/>
