@@ -1,5 +1,22 @@
 <h1>Changelog</h1>
 
+<h2>Version 0.3.5</h2>
+
+<p><strong>Release date:</strong> unreleased</p>
+
+<h3>Added</h3>
+
+<ul>
+<li>Add Portuguese translation</li>
+<li>Add Turkish translation</li>
+</ul>
+
+<h3>Known issues</h3>
+
+<ul>
+<li>Multipage function sometimes produces PDF files with defects</li>
+</ul>
+
 <h2>Version 0.3.4</h2>
 
 <p><strong>Release date:</strong> 2018-11-09</p>

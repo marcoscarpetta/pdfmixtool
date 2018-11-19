@@ -20,6 +20,10 @@
 <td><ul><li><a href="mailto:epost@anotheragency.no">Allan Nordhøy</a></li></ul></td>
 </tr>
 <tr>
+<th>Portuguese</th>
+<td><ul><li><a href="mailto:ssantos@web.de">ssantos</a></li></ul></td>
+</tr>
+<tr>
 <th>Portuguese (Brazil)</th>
 <td><ul><li><a href="mailto:fga.fulvio@gmail.com">Fúlvio Alves</a></li></ul></td>
 </tr>
@@ -30,5 +34,9 @@
 <tr>
 <th>Spanish</th>
 <td><ul><li><a href="mailto:mgfuentesl@outlook.com">M. G. Fuentes</a></li></ul></td>
+</tr>
+<tr>
+<th>Turkish</th>
+<td><ul><li><a href="mailto:makcan@gmail.com">MESUT AKCAN</a></li></ul></td>
 </tr>
 </table>
