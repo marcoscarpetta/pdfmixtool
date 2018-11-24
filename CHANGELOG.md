@@ -7,6 +7,8 @@
 <h3>Added</h3>
 
 <ul>
+<li>Add Dutch translation</li>
+<li>Add Indonesian translation</li>
 <li>Add Portuguese translation</li>
 <li>Add Turkish translation</li>
 </ul>

@@ -1,11 +1,19 @@
 <table>
 <tr>
+<th>Dutch</th>
+<td><ul><li><a href="mailto:vistausss@outlook.com">Heimen Stoffels</a></li></ul></td>
+</tr>
+<tr>
 <th>French</th>
 <td><ul><li><a href="mailto:31b32@tutanota.com">Gereko</a></li></ul></td>
 </tr>
 <tr>
 <th>German</th>
 <td><ul><li><a href="mailto:johanneskeyser@posteo.de">Johannes Keyser</a></li></ul></td>
+</tr>
+<tr>
+<th>Indonesian</th>
+<td><ul><li><a href="mailto:ditokpl@gmail.com">ditokp</a></li></ul></td>
 </tr>
 <tr>
 <th>Italian</th>
