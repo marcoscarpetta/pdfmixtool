@@ -41,7 +41,12 @@
 </tr>
 <tr>
 <th>Spanish</th>
-<td><ul><li><a href="mailto:mgfuentesl@outlook.com">M. G. Fuentes</a></li></ul></td>
+<td>
+<ul>
+<li><a href="mailto:mgfuentesl@outlook.com">M. G. Fuentes</a></li>
+<li><a href="https://gitlab.com/xoan">Xoán Sampaíño</a></li>
+</ul>
+</td>
 </tr>
 <tr>
 <th>Turkish</th>
