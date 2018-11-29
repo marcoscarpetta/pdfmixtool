@@ -21,12 +21,12 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="65"/>
         <source>An application to split, merge, rotate and mix PDF files.</source>
-        <translation>Aplicación para separar, añadir, rotar y mezclar archivos PDF.</translation>
+        <translation>Una aplicación para dividir, unir, rotar y mezclar archivos PDF.</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="66"/>
         <source>Website</source>
-        <translation>Sito Web</translation>
+        <translation>Sito web</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="73"/>
@@ -46,7 +46,7 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="100"/>
         <source>Credits</source>
-        <translation>Creditos</translation>
+        <translation>Créditos</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="118"/>
@@ -56,7 +56,7 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="128"/>
         <source>Submit a pull request</source>
-        <translation>Presentar una solicitud de extracción</translation>
+        <translation>Enviar una solicitud de extracción</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="129"/>
@@ -66,12 +66,12 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="130"/>
         <source>Help translating</source>
-        <translation>Ayuda traduciendo</translation>
+        <translation>Ayudar traduciendo</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="137"/>
         <source>Contribute</source>
-        <translation>Contribuir o Donar</translation>
+        <translation>Contribuir</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="153"/>
@@ -96,7 +96,7 @@
         <location filename="../src/editmultipageprofiledialog.cpp" line="61"/>
         <location filename="../src/editmultipageprofiledialog.cpp" line="65"/>
         <source>Center</source>
-        <translation>Centro o centrar</translation>
+        <translation>Centro</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="62"/>
@@ -108,13 +108,13 @@
         <location filename="../src/editmultipageprofiledialog.cpp" line="64"/>
         <location filename="../src/editmultipageprofiledialog.cpp" line="162"/>
         <source>Top</source>
-        <translation>Tope</translation>
+        <translation>Arriba</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="66"/>
         <location filename="../src/editmultipageprofiledialog.cpp" line="164"/>
         <source>Bottom</source>
-        <translation>Fondo</translation>
+        <translation>Abajo</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="97"/>
@@ -174,7 +174,7 @@
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="143"/>
         <source>Pages alignment</source>
-        <translation>Alineamiento de la página</translation>
+        <translation>Alineación de página</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="145"/>
@@ -207,7 +207,7 @@
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="41"/>
         <source>Disabled</source>
-        <translation>Incapacitado</translation>
+        <translation>Deshabilitado</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="87"/>
@@ -222,7 +222,7 @@
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="100"/>
         <source>Multipage:</source>
-        <translation>Múltiples  páginas:</translation>
+        <translation>Página múltiple:</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="102"/>
@@ -255,8 +255,8 @@
         <location filename="../src/inputpdffiledelegate.cpp" line="221"/>
         <source>%n page(s)</source>
         <translation>
-            <numerusform>%n Página</numerusform>
-            <numerusform>%n Páginas</numerusform>
+            <numerusform>%n página</numerusform>
+            <numerusform>%n páginas</numerusform>
         </translation>
     </message>
     <message>
@@ -275,7 +275,7 @@
         <location filename="../src/inputpdffiledelegate.cpp" line="149"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="207"/>
         <source>Disabled</source>
-        <translation>Incapacitado</translation>
+        <translation>Deshabilitado</translation>
     </message>
     <message>
         <location filename="../src/inputpdffiledelegate.cpp" line="150"/>
@@ -289,7 +289,7 @@
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="176"/>
         <source>Disabled</source>
-        <translation>Incapacitado</translation>
+        <translation>Deshabilitado</translation>
     </message>
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="189"/>
@@ -332,7 +332,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="153"/>
         <source>Remove file</source>
-        <translation>Remover el archivo</translation>
+        <translation>Quitar el archivo</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="168"/>
@@ -384,7 +384,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="169"/>
         <source>Exit</source>
-        <translation>Salida o salir</translation>
+        <translation>Salir</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="212"/>
@@ -405,7 +405,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="382"/>
         <source>&lt;li&gt;Invalid character &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</source>
-        <translation>&lt;li&gt;Carácter inválido&quot;&lt;b&gt;%1&lt;/b&gt;&quot; en el filtro de páginas del archivo&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</translation>
+        <translation>&lt;li&gt;Caracter inválido&quot;&lt;b&gt;%1&lt;/b&gt;&quot; en el filtro de páginas del archivo&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="388"/>
@@ -435,7 +435,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="447"/>
         <source>Save PDF file</source>
-        <translation>Salvar el archivo PDF</translation>
+        <translation>Guardar archivo PDF</translation>
     </message>
 </context>
 <context>
@@ -443,7 +443,7 @@
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="31"/>
         <source>New profile…</source>
-        <translation>Nuevo perfil…</translation>
+        <translation>Perfil nuevo…</translation>
     </message>
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="32"/>
@@ -453,7 +453,7 @@
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="37"/>
         <source>Manage multipage profiles</source>
-        <translation>Manejar perfiles de página múltiple</translation>
+        <translation>Gestionar perfiles de página múltiple</translation>
     </message>
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="94"/>
@@ -472,12 +472,12 @@
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="142"/>
         <source>Profile name can not be empty.</source>
-        <translation>El nombre del perfil no puede estar vacio.</translation>
+        <translation>El nombre del perfil no puede estar vacío.</translation>
     </message>
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="147"/>
         <source>Disabled</source>
-        <translation>Incapacitado o apagado</translation>
+        <translation>Deshabilitado</translation>
     </message>
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="149"/>
