@@ -7,7 +7,7 @@ build_mingw64:
     - export PKG_CONFIG_LIBDIR="/usr/x86_64-w64-mingw32/sys-root/mingw/lib/pkgconfig:/usr/x86_64-w64-mingw32/sys-root/mingw/share/pkgconfig"
     - export PATH=/usr/x86_64-w64-mingw32/bin:$PATH
     - mkdir -p x86_64-w64-mingw32 mingw64-build; cd x86_64-w64-mingw32
-    - cmake .. -DCMAKE_TOOLCHAIN_FILE=/usr/share/mingw/toolchain-mingw64.cmake -DCMAKE_INSTALL_PREFIX=/builds/${CI_PROJECT_PATH}/mingw64-build DCMAKE_EXE_LINKER_FLAGS="-static-libgcc -static-libstdc++ -static"
+    - cmake .. -DCMAKE_TOOLCHAIN_FILE=/usr/share/mingw/toolchain-mingw64.cmake -DCMAKE_INSTALL_PREFIX=/builds/${CI_PROJECT_PATH}/mingw64-build -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc -static-libstdc++ -static"
     - make; make install
   artifacts:
     expire_in: 14d
