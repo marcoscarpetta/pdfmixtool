@@ -9,6 +9,7 @@ build_mingw64:
     - mkdir -p x86_64-w64-mingw32 mingw64-build; cd x86_64-w64-mingw32
     - cmake .. -DCMAKE_TOOLCHAIN_FILE=/usr/share/mingw/toolchain-mingw64.cmake -DCMAKE_INSTALL_PREFIX=/builds/${CI_PROJECT_PATH}/mingw64-build
     - make; make install
+    - cp -r /usr/x86_64-w64-mingw32/sys-root/mingw/lib /builds/${CI_PROJECT_PATH}/mingw64-build/
     - cp /usr/x86_64-w64-mingw32/sys-root/mingw/bin/* /builds/${CI_PROJECT_PATH}/mingw64-build/bin/
   artifacts:
     expire_in: 14d
