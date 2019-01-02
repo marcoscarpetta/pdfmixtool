@@ -28,7 +28,6 @@ parts:
       - build-essential
       - qtbase5-dev
       - qttools5-dev-tools
-      - discount
     after: [desktop-qt5, libpodofo]
   libpodofo:
     plugin: cmake
