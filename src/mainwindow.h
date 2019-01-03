@@ -53,6 +53,8 @@ public slots:
 
     void edit_menu_activated();
 
+    void view_menu_activated();
+
     void item_mouse_pressed(const QModelIndex &index);
 
     void update_output_page_count();

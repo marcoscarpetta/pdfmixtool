@@ -27,6 +27,7 @@
 #include <QPushButton>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QDesktopServices>
 
 #include "multipageprofilesmanager.h"
 #include "aboutdialog.h"
@@ -141,6 +142,7 @@ MainWindow::MainWindow(MouseEventFilter *filter, QWidget *parent) :
     m_files_list_view->viewport()->installEventFilter(this);
 
     m_edit_menu->addAction(tr("Edit"), this, SLOT(edit_menu_activated()));
+    m_edit_menu->addAction(tr("View"), this, SLOT(view_menu_activated()));
 
     QToolBar *toolbar = new QToolBar(tr("Main toolbar"), this);
     toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
@@ -326,6 +328,19 @@ void MainWindow::edit_menu_activated()
     }
 
     this->update_output_page_count();
+}
+
+void MainWindow::view_menu_activated()
+{
+    QModelIndexList indexes = m_files_list_view->selectionModel()->selectedIndexes();
+    for (int i=0; i < indexes.count(); i++)
+    {
+        QDesktopServices::openUrl(QString("file://") +
+                                  m_files_list_model
+                                  ->itemFromIndex(indexes[i])
+                                  ->data(PDF_FILE_ROLE).value<InputPdfFile *>()->filename().c_str()
+                                  );
+    }
 }
 
 void MainWindow::item_mouse_pressed(const QModelIndex &index) //eventfilter
