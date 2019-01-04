@@ -202,7 +202,7 @@
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="36"/>
         <source>No rotation</source>
-        <translation>回転しない</translation>
+        <translation>回転なし</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="41"/>
@@ -293,7 +293,7 @@
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="189"/>
         <source>No rotation</source>
-        <translation>回転しない</translation>
+        <translation>回転なし</translation>
     </message>
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="195"/>
@@ -368,7 +368,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="145"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>表示</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="147"/>
