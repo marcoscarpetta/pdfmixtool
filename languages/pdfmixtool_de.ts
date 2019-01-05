@@ -369,7 +369,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="145"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="147"/>
