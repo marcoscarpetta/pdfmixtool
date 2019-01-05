@@ -395,7 +395,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="145"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="147"/>
