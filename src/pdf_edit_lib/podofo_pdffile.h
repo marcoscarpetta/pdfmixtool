@@ -36,6 +36,10 @@ public:
 
     ~PoDoFoOutputPdfFile();
 
+    void clear_outline();
+
+    void add_outline_item(int page, const std::string &title);
+
     void write(const std::string &filename);
 
     PoDoFo::PdfMemDocument *output_file;

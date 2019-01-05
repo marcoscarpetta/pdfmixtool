@@ -30,6 +30,29 @@ PoDoFoOutputPdfFile::~PoDoFoOutputPdfFile()
     delete output_file;
 }
 
+void PoDoFoOutputPdfFile::clear_outline()
+{
+    // FIXME Find a cleaner way to clear the document outline
+    PoDoFo::PdfOutlines *outline = this->output_file->GetOutlines(true);
+
+    outline->CreateRoot("");
+    PoDoFo::PdfOutlineItem *item = outline->First();
+
+    while (item)
+    {
+        item->SetTitle("");
+        item = item->Next();
+    }
+}
+
+void PoDoFoOutputPdfFile::add_outline_item(int page, const std::string &title)
+{
+    this->output_file->GetOutlines()->Last()->CreateNext(
+                title.c_str(),
+                PoDoFo::PdfDestination(output_file->GetPage(page))
+                );
+}
+
 void PoDoFoOutputPdfFile::write(const std::string &filename)
 {
     output_file->Write(filename.c_str());

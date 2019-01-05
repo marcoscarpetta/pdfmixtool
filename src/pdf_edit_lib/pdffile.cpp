@@ -17,6 +17,7 @@
  */
 
 #include "pdffile.h"
+#include <QFileInfo>
 
 OutputPdfFile::OutputPdfFile()
 {
@@ -34,12 +35,15 @@ InputPdfFile::InputPdfFile(const std::string &filename) :
     InputPdfFile()
 {
     m_filename = filename;
+
+    QFileInfo fileinfo(QString::fromStdString(filename));
+    m_outline_title = fileinfo.fileName().toStdString();
 }
 
 InputPdfFile::InputPdfFile(InputPdfFile *pdf_file) :
-    InputPdfFile()
+    InputPdfFile(pdf_file->filename())
 {
-    m_filename = pdf_file->m_filename;
+
 }
 
 const std::string &InputPdfFile::filename()
@@ -234,4 +238,14 @@ void InputPdfFile::set_rotation(int rotation)
 int InputPdfFile::rotation()
 {
     return m_rotation;
+}
+
+void InputPdfFile::set_outline_title(const std::string &title)
+{
+    m_outline_title = title;
+}
+
+const std::string &InputPdfFile::outline_title()
+{
+    return m_outline_title;
 }

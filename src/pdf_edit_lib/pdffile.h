@@ -31,6 +31,10 @@ public:
 
     virtual ~OutputPdfFile() {}
 
+    virtual void clear_outline() = 0;
+
+    virtual void add_outline_item(int page, const std::string &title) = 0;
+
     virtual void write(const std::string &filename) = 0;
 };
 
@@ -73,6 +77,10 @@ public:
 
     virtual int rotation();
 
+    virtual void set_outline_title(const std::string &title);
+
+    virtual const std::string &outline_title();
+
     virtual void run(OutputPdfFile *output_file) = 0;
 
 protected:
@@ -90,6 +98,8 @@ protected:
     Multipage m_multipage;
 
     int m_rotation;
+
+    std::string m_outline_title;
 };
 
 #endif // PDFFILE_H

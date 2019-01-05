@@ -473,13 +473,36 @@ void MainWindow::generate_pdf()
         OutputPdfFile *output_file = m_pdf_editor->new_output_file();
 
         // Write each file to the output file
-        for (int i=0; i<m_files_list_model->rowCount(); i++)
+        for (int i = 0; i < m_files_list_model->rowCount(); i++)
         {
             InputPdfFile *pdf_file = m_files_list_model->item(i)->data(PDF_FILE_ROLE).value<InputPdfFile *>();
 
             pdf_file->run(output_file);
 
             m_progress_bar->setValue((i+1)*100/(m_files_list_model->rowCount()+1));
+        }
+
+        // Update output document's outline
+        if (m_files_list_model->rowCount() == 1)
+        {
+            InputPdfFile *pdf_file = m_files_list_model->item(0)->data(PDF_FILE_ROLE).value<InputPdfFile *>();
+
+            if (pdf_file->output_page_count() != pdf_file->page_count())
+                output_file->clear_outline();
+        }
+        else
+        {
+            output_file->clear_outline();
+            int p = 0;
+
+            for (int i = 0; i < m_files_list_model->rowCount(); i++)
+            {
+                InputPdfFile *pdf_file = m_files_list_model->item(i)->data(PDF_FILE_ROLE).value<InputPdfFile *>();
+
+                output_file->add_outline_item(p, pdf_file->outline_title());
+
+                p += pdf_file->output_page_count();
+            }
         }
 
         // Save output file on disk

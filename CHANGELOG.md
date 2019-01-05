@@ -7,6 +7,7 @@
 <h3>Added</h3>
 
 <ul>
+<li>Add an entry in the context menu to view listed PDF files</li>
 <li>Add Dutch translation</li>
 <li>Add Indonesian translation</li>
 <li>Add Portuguese translation</li>
