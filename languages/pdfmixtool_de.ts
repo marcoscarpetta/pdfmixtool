@@ -269,7 +269,7 @@
         <location filename="../src/inputpdffiledelegate.cpp" line="146"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="204"/>
         <source>Multipage:</source>
-        <translation>Mehrseiten:</translation>
+        <translation>Mehrseitiges:</translation>
     </message>
     <message>
         <location filename="../src/inputpdffiledelegate.cpp" line="149"/>
@@ -304,7 +304,7 @@
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="197"/>
         <source>Multipage:</source>
-        <translation>Mehrseiten:</translation>
+        <translation>Mehrseitiges:</translation>
     </message>
     <message>
         <location filename="../src/inputpdffilewidget.cpp" line="199"/>
@@ -322,7 +322,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="153"/>
         <source>Move up</source>
-        <translation>Nach oben</translation>
+        <translation>Nach oben verschieben</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="154"/>
@@ -435,7 +435,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="446"/>
         <source>&lt;p&gt;The following problems were encountered while generating the PDF file:&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Die folgenden Probleme sind aufgetreten während das PDF erzeugt wurde:&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Die Erzeugung der PDF-Datei scheiterte wegen folgender Fehler:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="462"/>
