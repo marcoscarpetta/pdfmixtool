@@ -21,7 +21,7 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="65"/>
         <source>An application to split, merge, rotate and mix PDF files.</source>
-        <translation>Um programa para dividir, mesclar, girar e misturar arquivos PDF.</translation>
+        <translation>Um programa para dividir, mesclar, girar e misturar ficheiros PDF.</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="66"/>
@@ -197,7 +197,7 @@
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="33"/>
         <source>Edit PDF files&apos; properties</source>
-        <translation>Editar propriedades dos arquivos PDF</translation>
+        <translation>Editar propriedades dos ficheiros PDF</translation>
     </message>
     <message>
         <location filename="../src/editpdfentrydialog.cpp" line="36"/>
@@ -254,11 +254,9 @@
         <location filename="../src/inputpdffiledelegate.cpp" line="98"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="221"/>
         <source>%n page(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
+        <translation><numerusform>%n página(s)</numerusform>
+        <numerusform>%n páginas</numerusform>
+        </translation></message>
     <message>
         <location filename="../src/inputpdffiledelegate.cpp" line="145"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="203"/>
@@ -317,7 +315,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="152"/>
         <source>Add PDF file</source>
-        <translation>Adic. arquivo PDF</translation>
+        <translation>Adic. ficheiro PDF</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="153"/>
@@ -332,7 +330,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="155"/>
         <source>Remove file</source>
-        <translation>Remover arquivo</translation>
+        <translation>Remover ficheiro</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="170"/>
@@ -359,7 +357,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="212"/>
         <source>Select one or more PDF files to open</source>
-        <translation>Selecione um ou mais arquivos PDF para abrir</translation>
+        <translation>Selecione um ou mais ficheiros PDF para abrir</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="144"/>
@@ -369,7 +367,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="145"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="147"/>
@@ -395,7 +393,7 @@
         <location filename="../src/mainwindow.cpp" line="214"/>
         <location filename="../src/mainwindow.cpp" line="464"/>
         <source>PDF files (*.pdf)</source>
-        <translation>Arquivos PDF (*.pdf)</translation>
+        <translation>Ficheiros PDF (*.pdf)</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="364"/>
@@ -405,27 +403,27 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="374"/>
         <source>You must add at least one PDF file.</source>
-        <translation>Você deve adicionar ao menos um arquivo PDF.</translation>
+        <translation>Você deve adicionar ao menos um ficheiro PDF.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="397"/>
         <source>&lt;li&gt;Invalid character &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</source>
-        <translation>&lt;li&gt;Caractere inválido &quot;&lt;b&gt;%1&lt;/b&gt;&quot; no filtro de páginas do arquivo &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</translation>
+        <translation>&lt;li&gt;Caractere inválido &quot;&lt;b&gt;%1&lt;/b&gt;&quot; no filtro de páginas do ficheiro &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="403"/>
         <source>&lt;li&gt;Invalid interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</source>
-        <translation>&lt;li&gt;Intervalo inválido &quot;&lt;b&gt;%1&lt;/b&gt;&quot; no filtro de páginas do arquivo &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</translation>
+        <translation>&lt;li&gt;Intervalo inválido &quot;&lt;b&gt;%1&lt;/b&gt;&quot; no filtro de páginas do ficheiro &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="409"/>
         <source>&lt;li&gt;Boundaries of interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; are out of allowed interval&lt;/li&gt;</source>
-        <translation>&lt;li&gt;Limites do intervalo &quot;&lt;b&gt;%1&lt;/b&gt;&quot; no filtro de páginas do arquivo &quot;&lt;b&gt;%2&lt;/b&gt;&quot; estão fora do intervalo permitido&lt;/li&gt;</translation>
+        <translation>&lt;li&gt;Limites do intervalo &quot;&lt;b&gt;%1&lt;/b&gt;&quot; no filtro de páginas do ficheiro &quot;&lt;b&gt;%2&lt;/b&gt;&quot; estão fora do intervalo permitido&lt;/li&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="428"/>
         <source>&lt;li&gt;Interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; is overlapping with another interval&lt;/li&gt;</source>
-        <translation>&lt;li&gt;O intervalo &quot;&lt;b&gt;%1&lt;/b&gt;&quot; no filtro de páginas do arquivo &quot;&lt;b&gt;%2&lt;/b&gt;&quot; está sobreposto a outro intervalo&lt;/li&gt;</translation>
+        <translation>&lt;li&gt;O intervalo &quot;&lt;b&gt;%1&lt;/b&gt;&quot; no filtro de páginas do ficheiro &quot;&lt;b&gt;%2&lt;/b&gt;&quot; está sobreposto a outro intervalo&lt;/li&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="438"/>
@@ -435,12 +433,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="446"/>
         <source>&lt;p&gt;The following problems were encountered while generating the PDF file:&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Os seguintes problemas foram encontrados durante a geração do arquivo PDF:&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Os seguintes problemas foram encontrados durante a geração do ficheiro PDF:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="462"/>
         <source>Save PDF file</source>
-        <translation>Salvar arquivo PDF</translation>
+        <translation>Salvar ficheiro PDF</translation>
     </message>
 </context>
 <context>
