@@ -1,6 +1,6 @@
 /* Copyright (C) 2007 Pierre Marchand
  *
- * Copyright (C) 2018 Marco Scarpetta
+ * Copyright (C) 2018-2019 Marco Scarpetta
  *
  * This file is part of PDF Mix Tool.
  *
