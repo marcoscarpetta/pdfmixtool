@@ -14,6 +14,7 @@ apps:
     desktop: usr/share/applications/eu.scarpetta.PDFMixTool.desktop
     plugs:
       - home
+      - removable-media
       - desktop
       - x11
       - wayland
@@ -24,6 +25,7 @@ parts:
     plugin: cmake
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/usr]
     source: .
+    source-branch: stable
     build-packages:
       - build-essential
       - qtbase5-dev
