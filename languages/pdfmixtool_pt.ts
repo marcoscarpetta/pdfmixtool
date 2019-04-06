@@ -6,7 +6,7 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="33"/>
         <source>About PDF Mix Tool</source>
-        <translation>Sobre PDF Mix Tool</translation>
+        <translation>Acerca de PDF Mix Tool</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="43"/>
@@ -21,17 +21,17 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="65"/>
         <source>An application to split, merge, rotate and mix PDF files.</source>
-        <translation>Um programa para dividir, mesclar, girar e misturar ficheiros PDF.</translation>
+        <translation>Uma aplicação para separar, unir, rodar e misturar ficheiros PDF.</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="66"/>
         <source>Website</source>
-        <translation>Site da web</translation>
+        <translation>Site</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="73"/>
         <source>About</source>
-        <translation>Sobre</translation>
+        <translation>Acerca</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="89"/>
@@ -56,12 +56,12 @@
     <message>
         <location filename="../src/aboutdialog.cpp" line="128"/>
         <source>Submit a pull request</source>
-        <translation>Enviar um pull request</translation>
+        <translation>Enviar um &apos;pull request&apos;</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="129"/>
         <source>Report a bug</source>
-        <translation>Informar um erro</translation>
+        <translation>Reportar um erro</translation>
     </message>
     <message>
         <location filename="../src/aboutdialog.cpp" line="130"/>
@@ -108,13 +108,13 @@
         <location filename="../src/editmultipageprofiledialog.cpp" line="64"/>
         <location filename="../src/editmultipageprofiledialog.cpp" line="162"/>
         <source>Top</source>
-        <translation>Acima</translation>
+        <translation>Cima</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="66"/>
         <location filename="../src/editmultipageprofiledialog.cpp" line="164"/>
         <source>Bottom</source>
-        <translation>Abaixo</translation>
+        <translation>Baixo</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="97"/>
@@ -134,7 +134,7 @@
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="110"/>
         <source>Custom size:</source>
-        <translation>Tam. personalizado:</translation>
+        <translation>Tamanho personalizado:</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="113"/>
@@ -149,7 +149,7 @@
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="124"/>
         <source>Pages layout</source>
-        <translation>Layout das páginas</translation>
+        <translation>Esquema das páginas</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="126"/>
@@ -174,7 +174,7 @@
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="143"/>
         <source>Pages alignment</source>
-        <translation>Alinhamento das páginas</translation>
+        <translation>Alinhamento de páginas</translation>
     </message>
     <message>
         <location filename="../src/editmultipageprofiledialog.cpp" line="145"/>
@@ -236,13 +236,13 @@
         <location filename="../src/inputpdffiledelegate.cpp" line="97"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="220"/>
         <source>portrait</source>
-        <translation>retrato</translation>
+        <translation>vertical</translation>
     </message>
     <message>
         <location filename="../src/inputpdffiledelegate.cpp" line="97"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="220"/>
         <source>landscape</source>
-        <translation>paisagem</translation>
+        <translation>horizontal</translation>
     </message>
     <message>
         <location filename="../src/inputpdffiledelegate.cpp" line="143"/>
@@ -254,9 +254,11 @@
         <location filename="../src/inputpdffiledelegate.cpp" line="98"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="221"/>
         <source>%n page(s)</source>
-        <translation><numerusform>%n página(s)</numerusform>
-        <numerusform>%n páginas</numerusform>
-        </translation></message>
+        <translation>
+            <numerusform>%n página</numerusform>
+            <numerusform>%n páginas</numerusform>
+        </translation>
+    </message>
     <message>
         <location filename="../src/inputpdffiledelegate.cpp" line="145"/>
         <location filename="../src/inputpdffiledelegate.cpp" line="203"/>
@@ -315,17 +317,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="152"/>
         <source>Add PDF file</source>
-        <translation>Adic. ficheiro PDF</translation>
+        <translation>Adicionar PDF</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="153"/>
         <source>Move up</source>
-        <translation>Subir</translation>
+        <translation>Mover p/cima</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="154"/>
         <source>Move down</source>
-        <translation>Descer</translation>
+        <translation>Mover p/baixo</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="155"/>
@@ -335,7 +337,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="170"/>
         <source>About</source>
-        <translation>Sobre</translation>
+        <translation>Acerca</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="174"/>
@@ -346,7 +348,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="111"/>
         <source>PDF Mix Tool</source>
-        <translation>Ferramenta de mixagem de PDF</translation>
+        <translation>PDF Mix Tool</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="373"/>
@@ -403,12 +405,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="374"/>
         <source>You must add at least one PDF file.</source>
-        <translation>Você deve adicionar ao menos um ficheiro PDF.</translation>
+        <translation>Tem que adicionar, pelo menos, um ficheiro PDF.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="397"/>
         <source>&lt;li&gt;Invalid character &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</source>
-        <translation>&lt;li&gt;Caractere inválido &quot;&lt;b&gt;%1&lt;/b&gt;&quot; no filtro de páginas do ficheiro &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</translation>
+        <translation>&lt;li&gt;Carácter inválido &quot;&lt;b&gt;%1&lt;/b&gt;&quot; no filtro de páginas do ficheiro &quot;&lt;b&gt;%2&lt;/b&gt;&quot;&lt;/li&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="403"/>
@@ -418,7 +420,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="409"/>
         <source>&lt;li&gt;Boundaries of interval &quot;&lt;b&gt;%1&lt;/b&gt;&quot; in pages filter of file &quot;&lt;b&gt;%2&lt;/b&gt;&quot; are out of allowed interval&lt;/li&gt;</source>
-        <translation>&lt;li&gt;Limites do intervalo &quot;&lt;b&gt;%1&lt;/b&gt;&quot; no filtro de páginas do ficheiro &quot;&lt;b&gt;%2&lt;/b&gt;&quot; estão fora do intervalo permitido&lt;/li&gt;</translation>
+        <translation>&lt;li&gt;Limites do intervalo &quot;&lt;b&gt;%1&lt;/b&gt;&quot; no filtro de páginas do ficheiro &quot;&lt;b&gt;%2&lt;/b&gt;&quot; estão fora do permitido&lt;/li&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="428"/>
@@ -433,12 +435,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="446"/>
         <source>&lt;p&gt;The following problems were encountered while generating the PDF file:&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Os seguintes problemas foram encontrados durante a geração do ficheiro PDF:&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Foram encontrados os seguintes problemas durante a geração do ficheiro PDF:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="462"/>
         <source>Save PDF file</source>
-        <translation>Salvar ficheiro PDF</translation>
+        <translation>Guardar ficheiro PDF</translation>
     </message>
 </context>
 <context>
@@ -456,7 +458,7 @@
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="37"/>
         <source>Manage multipage profiles</source>
-        <translation>Gerenciar perfis de múltiplas páginas</translation>
+        <translation>Gerir perfis de múltiplas páginas</translation>
     </message>
     <message>
         <location filename="../src/multipageprofilesmanager.cpp" line="94"/>
