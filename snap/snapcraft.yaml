@@ -24,7 +24,7 @@ parts:
   pdfmixtool:
     plugin: cmake
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/usr]
-    source: .
+    source: https://gitlab.com/scarpetta/pdfmixtool.git
     source-branch: stable
     build-packages:
       - build-essential
