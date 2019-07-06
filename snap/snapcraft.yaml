@@ -60,7 +60,7 @@ parts:
       - libidn11
       - libjpeg-turbo8
       - libfreetype6
-      - libunistring0
+      - libunistring2
   # Remote part for support of various desktop technologies
   # Refer: https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
   desktop-qt5:
