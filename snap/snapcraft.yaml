@@ -30,7 +30,7 @@ parts:
     build-packages:
       - build-essential
       - qtbase5-dev
-      - qttools5-dev-tools
+      - qttools5-dev
     after: [desktop-qt5, libpodofo]
   libpodofo:
     plugin: cmake
