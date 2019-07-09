@@ -1,5 +1,4 @@
 name: pdfmixtool
-base: core18
 version: '0.3.4'
 summary: An application to split, merge, rotate and mix PDF files
 description: |
@@ -30,7 +29,7 @@ parts:
     build-packages:
       - build-essential
       - qtbase5-dev
-      - qttools5-dev
+      - qttools5-dev-tools
     after: [desktop-qt5, libpodofo]
   libpodofo:
     plugin: cmake
@@ -60,32 +59,4 @@ parts:
       - libidn11
       - libjpeg-turbo8
       - libfreetype6
-      - libunistring2
-  # Remote part for support of various desktop technologies
-  # Refer: https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
-  desktop-qt5:
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-depth: 1
-    source-subdir: qt
-
-    plugin: make
-    make-parameters: ["FLAVOR=qt5"]
-    build-packages:
-      - build-essential
-      - qtbase5-dev
-      - dpkg-dev
-    stage-packages:
-      - libxkbcommon0
-      - ttf-ubuntu-font-family
-      - dmz-cursor-theme
-      - light-themes
-      - adwaita-icon-theme
-      - gnome-themes-standard
-      - shared-mime-info
-      - libqt5gui5
-      - libgdk-pixbuf2.0-0
-      - libqt5svg5 # for loading icon themes which are svg
-      - try: [appmenu-qt5] # not available on core18
-      - locales-all
-      - xdg-user-dirs
-      - fcitx-frontend-qt5
+      - libunistring0
