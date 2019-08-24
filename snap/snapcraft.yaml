@@ -13,12 +13,12 @@ apps:
     command: desktop-launch $SNAP/usr/bin/pdfmixtool
     desktop: usr/share/applications/eu.scarpetta.PDFMixTool.desktop
     plugs:
+      - desktop
+      - desktop-legacy
+      - wayland
+      - x11
       - home
       - removable-media
-      - desktop
-      - x11
-      - wayland
-      - opengl
 
 parts:
   pdfmixtool:
@@ -61,10 +61,10 @@ parts:
       - libfreetype6
       - libunistring0
   libqpdf:
-    plugin: make
-    override-build: |
+    plugin: make
+    override-build: |
       ./configure --prefix=/usr --disable-static
-      make
+      make
       make DESTDIR=$SNAPCRAFT_PART_INSTALL install
     source: https://github.com/qpdf/qpdf/releases/download/release-qpdf-8.4.2/qpdf-8.4.2.tar.gz
     source-type: tar
