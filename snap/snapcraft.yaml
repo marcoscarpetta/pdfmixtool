@@ -1,5 +1,5 @@
 name: pdfmixtool
-version: '0.3.4'
+version: '0.4'
 summary: An application to split, merge, rotate and mix PDF files
 description: |
   PDF Mix Tool is a simple and lightweight application that allows you to split, merge, rotate and mix PDF files.
@@ -30,7 +30,7 @@ parts:
       - build-essential
       - qtbase5-dev
       - qttools5-dev-tools
-    after: [desktop-qt5, libpodofo]
+    after: [desktop-qt5, libpodofo, libqpdf]
   libpodofo:
     plugin: cmake
     configflags:
@@ -60,3 +60,19 @@ parts:
       - libjpeg-turbo8
       - libfreetype6
       - libunistring0
+  libqpdf:
+    plugin: make
+    override-build: |
+      ./configure --prefix=/usr --disable-static
+      make
+      make DESTDIR=$SNAPCRAFT_PART_INSTALL install
+    source: https://github.com/qpdf/qpdf/releases/download/release-qpdf-8.4.2/qpdf-8.4.2.tar.gz
+    source-type: tar
+    build-packages:
+      - build-essential
+      - pkg-config
+      - libjpeg8-dev
+      - zlib1g-dev
+    stage-packages:
+      - libjpeg8
+      - zlib1g
