@@ -13,9 +13,9 @@ apps:
     command: desktop-launch $SNAP/usr/bin/pdfmixtool
     desktop: usr/share/applications/eu.scarpetta.PDFMixTool.desktop
     plugs:
-      - desktop
-      - desktop-legacy
-      - wayland
+      - desktop
+      - desktop-legacy
+      - wayland
       - x11
       - home
       - removable-media
@@ -24,7 +24,7 @@ parts:
   pdfmixtool:
     plugin: cmake
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/usr]
-    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/master/pdfmixtool-master.tar.gz
+    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/v0.4/pdfmixtool-v0.4.tar.gz
     source-type: tar
     build-packages:
       - build-essential
@@ -75,4 +75,4 @@ parts:
       - zlib1g-dev
     stage-packages:
       - libjpeg8
-      - zlib1g
+      - zlib1g 
