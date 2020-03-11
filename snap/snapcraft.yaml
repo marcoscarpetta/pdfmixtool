@@ -37,7 +37,7 @@ apps:
   pdfmixtool:
     command: $SNAP/usr/bin/pdfmixtool
     command-chain:
-      - desktop-launch
+      - bin/desktop-launch
       - bin/pdfmixtool-launch
     desktop: usr/share/applications/eu.scarpetta.PDFMixTool.desktop
 
