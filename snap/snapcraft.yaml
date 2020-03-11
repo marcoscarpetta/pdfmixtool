@@ -45,7 +45,7 @@ parts:
   pdfmixtool:
     plugin: cmake
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/usr]
-    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/v0.4/pdfmixtool-v0.4.tar.gz
+    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/master/pdfmixtool-master.tar.gz
     source-type: tar
     build-packages:
       - build-essential
@@ -133,5 +133,3 @@ parts:
     plugin: dump
     organize:
       '*': bin/
-    stage:
-      - -bin/README.*
