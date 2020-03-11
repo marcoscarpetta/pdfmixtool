@@ -57,7 +57,7 @@ parts:
       - libidn11
       - libjpeg-turbo8
       - libfreetype6
-      - libunistring0
+      - libunistring2
   libqpdf:
     plugin: make
     override-build: |
