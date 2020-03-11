@@ -24,10 +24,12 @@ parts:
   pdfmixtool:
     plugin: cmake
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/usr]
-    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/v0.4/pdfmixtool-v0.4.tar.gz
+    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/master/pdfmixtool-master.tar.gz
     source-type: tar
     build-packages:
       - build-essential
+      - qtbase5-dev
+      - qttools5-dev
     after: [qt5, libpodofo, libqpdf]
   libpodofo:
     plugin: cmake
@@ -75,7 +77,7 @@ parts:
       - libjpeg8
       - zlib1g 
   qt5:
-    source: .
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: qt
     plugin: make
     make-parameters: ["FLAVOR=qt5"]
