@@ -15,8 +15,9 @@ apps:
     desktop: usr/share/applications/eu.scarpetta.PDFMixTool.desktop
     plugs:
       - desktop
+      - desktop-legacy
       - wayland
-      - x11
+      - unity7
       - home
       - removable-media
 
@@ -30,6 +31,11 @@ parts:
       - build-essential
       - qtbase5-dev
       - qttools5-dev
+    stage-packages:
+      - dbus
+      - qttranslations5-l10n # common translations
+      - qtwayland5
+      - qt5-gtk-platformtheme # for theming, font settings, cursor and to use gtk3 file chooser
     after: [qt5, libpodofo, libqpdf]
   libpodofo:
     plugin: cmake
