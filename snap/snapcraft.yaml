@@ -1,6 +1,6 @@
 name: pdfmixtool
 base: core18
-version: '0.4'
+version: '0.5 beta'
 summary: An application to split, merge, rotate and mix PDF files
 description: |
   PDF Mix Tool is a simple and lightweight application that allows you to split, merge, rotate and mix PDF files.
@@ -45,7 +45,7 @@ parts:
   pdfmixtool:
     plugin: cmake
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/usr]
-    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/master/pdfmixtool-master.tar.gz
+    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/v0.5-beta/pdfmixtool-v0.5-beta.tar.gz
     source-type: tar
     build-packages:
       - build-essential
