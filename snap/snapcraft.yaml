@@ -10,6 +10,16 @@ grade: stable
 confinement: strict
 
 plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
+  desktop:
+  desktop-legacy:
+  wayland:
+  unity7:
+  home:
+  removable-media:
+
+  # To allow wayland apps access system theme settings
+  gsettings:
+  
   gtk-3-themes:
     interface: content
     target: $SNAP/data-dir/themes
@@ -25,24 +35,17 @@ plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
 
 apps:
   pdfmixtool:
-    command: desktop-launch $SNAP/usr/bin/pdfmixtool
+    command: $SNAP/usr/bin/pdfmixtool
+    command-chain:
+      - desktop-launch
+      - bin/pdfmixtool-launch
     desktop: usr/share/applications/eu.scarpetta.PDFMixTool.desktop
-    plugs:
-      - desktop
-      - desktop-legacy
-      - wayland
-      - unity7
-      - home
-      - removable-media
-    environment:
-      # Use GTK3 cursor theme, icon theme and open/save file dialogs.
-      QT_QPA_PLATFORMTHEME: gtk3
 
 parts:
   pdfmixtool:
     plugin: cmake
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/usr]
-    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/master/pdfmixtool-master.tar.gz
+    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/v0.4/pdfmixtool-v0.4.tar.gz
     source-type: tar
     build-packages:
       - build-essential
@@ -53,7 +56,9 @@ parts:
       - qttranslations5-l10n # common translations
       - qtwayland5
       - qt5-gtk-platformtheme # for theming, font settings, cursor and to use gtk3 file chooser
+      - qt5-style-plugins # for mouse cursor theme fix
     after: [qt5, libpodofo, libqpdf]
+    
   libpodofo:
     plugin: cmake
     configflags:
@@ -83,6 +88,7 @@ parts:
       - libjpeg-turbo8
       - libfreetype6
       - libunistring2
+      
   libqpdf:
     plugin: make
     override-build: |
@@ -99,6 +105,7 @@ parts:
     stage-packages:
       - libjpeg8
       - zlib1g 
+      
   qt5:
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: qt
@@ -120,3 +127,11 @@ parts:
       - libqt5svg5 # for loading icon themes which are svg
       - try: [appmenu-qt5] # not available on core18
       - locales-all
+      
+  launchers: # custom launcher to set QT_QPA_PLATFORMTHEME=gtk3 correctly
+    source: snap/local/launchers
+    plugin: dump
+    organize:
+      '*': bin/
+    stage:
+      - -bin/README.*
