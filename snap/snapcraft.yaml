@@ -1,7 +1,7 @@
 name: pdfmixtool
 base: core18
 version: '0.5'
-license: GPL-3.0-or-later
+license: GPL-3.0+
 title: PDF Mix Tool
 summary: An application to perform common editing operations on PDF files
 description: |
