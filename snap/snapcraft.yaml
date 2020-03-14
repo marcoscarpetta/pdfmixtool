@@ -1,10 +1,22 @@
 name: pdfmixtool
 base: core18
-version: '0.5-beta'
-summary: An application to split, merge, rotate and mix PDF files
+version: '0.5'
+license: GPL-3.0-or-later
+title: PDF Mix Tool
+summary: An application to perform common editing operations on PDF files
 description: |
-  PDF Mix Tool is a simple and lightweight application that allows you to split, merge, rotate and mix PDF files.
-  It is written in C++ and depends only on Qt 5 and PoDoFo.
+  PDF Mix Tool is a simple and lightweight application that allows you to
+  perform common editing operations on PDF files.
+  
+  Base operations it can perform are the following:
+  - Merge two or more files specifying a page set for each of them
+  - Rotate pages
+  - Composite more pages onto a single one (N-up)
+  - Combinations of all of the above
+
+  Besides, it can also mix files alternating their pages, generate booklets,
+  add white pages to a PDF file, delete pages from a PDF file, extract pages
+  from a PDF file.
 
 grade: stable
 confinement: strict
@@ -45,7 +57,7 @@ parts:
   pdfmixtool:
     plugin: cmake
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/usr]
-    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/v0.5-beta/pdfmixtool-v0.5-beta.tar.gz
+    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/v0.5/pdfmixtool-v0.5.tar.gz
     source-type: tar
     build-packages:
       - build-essential

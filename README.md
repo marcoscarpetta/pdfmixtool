@@ -2,6 +2,10 @@
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/pdfmixtool)
 
-An application to split, merge, rotate and mix PDF files. Starting from version 0.3 to create multipage PDF files too.
+PDF Mix Tool is a simple and lightweight application that allows you to
+perform common editing operations on PDF files.
 
-You can find more informations about the project on [this](https://scarpetta.eu/pdfmixtool/) web page.
+[Main repository (GitLab)](https://gitlab.com/scarpetta/pdfmixtool)
+
+[Website](https://scarpetta.eu/pdfmixtool/): here you can find usage
+guides, building instructions and all other information.
