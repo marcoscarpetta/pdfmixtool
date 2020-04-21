@@ -1,6 +1,6 @@
 name: pdfmixtool
 base: core18
-version: '0.5'
+version: '0.6'
 license: GPL-3.0+
 title: PDF Mix Tool
 summary: An application to perform common editing operations on PDF files
@@ -57,7 +57,7 @@ parts:
   pdfmixtool:
     plugin: cmake
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/usr]
-    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/v0.5/pdfmixtool-v0.5.tar.gz
+    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/v0.6/pdfmixtool-v0.6.tar.gz
     source-type: tar
     build-packages:
       - build-essential
@@ -70,36 +70,6 @@ parts:
       - qt5-gtk-platformtheme # for theming, font settings, cursor and to use gtk3 file chooser
       - qt5-style-plugins # for mouse cursor theme fix
     after: [qt5, libpodofo, libqpdf]
-    
-  libpodofo:
-    plugin: cmake
-    configflags:
-      - -DCMAKE_INSTALL_PREFIX=/usr
-      - -DPODOFO_BUILD_SHARED=1
-      - -DPODOFO_HAVE_JPEG_LIB=1
-      - -DPODOFO_HAVE_PNG_LIB=1
-      - -DPODOFO_HAVE_TIFF_LIB=1
-      - -DPODOFO_BUILD_LIB_ONLY=1
-    source: https://downloads.sourceforge.net/podofo/podofo-0.9.6.tar.gz
-    source-type: tar
-    build-packages:
-      - build-essential
-      - pkg-config
-      - libssl-dev
-      - libfontconfig1-dev
-      - libtiff5-dev
-      - libidn11-dev
-      - libjpeg-turbo8-dev
-      - libfreetype6-dev
-      - libunistring-dev
-    stage-packages:
-      - libssl1.0.0
-      - libfontconfig1
-      - libtiff5
-      - libidn11
-      - libjpeg-turbo8
-      - libfreetype6
-      - libunistring2
       
   libqpdf:
     plugin: make
@@ -107,7 +77,7 @@ parts:
       ./configure --prefix=/usr --disable-static
       make
       make DESTDIR=$SNAPCRAFT_PART_INSTALL install
-    source: https://github.com/qpdf/qpdf/releases/download/release-qpdf-9.1.1/qpdf-9.1.1.tar.gz
+    source: https://github.com/qpdf/qpdf/releases/download/release-qpdf-10.0.1/qpdf-10.0.1.tar.gz
     source-type: tar
     build-packages:
       - build-essential
