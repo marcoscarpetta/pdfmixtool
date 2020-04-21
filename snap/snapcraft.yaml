@@ -69,7 +69,7 @@ parts:
       - qtwayland5
       - qt5-gtk-platformtheme # for theming, font settings, cursor and to use gtk3 file chooser
       - qt5-style-plugins # for mouse cursor theme fix
-    after: [qt5, libpodofo, libqpdf]
+    after: [qt5, libqpdf]
       
   libqpdf:
     plugin: make
