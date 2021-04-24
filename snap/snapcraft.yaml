@@ -1,5 +1,5 @@
 name: pdfmixtool
-base: core18
+base: core20
 version: '1.0beta'
 license: GPL-3.0+
 title: PDF Mix Tool
