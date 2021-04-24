@@ -1,14 +1,15 @@
 name: pdfmixtool
 base: core18
-version: '0.6'
+version: '1.0beta'
 license: GPL-3.0+
 title: PDF Mix Tool
 summary: An application to perform common editing operations on PDF files
 description: |
   PDF Mix Tool is a simple and lightweight application that allows you to
   perform common editing operations on PDF files.
-  
+
   Base operations it can perform are the following:
+
   - Merge two or more files specifying a page set for each of them
   - Rotate pages
   - Composite more pages onto a single one (N-up)
@@ -16,7 +17,7 @@ description: |
 
   Besides, it can also mix files alternating their pages, generate booklets,
   add white pages to a PDF file, delete pages from a PDF file, extract pages
-  from a PDF file.
+  from a PDF file, edit the PDF document information.
 
 grade: stable
 confinement: strict
@@ -57,7 +58,7 @@ parts:
   pdfmixtool:
     plugin: cmake
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/usr]
-    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/v0.6/pdfmixtool-v0.6.tar.gz
+    source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/v1.0beta/pdfmixtool-v1.0beta.tar.gz
     source-type: tar
     build-packages:
       - build-essential
@@ -77,7 +78,7 @@ parts:
       ./configure --prefix=/usr --disable-static
       make
       make DESTDIR=$SNAPCRAFT_PART_INSTALL install
-    source: https://github.com/qpdf/qpdf/releases/download/release-qpdf-10.0.1/qpdf-10.0.1.tar.gz
+    source: https://github.com/qpdf/qpdf/releases/download/release-qpdf-10.3.1/qpdf-10.3.1.tar.gz
     source-type: tar
     build-packages:
       - build-essential
