@@ -57,7 +57,7 @@ apps:
 parts:
   pdfmixtool:
     plugin: cmake
-    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/usr]
+    cmake-parameters: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/usr]
     source: https://gitlab.com/scarpetta/pdfmixtool/-/archive/v1.0beta/pdfmixtool-v1.0beta.tar.gz
     source-type: tar
     build-packages:
