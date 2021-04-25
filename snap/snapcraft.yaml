@@ -1,26 +1,9 @@
 name: pdfmixtool
-base: core20
 version: '1.0beta'
-license: GPL-3.0+
-title: PDF Mix Tool
-summary: An application to perform common editing operations on PDF files
-description: |
-  PDF Mix Tool is a simple and lightweight application that allows you to
-  perform common editing operations on PDF files.
-
-  Base operations it can perform are the following:
-
-  - Merge two or more files specifying a page set for each of them
-  - Rotate pages
-  - Composite more pages onto a single one (N-up)
-  - Combinations of all of the above
-
-  Besides, it can also mix files alternating their pages, generate booklets,
-  add white pages to a PDF file, delete pages from a PDF file, extract pages
-  from a PDF file, edit the PDF document information.
-
+base: core20
 grade: stable
 confinement: strict
+adopt-info: pdfmixtool
 
 plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
   desktop:
@@ -48,11 +31,11 @@ plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
 
 apps:
   pdfmixtool:
-    command: $SNAP/usr/bin/pdfmixtool
+    common-id: eu.scarpetta.PDFMixTool.desktop
+    command: usr/bin/pdfmixtool
     command-chain:
       - bin/desktop-launch
       - bin/pdfmixtool-launch
-    desktop: usr/share/applications/eu.scarpetta.PDFMixTool.desktop
 
 parts:
   pdfmixtool:
@@ -70,6 +53,8 @@ parts:
       - qtwayland5
       - qt5-gtk-platformtheme # for theming, font settings, cursor and to use gtk3 file chooser
       - qt5-style-plugins # for mouse cursor theme fix
+    parse-info:
+      - usr/share/metainfo/eu.scarpetta.PDFMixTool.appdata.xml
     after: [qt5, libqpdf]
       
   libqpdf:
